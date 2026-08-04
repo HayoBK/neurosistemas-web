@@ -1,0 +1,12 @@
+# ============================================================
+# Galería de imágenes del laboratorio
+# archivo : nombre del archivo dentro de static/images/galeria/
+# titulo  : texto que aparece bajo la foto (opcional)
+# Rescatadas del sitio antiguo por scripts/rescatar_imagenes.py
+# ============================================================
+- archivo: "laboratorio-01.jpg"
+  titulo: ""
+- archivo: "laboratorio-02.jpg"
+  titulo: ""
+- archivo: "laboratorio-03.jpg"
+  titulo: ""
