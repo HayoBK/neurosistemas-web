@@ -1,0 +1,647 @@
+/* ============================================================
+   LABORATORIO DE NEUROSISTEMAS — hoja de estilo única
+   Estética: "papel de laboratorio + espectro".
+
+   La regla que ordena todo: EL COLOR ES INFORMACIÓN, NO DECORACIÓN.
+   El lienzo es blanco y la tinta negra. Los 9 tonos del logo entran
+   en dosis pequeñas y siempre significando algo: qué área, qué grupo,
+   qué sección. Sin degradados, sin sombras, sin fondos de color
+   grandes. El único momento en que el color ocupa el ancho completo
+   es la franja espectral.
+
+   Las clases van prefijadas con  ns-  y las variables con  --ns-
+   El color de cada bloque llega por la variable --ns-acento, que las
+   plantillas inyectan desde data/colores.yaml.
+   ============================================================ */
+
+:root{
+  /* --- Espectro: muestreado del logo, en su orden --- */
+  --ns-rojo:    #B12313;
+  --ns-naranja: #C65A16;
+  --ns-ambar:   #C98510;
+  --ns-lima:    #6E9A1B;
+  --ns-verde:   #2F8F5B;
+  --ns-cian:    #2E9DBC;
+  --ns-azul:    #2186B7;
+  --ns-morado:  #762D60;
+  --ns-magenta: #9A2A53;
+
+  /* --- Neutros --- */
+  --ns-tinta:  #101214;
+  --ns-texto:  #24282B;
+  --ns-suave:  #5B6166;
+  --ns-tenue:  #8A9298;
+  --ns-linea:  #E3E6E8;
+  --ns-fondo:  #FFFFFF;
+  --ns-fondo2: #F6F8F9;
+
+  /* Acento por omisión: si una plantilla no inyecta --ns-acento,
+     el elemento se dibuja en tinta y no se rompe nada. */
+  --ns-acento: var(--ns-tinta);
+
+  /* --- Tipografías --- */
+  --ns-titulo: "Archivo", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --ns-cuerpo: "Inter", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --ns-mono:   "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* --- Forma --- */
+  --ns-radio:   6px;   /* tarjetas */
+  --ns-radio-s: 4px;   /* controles y chips */
+
+  --ns-ancho: 1180px;
+  --ns-ancho-txt: 760px;
+  --ns-cab-alto: 74px; /* 70 de la fila + 4 de la franja */
+}
+
+/* ---------- Reset suave ---------- */
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+body{
+  margin:0;
+  background:var(--ns-fondo);
+  color:var(--ns-texto);
+  font-family:var(--ns-cuerpo);
+  font-size:17px;
+  line-height:1.65;
+  font-synthesis-weight:none;
+  -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; height:auto; display:block; }
+a{ color:var(--ns-azul); text-underline-offset:.18em; text-decoration-thickness:.06em; }
+a:hover{ color:var(--ns-tinta); }
+h1,h2,h3,h4{
+  font-family:var(--ns-titulo); font-weight:700; color:var(--ns-tinta);
+  line-height:1.12; letter-spacing:-.022em; margin:0 0 .5em;
+}
+h1{ font-size:clamp(2.1rem,1.3rem + 3.2vw,3.3rem); }
+h2{ font-size:clamp(1.5rem,1.1rem + 1.7vw,2.2rem); }
+h3{ font-size:clamp(1.15rem,1rem + .7vw,1.4rem); font-weight:600; }
+p{ margin:0 0 1.1em; }
+hr{ border:0; border-top:1px solid var(--ns-linea); margin:2.5rem 0; }
+:focus-visible{ outline:2px solid var(--ns-azul); outline-offset:2px; border-radius:2px; }
+
+/* ---------- Utilidades ---------- */
+.ns-wrap{ width:min(100% - 2.5rem, var(--ns-ancho)); margin-inline:auto; }
+.ns-wrap-txt{ width:min(100% - 2.5rem, var(--ns-ancho-txt)); margin-inline:auto; }
+.ns-seccion{ padding:clamp(3rem,2rem + 4vw,5rem) 0; }
+.ns-seccion--alt{ background:var(--ns-fondo2); }
+.ns-solo-lectores{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+.ns-saltar{
+  position:absolute; left:-9999px; top:0; z-index:200;
+  background:var(--ns-tinta); color:#fff; padding:.7rem 1.1rem; text-decoration:none;
+}
+.ns-saltar:focus{ left:0; }
+
+/* Rótulo mono. El punto que lo precede toma el color del bloque. */
+.ns-rotulo{
+  font-family:var(--ns-mono);
+  font-size:11px; font-weight:500;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--ns-suave);
+  display:inline-flex; align-items:center; gap:.6rem;
+  margin:0 0 1rem;
+}
+.ns-rotulo::before{
+  content:""; width:6px; height:6px; flex:none;
+  background:var(--ns-acento);
+}
+.ns-bajada{ font-size:1.12rem; color:var(--ns-suave); max-width:64ch; }
+
+/* Espaciados recurrentes, para no repetir estilos en línea en las plantillas */
+.ns-tras-lista{ margin-top:2.5rem; }
+.ns-acciones{ display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1rem; }
+.ns-nota-pie{ margin-top:3rem; font-size:.88rem; color:var(--ns-tenue); max-width:70ch; }
+.ns-rejilla--sep{ margin-top:2.5rem; }
+
+/* Dos columnas: titular a la izquierda, prosa a la derecha */
+.ns-dos-col{
+  display:grid; gap:2.5rem;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  align-items:start;
+}
+
+/* ============================================================
+   FRANJA ESPECTRAL — la firma del sitio
+   9 bandas iguales, tramos duros, 4 px. Va bajo el header y al
+   inicio del pie. Es el único color a ancho completo.
+   ============================================================ */
+.ns-franja{
+  height:4px; width:100%; flex:none;
+  background:linear-gradient(90deg,
+    var(--ns-rojo)    0       11.111%,
+    var(--ns-naranja) 11.111% 22.222%,
+    var(--ns-ambar)   22.222% 33.333%,
+    var(--ns-lima)    33.333% 44.444%,
+    var(--ns-verde)   44.444% 55.556%,
+    var(--ns-cian)    55.556% 66.667%,
+    var(--ns-azul)    66.667% 77.778%,
+    var(--ns-morado)  77.778% 88.889%,
+    var(--ns-magenta) 88.889% 100%);
+}
+
+/* ============================================================
+   DIVISOR EEG — el trazo del logo, entre secciones
+   ============================================================ */
+.ns-eeg{
+  color:var(--ns-tinta);
+  opacity:.18;
+  width:100%; height:28px;
+  overflow:hidden;
+}
+.ns-eeg svg{ display:block; width:100%; height:28px; }
+
+/* ============================================================
+   CABECERA
+   ============================================================ */
+.ns-cab{
+  position:sticky; top:0; z-index:60;
+  background:var(--ns-fondo);
+  border-bottom:1px solid var(--ns-linea);
+}
+.ns-cab__fila{
+  display:flex; align-items:center; gap:1.25rem;
+  min-height:70px;
+}
+.ns-marca{
+  display:flex; align-items:center; gap:.7rem;
+  text-decoration:none; color:var(--ns-tinta); flex:none;
+}
+.ns-marca:hover{ color:var(--ns-tinta); }
+.ns-marca__logo{ height:34px; width:auto; flex:none; }
+.ns-marca__txt{ display:flex; flex-direction:column; line-height:1.1; }
+.ns-marca__nombre{ font-family:var(--ns-titulo); font-weight:700; font-size:1rem; letter-spacing:-.015em; }
+.ns-marca__sub{ font-family:var(--ns-mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--ns-tenue); }
+
+.ns-nav{ margin-left:auto; }
+.ns-nav__lista{ list-style:none; display:flex; align-items:center; gap:.1rem; margin:0; padding:0; }
+.ns-nav__item{ position:relative; }
+.ns-nav__link{
+  display:block; padding:.5rem .75rem;
+  font-size:.94rem; font-weight:500; color:var(--ns-suave); text-decoration:none;
+  border-bottom:2px solid transparent;
+  transition:color .16s ease, border-color .16s ease;
+  white-space:nowrap;
+}
+.ns-nav__link:hover{ color:var(--ns-tinta); }
+.ns-nav__link.es-activo{ color:var(--ns-tinta); font-weight:600; border-bottom-color:var(--ns-tinta); }
+
+/* Submenú: caja blanca con borde hairline, sin sombra */
+.ns-nav__sub{
+  list-style:none; margin:0; padding:.3rem;
+  position:absolute; top:100%; left:0; min-width:240px;
+  background:var(--ns-fondo); border:1px solid var(--ns-linea);
+  border-radius:var(--ns-radio);
+  opacity:0; visibility:hidden;
+  transition:opacity .14s ease, visibility .14s;
+}
+.ns-nav__item:hover > .ns-nav__sub,
+.ns-nav__item:focus-within > .ns-nav__sub{ opacity:1; visibility:visible; }
+.ns-nav__sub .ns-nav__link{ padding:.45rem .65rem; border-bottom:0; white-space:normal; }
+.ns-nav__sub .ns-nav__link.es-activo{ border-bottom:0; }
+
+.ns-hamburguesa{
+  display:none; margin-left:auto;
+  background:none; border:1px solid var(--ns-linea); border-radius:var(--ns-radio-s);
+  width:44px; height:40px; cursor:pointer; color:var(--ns-tinta);
+  align-items:center; justify-content:center;
+}
+.ns-hamburguesa:hover{ border-color:var(--ns-tinta); }
+.ns-hamburguesa span{ display:block; width:19px; height:1.5px; background:currentColor; position:relative; }
+.ns-hamburguesa span::before,.ns-hamburguesa span::after{
+  content:""; position:absolute; left:0; width:19px; height:1.5px; background:currentColor;
+}
+.ns-hamburguesa span::before{ top:-6px; }
+.ns-hamburguesa span::after{ top:6px; }
+
+@media (max-width: 900px){
+  .ns-hamburguesa{ display:inline-flex; }
+  .ns-nav{
+    position:fixed; inset:var(--ns-cab-alto) 0 auto 0; background:var(--ns-fondo);
+    border-bottom:1px solid var(--ns-linea);
+    padding:1rem 1.25rem 1.5rem; margin:0;
+    max-height:calc(100dvh - var(--ns-cab-alto)); overflow-y:auto;
+    display:none;
+  }
+  .ns-nav.es-abierto{ display:block; }
+  .ns-nav__lista{ flex-direction:column; align-items:stretch; gap:0; }
+  .ns-nav__link{ padding:.7rem .2rem; font-size:1rem; border-bottom:1px solid var(--ns-linea); }
+  .ns-nav__link.es-activo{ border-bottom-color:var(--ns-tinta); }
+  .ns-nav__sub{
+    position:static; opacity:1; visibility:visible;
+    border:0; border-left:1px solid var(--ns-linea); border-radius:0;
+    margin:0 0 0 .5rem; padding:0 0 0 .6rem; min-width:0;
+  }
+}
+
+/* ============================================================
+   HERO — blanco, sin animación, con aire
+   ============================================================ */
+.ns-hero{ background:var(--ns-fondo); }
+.ns-hero__cont{
+  padding:clamp(3rem,2rem + 5vw,5.5rem) 0 clamp(2.5rem,2rem + 4vw,4.5rem);
+}
+.ns-hero__logo{
+  width:min(100%, 440px);
+  height:auto;
+  margin:0 0 clamp(2rem,1.5rem + 2vw,3rem);
+}
+.ns-hero__titulo{
+  max-width:18ch;
+  font-size:clamp(2rem,1.1rem + 4vw,3.6rem);
+  letter-spacing:-.03em;
+  margin-bottom:.4em;
+}
+.ns-hero__bajada{ font-size:clamp(1.02rem,1rem + .35vw,1.22rem); max-width:62ch; color:var(--ns-suave); }
+.ns-hero__acciones{ display:flex; flex-wrap:wrap; gap:.7rem; margin-top:2rem; }
+
+/* ---------- Botones: rectangulares, sin color del espectro ---------- */
+.ns-btn{
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.7rem 1.25rem; border-radius:var(--ns-radio-s);
+  font-family:var(--ns-cuerpo); font-weight:600; font-size:.95rem;
+  text-decoration:none; border:1px solid transparent; cursor:pointer;
+  transition:background .16s ease, color .16s ease, border-color .16s ease;
+}
+.ns-btn--primario{ background:var(--ns-tinta); color:#fff; border-color:var(--ns-tinta); }
+.ns-btn--primario:hover{ background:#000; color:#fff; }
+.ns-btn--fantasma{ border-color:var(--ns-linea); color:var(--ns-tinta); background:transparent; }
+.ns-btn--fantasma:hover{ border-color:var(--ns-tinta); color:var(--ns-tinta); }
+
+/* ============================================================
+   CIFRAS — sin tarjeta, separadas por línea vertical hairline
+   ============================================================ */
+.ns-cifras{
+  display:grid; gap:0;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  margin-top:clamp(2.5rem,2rem + 2vw,3.5rem);
+  border-top:1px solid var(--ns-linea);
+  padding-top:1.6rem;
+}
+.ns-cifra{ padding:0 1.5rem; border-left:1px solid var(--ns-linea); }
+.ns-cifra:first-child{ padding-left:0; border-left:0; }
+.ns-cifra__n{
+  font-family:var(--ns-titulo); font-weight:700; font-size:2.6rem; line-height:1;
+  letter-spacing:-.03em;
+  color:var(--ns-acento);
+}
+.ns-cifra__t{
+  font-family:var(--ns-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--ns-tenue); margin-top:.6rem;
+}
+
+/* ============================================================
+   TARJETAS — blancas, hairline, barra de 3 px arriba
+   ============================================================ */
+.ns-rejilla{ display:grid; gap:1.25rem; }
+.ns-rejilla--2{ grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); }
+/* --3 va con auto-fit porque las áreas de investigación son justo tres y
+   conviene que llenen la fila. --4 y --noticias van con auto-fill para que
+   un grupo de dos personas o una sola noticia no se estiren a lo ancho. */
+.ns-rejilla--3{ grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); }
+.ns-rejilla--4{ grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); }
+.ns-rejilla--noticias{ grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); }
+
+.ns-tarjeta{
+  background:var(--ns-fondo);
+  border:1px solid var(--ns-linea);
+  border-top:3px solid var(--ns-acento);
+  border-radius:var(--ns-radio);
+  padding:1.5rem;
+  transition:border-color .16s ease;
+}
+.ns-tarjeta:hover{ border-color:var(--ns-tenue); border-top-color:var(--ns-acento); }
+.ns-tarjeta__n{
+  font-family:var(--ns-mono); font-size:11px; font-weight:500; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--ns-acento); display:block; margin-bottom:.7rem;
+}
+.ns-tarjeta h3{ margin-bottom:.5rem; }
+.ns-tarjeta p:last-child{ margin-bottom:0; }
+.ns-tarjeta__txt{ font-size:.95rem; color:var(--ns-suave); }
+.ns-tarjeta__mas{
+  font-family:var(--ns-mono); font-size:11px; letter-spacing:.08em;
+  text-transform:uppercase; text-decoration:none; color:var(--ns-acento);
+}
+.ns-tarjeta__mas:hover{ color:var(--ns-tinta); text-decoration:underline; }
+
+/* Área de investigación en su página propia */
+.ns-area{ margin-bottom:3.5rem; scroll-margin-top:calc(var(--ns-cab-alto) + 1rem); }
+.ns-area__tit{ max-width:24ch; }
+.ns-area__sub{
+  font-family:var(--ns-mono); font-size:11px; font-weight:500;
+  letter-spacing:.08em; text-transform:uppercase;
+  color:var(--ns-tenue); margin-top:1.8rem; margin-bottom:.8rem;
+}
+
+/* Lista de proyectos dentro de un área */
+.ns-proyectos{ list-style:none; margin:1rem 0 0; padding:0; }
+.ns-proyectos li{
+  position:relative; padding-left:1.4rem; margin-bottom:.6rem;
+  font-size:.95rem; color:var(--ns-suave);
+}
+.ns-proyectos li::before{
+  content:""; position:absolute; left:0; top:.62em;
+  width:6px; height:6px; background:var(--ns-acento);
+}
+
+/* ============================================================
+   EQUIPO
+   ============================================================ */
+.ns-grupo{ margin-bottom:3.5rem; }
+.ns-grupo__tit{
+  font-family:var(--ns-mono); font-size:12px; font-weight:500;
+  letter-spacing:.08em; text-transform:uppercase;
+  color:var(--ns-texto);
+  border-bottom:1px solid var(--ns-linea);
+  padding-bottom:.7rem; margin:0 0 2rem;
+  display:flex; align-items:center; gap:.7rem;
+}
+.ns-grupo__tit::before{
+  content:""; width:6px; height:6px; flex:none; background:var(--ns-acento);
+}
+.ns-grupo__tit span{ color:var(--ns-tenue); margin-left:auto; }
+
+.ns-persona{
+  text-align:center;
+  display:flex; flex-direction:column; align-items:center;
+}
+.ns-persona__foto{
+  width:128px; height:128px; border-radius:50%;
+  object-fit:cover; background:var(--ns-fondo2);
+  border:2px solid var(--ns-acento);
+}
+.ns-persona__ini{
+  width:128px; height:128px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  border:2px solid var(--ns-acento);
+  background:color-mix(in srgb, var(--ns-acento) 10%, #fff);
+  color:var(--ns-acento);
+  font-family:var(--ns-titulo); font-weight:700; font-size:2.1rem; letter-spacing:-.02em;
+}
+.ns-persona__nombre{ font-family:var(--ns-titulo); font-weight:600; font-size:1.02rem; margin:1rem 0 .2rem; }
+.ns-persona__rol{
+  font-family:var(--ns-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--ns-suave); margin:0 0 .4rem;
+}
+.ns-persona__afil{ font-size:.88rem; color:var(--ns-suave); margin:.3rem 0 0; }
+.ns-persona__links{ display:flex; gap:.4rem; justify-content:center; margin-top:.8rem; flex-wrap:wrap; }
+.ns-chip{
+  font-family:var(--ns-mono); font-size:11px; letter-spacing:.06em;
+  padding:.22rem .5rem; border-radius:var(--ns-radio-s);
+  border:1px solid var(--ns-linea); color:var(--ns-suave);
+  text-decoration:none;
+  transition:border-color .16s ease, color .16s ease;
+}
+.ns-chip:hover{ border-color:var(--ns-tinta); color:var(--ns-tinta); }
+.ns-chip--orcid:hover{ border-color:var(--ns-lima); color:var(--ns-tinta); }
+
+/* Ex miembros: filas compactas */
+.ns-alumni{ display:grid; gap:.75rem; grid-template-columns:repeat(auto-fit,minmax(330px,1fr)); }
+.ns-alumno{
+  display:flex; gap:.9rem; align-items:flex-start;
+  padding:.9rem 1rem; border:1px solid var(--ns-linea);
+  border-radius:var(--ns-radio); background:var(--ns-fondo);
+  transition:border-color .16s ease;
+}
+.ns-alumno:hover{ border-color:var(--ns-tenue); }
+.ns-alumno__ini{
+  width:42px; height:42px; flex:none; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--ns-acento);
+  background:color-mix(in srgb, var(--ns-acento) 10%, #fff);
+  color:var(--ns-acento);
+  font-family:var(--ns-titulo); font-weight:700; font-size:.85rem;
+}
+.ns-alumno__nombre{ font-family:var(--ns-titulo); font-weight:600; font-size:.98rem; margin:0 0 .2rem; }
+.ns-alumno__afil{ font-size:.85rem; color:var(--ns-suave); margin:0; line-height:1.45; }
+.ns-alumno__mail{ font-family:var(--ns-mono); font-size:11px; }
+
+/* ============================================================
+   PUBLICACIONES — grilla de dos columnas, año pegajoso
+   ============================================================ */
+.ns-pub-barra{
+  display:flex; flex-wrap:wrap; gap:.7rem; align-items:center;
+  padding:0 0 1.1rem; margin-bottom:2.5rem;
+  border-bottom:1px solid var(--ns-linea);
+}
+.ns-pub-barra input[type="search"]{
+  flex:1 1 280px; min-width:0;
+  padding:.6rem .8rem; border-radius:var(--ns-radio-s);
+  border:1px solid var(--ns-linea); background:var(--ns-fondo);
+  font-family:var(--ns-cuerpo); font-size:.95rem; color:var(--ns-texto);
+}
+.ns-pub-barra input[type="search"]:hover{ border-color:var(--ns-tenue); }
+.ns-pub-barra input[type="search"]::placeholder{ color:var(--ns-tenue); }
+.ns-pub-barra__meta{
+  font-family:var(--ns-mono); font-size:11px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--ns-tenue);
+}
+.ns-pub-barra__fuente{
+  display:inline-flex; align-items:center; gap:.45rem;
+  font-family:var(--ns-mono); font-size:11px; letter-spacing:.06em;
+  padding:.28rem .55rem; border-radius:var(--ns-radio-s);
+  border:1px solid var(--ns-linea); color:var(--ns-suave);
+}
+.ns-pub-barra__fuente::before{
+  content:""; width:6px; height:6px; flex:none; background:var(--ns-lima);
+}
+
+.ns-anio{
+  display:grid;
+  grid-template-columns:110px 1fr;
+  gap:0 2.5rem;
+  border-top:1px solid var(--ns-linea);
+  padding:1.6rem 0 .6rem;
+}
+.ns-anio__col{ position:sticky; top:calc(var(--ns-cab-alto) + 1.5rem); align-self:start; }
+.ns-anio__tit{
+  font-family:var(--ns-titulo); font-weight:700; font-size:1.7rem;
+  letter-spacing:-.02em; line-height:1; margin:0 0 .4rem; color:var(--ns-tinta);
+}
+.ns-anio__n{
+  display:block;
+  font-family:var(--ns-mono); font-size:11px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--ns-tenue);
+}
+
+.ns-pubs{ list-style:none; margin:0; padding:0; display:grid; gap:0; }
+.ns-pub{
+  position:relative;
+  padding:0 0 1.4rem 1.3rem;
+  margin-bottom:1.4rem;
+  border-bottom:1px solid var(--ns-linea);
+}
+.ns-pub:last-child{ border-bottom:0; margin-bottom:0; padding-bottom:.4rem; }
+.ns-pub::before{
+  content:""; position:absolute; left:0; top:.62em;
+  width:6px; height:6px; background:var(--ns-acento);
+}
+.ns-pub__tit{ font-family:var(--ns-titulo); font-weight:600; font-size:1.02rem; line-height:1.35; margin:0 0 .35rem; }
+.ns-pub__tit a{ color:var(--ns-tinta); text-decoration:none; }
+.ns-pub__tit a:hover{ text-decoration:underline; text-decoration-color:var(--ns-acento); }
+.ns-pub__autores{ font-size:.92rem; color:var(--ns-suave); margin:0 0 .4rem; }
+.ns-pub__autores b{ color:var(--ns-tinta); font-weight:600; }
+.ns-pub__meta{ display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; font-size:.85rem; margin:0; }
+.ns-pub__revista{ font-style:italic; color:var(--ns-suave); }
+.ns-pub__doi{
+  font-family:var(--ns-mono); font-size:11px; letter-spacing:.04em;
+  padding:.16rem .45rem; border-radius:var(--ns-radio-s);
+  border:1px solid var(--ns-linea); color:var(--ns-suave); text-decoration:none;
+}
+.ns-pub__doi:hover{ border-color:var(--ns-tinta); color:var(--ns-tinta); }
+.ns-pub[hidden]{ display:none; }
+.ns-vacio{
+  padding:2rem 0; color:var(--ns-tenue);
+  font-family:var(--ns-mono); font-size:12px; letter-spacing:.06em;
+}
+
+@media (max-width: 700px){
+  .ns-anio{ grid-template-columns:1fr; gap:0; }
+  .ns-anio__col{ position:static; margin-bottom:1.2rem; display:flex; align-items:baseline; gap:.8rem; }
+  .ns-anio__tit{ margin:0; }
+}
+
+/* ============================================================
+   NOTICIAS
+   ============================================================ */
+.ns-nota{
+  display:flex; flex-direction:column;
+  background:var(--ns-fondo);
+  border:1px solid var(--ns-linea);
+  border-top:3px solid var(--ns-acento);
+  border-radius:var(--ns-radio); overflow:hidden;
+  transition:border-color .16s ease;
+}
+.ns-nota:hover{ border-color:var(--ns-tenue); border-top-color:var(--ns-acento); }
+.ns-nota__img{ aspect-ratio:16/9; object-fit:cover; width:100%; background:var(--ns-fondo2); }
+.ns-nota__cuerpo{ padding:1.2rem 1.3rem 1.3rem; display:flex; flex-direction:column; flex:1; }
+.ns-nota__fecha{
+  font-family:var(--ns-mono); font-size:11px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--ns-tenue); margin:0 0 .5rem;
+}
+.ns-nota__tit{ font-size:1.12rem; margin:0 0 .5rem; }
+.ns-nota__tit a{ color:var(--ns-tinta); text-decoration:none; }
+.ns-nota__tit a:hover{ text-decoration:underline; text-decoration-color:var(--ns-acento); }
+.ns-nota__res{ font-size:.93rem; color:var(--ns-suave); margin:0 0 1rem; }
+.ns-nota__mas{
+  margin-top:auto; font-family:var(--ns-mono); font-size:11px; letter-spacing:.08em;
+  text-transform:uppercase; text-decoration:none; color:var(--ns-acento);
+}
+.ns-nota__mas:hover{ color:var(--ns-tinta); text-decoration:underline; }
+
+/* Artículo suelto */
+.ns-articulo{ padding:clamp(2.5rem,2rem + 3vw,4rem) 0; }
+.ns-articulo__cuerpo{ font-size:1.06rem; }
+.ns-articulo__cuerpo h2{ margin-top:2.2rem; }
+.ns-articulo__cuerpo img{ border-radius:var(--ns-radio); margin:1.8rem 0; }
+.ns-articulo__cuerpo blockquote{
+  margin:1.8rem 0; padding:.2rem 0 .2rem 1.3rem;
+  border-left:3px solid var(--ns-acento); color:var(--ns-suave); font-size:1.08rem;
+}
+
+/* ============================================================
+   GALERÍA
+   ============================================================ */
+.ns-galeria{ display:grid; gap:1rem; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); }
+.ns-galeria figure{
+  margin:0; border:1px solid var(--ns-linea); border-radius:var(--ns-radio);
+  overflow:hidden; background:var(--ns-fondo2);
+}
+.ns-galeria img{ width:100%; aspect-ratio:4/3; object-fit:cover; }
+.ns-galeria figcaption{ padding:.7rem .85rem; font-size:.85rem; color:var(--ns-suave); }
+
+/* ============================================================
+   CONTACTO
+   ============================================================ */
+.ns-contacto{ display:grid; gap:2.5rem; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); align-items:start; }
+.ns-dato{ display:flex; gap:.9rem; align-items:flex-start; margin-bottom:1.6rem; }
+.ns-dato__icono{
+  width:36px; height:36px; flex:none; border-radius:var(--ns-radio-s);
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--ns-linea); color:var(--ns-acento);
+}
+.ns-dato__icono svg{ width:18px; height:18px; }
+.ns-dato__t{
+  font-family:var(--ns-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--ns-tenue); margin:0 0 .2rem;
+}
+.ns-dato__v{ margin:0; font-size:1rem; }
+.ns-dato__v a{ font-weight:500; }
+.ns-mapa{
+  border-radius:var(--ns-radio); overflow:hidden;
+  border:1px solid var(--ns-linea);
+  aspect-ratio:4/3; background:var(--ns-fondo2);
+}
+.ns-mapa iframe{ width:100%; height:100%; border:0; display:block; }
+
+/* Financiamiento */
+.ns-fondos{ list-style:none; margin:0; padding:0; display:grid; gap:.6rem; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); }
+.ns-fondos li{
+  font-size:.9rem; color:var(--ns-suave);
+  padding:.7rem .9rem;
+  border:1px solid var(--ns-linea);
+  border-left:3px solid var(--ns-acento);
+  border-radius:0 var(--ns-radio-s) var(--ns-radio-s) 0;
+  background:var(--ns-fondo);
+}
+.ns-fondos b{ color:var(--ns-tinta); font-family:var(--ns-mono); font-size:.8rem; font-weight:500; }
+
+/* ============================================================
+   PIE — gris muy claro, discreto
+   ============================================================ */
+.ns-pie{
+  background:var(--ns-fondo2);
+  color:var(--ns-suave);
+  font-size:.92rem;
+}
+.ns-pie__cuerpo{ padding:3rem 0 1.5rem; }
+.ns-pie a{ color:var(--ns-texto); text-decoration:none; }
+.ns-pie a:hover{ color:var(--ns-tinta); text-decoration:underline; }
+.ns-pie__rejilla{ display:grid; gap:2rem; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
+.ns-pie h4{
+  font-family:var(--ns-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--ns-tenue); margin:0 0 .9rem; font-weight:500;
+}
+.ns-pie ul{ list-style:none; margin:0; padding:0; }
+.ns-pie li{ margin-bottom:.45rem; }
+.ns-pie__marca{ font-family:var(--ns-titulo); font-weight:700; font-size:1.05rem; color:var(--ns-tinta); margin:0 0 .5rem; }
+.ns-pie__legal{
+  border-top:1px solid var(--ns-linea);
+  margin-top:2.5rem; padding-top:1.2rem;
+  display:flex; flex-wrap:wrap; gap:.8rem; justify-content:space-between;
+  font-family:var(--ns-mono); font-size:11px; letter-spacing:.06em; color:var(--ns-tenue);
+}
+
+/* ============================================================
+   MISC
+   ============================================================ */
+.ns-encabezado-pag{
+  padding:clamp(2.5rem,2rem + 3vw,4rem) 0 clamp(1.5rem,1rem + 2vw,2.2rem);
+  border-bottom:1px solid var(--ns-linea);
+  background:var(--ns-fondo);
+}
+.ns-prosa{ max-width:70ch; }
+.ns-prosa h2{ margin-top:2.2rem; }
+.ns-prosa ul{ padding-left:1.2rem; }
+.ns-prosa li{ margin-bottom:.4rem; }
+
+/* Paginación */
+.ns-paginacion{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+  gap:1rem; margin-top:3rem;
+}
+.ns-paginacion__pos{
+  font-family:var(--ns-mono); font-size:11px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--ns-tenue);
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+}
+
+@media print{
+  .ns-cab,.ns-pie,.ns-pub-barra,.ns-eeg,.ns-franja{ display:none !important; }
+  body{ background:#fff; font-size:11pt; }
+  .ns-anio{ grid-template-columns:90px 1fr; }
+  .ns-anio__col{ position:static; }
+}

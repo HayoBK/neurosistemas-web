@@ -1,0 +1,208 @@
+# ============================================================
+# Pages CMS — edición del sitio sin tocar código
+# https://pagescms.org  ·  entrar con la cuenta de GitHub del repo
+# ============================================================
+
+media:
+  input: static/images
+  output: images
+
+content:
+  # ---------------------------------------------------- Páginas
+  - name: inicio
+    label: "Inicio — texto de bienvenida"
+    type: file
+    path: content/_index.md
+    fields:
+      - { name: title, label: "Título", type: string }
+      - { name: body,  label: "Texto de bienvenida", type: rich-text }
+
+  - name: pagina_investigacion
+    label: "Investigación — encabezado"
+    type: file
+    path: content/investigacion/_index.md
+    fields:
+      - { name: title,  label: "Título", type: string }
+      - { name: rotulo, label: "Rótulo pequeño", type: string }
+      - { name: bajada, label: "Bajada", type: text }
+
+  - name: pagina_contacto
+    label: "Contacto — encabezado y texto"
+    type: file
+    path: content/contacto/_index.md
+    fields:
+      - { name: title,  label: "Título", type: string }
+      - { name: rotulo, label: "Rótulo pequeño", type: string }
+      - { name: bajada, label: "Bajada", type: text }
+      - { name: body,   label: "Texto", type: rich-text }
+
+  # ---------------------------------------------------- Datos
+  - name: lineas
+    label: "Líneas de investigación"
+    type: file
+    path: data/lineas.yaml
+    list: true
+    fields:
+      - { name: numero,  label: "Número (01, 02, 03…)", type: string }
+      - { name: titulo,  label: "Título del área", type: string }
+      - { name: resumen, label: "Descripción", type: text }
+      - name: proyectos
+        label: "Proyectos de esta área"
+        type: string
+        list: true
+
+  - name: miembros
+    label: "Miembros actuales"
+    type: file
+    path: data/miembros.yaml
+    list: true
+    fields:
+      - { name: titulo, label: "Nombre del grupo", type: string }
+      - name: personas
+        label: "Personas"
+        type: object
+        list: true
+        fields:
+          - { name: nombre,     label: "Nombre", type: string }
+          - { name: rol,        label: "Rol", type: string }
+          - { name: afiliacion, label: "Afiliación", type: text }
+          - { name: foto,       label: "Foto (archivo en images/equipo/)", type: string }
+          - { name: email,      label: "Correo", type: string }
+          - { name: orcid,      label: "ORCID iD", type: string }
+          - { name: perfil,     label: "URL de perfil externo", type: string }
+
+  - name: visitantes
+    label: "Miembros visitantes"
+    type: file
+    path: data/visitantes.yaml
+    list: true
+    fields:
+      - { name: nombre,     label: "Nombre", type: string }
+      - { name: rol,        label: "Rol", type: string }
+      - { name: afiliacion, label: "Afiliación", type: text }
+      - { name: linea,      label: "Línea de investigación", type: text }
+      - { name: foto,       label: "Foto (archivo en images/equipo/)", type: string }
+      - { name: email,      label: "Correo", type: string }
+      - { name: orcid,      label: "ORCID iD", type: string }
+
+  - name: exmiembros
+    label: "Ex miembros"
+    type: file
+    path: data/exmiembros.yaml
+    list: true
+    fields:
+      - { name: nombre,     label: "Nombre", type: string }
+      - { name: afiliacion, label: "Afiliación actual", type: text }
+      - { name: email,      label: "Correo", type: string }
+
+  - name: publicaciones_historicas
+    label: "Publicaciones — archivo histórico"
+    type: file
+    path: data/publicaciones_historicas.yaml
+    list: true
+    fields:
+      - { name: anio,    label: "Año", type: number }
+      - { name: cita,    label: "Cita completa (admite <b> e <i>)", type: text }
+      - { name: revista, label: "Revista / volumen / páginas", type: string }
+      - { name: doi,     label: "DOI (sin https://doi.org/)", type: string }
+
+  - name: orcid
+    label: "ORCID — fuentes de sincronización"
+    type: file
+    path: data/orcid.yaml
+    fields:
+      - name: miembros
+        label: "Perfiles ORCID del laboratorio"
+        type: object
+        list: true
+        fields:
+          - { name: nombre, label: "Nombre", type: string }
+          - { name: orcid,  label: "ORCID iD (0000-0000-0000-0000)", type: string }
+          - name: apellidos
+            label: "Apellidos para resaltar en negrita"
+            type: string
+            list: true
+      - name: opciones
+        label: "Opciones"
+        type: object
+        fields:
+          - { name: anio_minimo,      label: "No traer nada anterior a", type: number }
+          - { name: usar_crossref,    label: "Completar datos con Crossref", type: boolean }
+          - { name: correo_contacto,  label: "Correo de contacto para las APIs", type: string }
+
+  - name: financiamiento
+    label: "Financiamiento"
+    type: file
+    path: data/financiamiento.yaml
+    list: true
+    fields:
+      - { name: codigo, label: "Código / fondo", type: string }
+      - { name: nombre, label: "Descripción", type: string }
+
+  # Se edita en crudo a propósito: es un YAML de mapas anidados (espectro,
+  # áreas, grupos, secciones) y modelarlo por campos haría que al guardar
+  # desde el CMS se perdieran las tablas no declaradas. El archivo trae sus
+  # propias instrucciones arriba.
+  - name: colores
+    label: "Colores del sitio"
+    type: file
+    path: data/colores.yaml
+    format: raw
+    fields:
+      - { name: body, label: "Paleta y asignación de color (YAML)", type: code }
+
+  - name: galeria
+    label: "Galería de imágenes"
+    type: file
+    path: data/galeria.yaml
+    list: true
+    fields:
+      - { name: archivo, label: "Archivo (en images/galeria/)", type: string }
+      - { name: titulo,  label: "Descripción", type: string }
+
+  # ---------------------------------------------------- Noticias
+  - name: noticias
+    label: "Noticias"
+    type: collection
+    path: content/noticias
+    filename: "{year}-{month}-{day}-{primary}.md"
+    exclude: ["_index.md"]
+    view:
+      fields: [title, date, draft]
+      sort: [date, title]
+    fields:
+      - { name: title,   label: "Título", type: string }
+      - { name: date,    label: "Fecha", type: date }
+      - { name: draft,   label: "Borrador", type: boolean, default: false }
+      - { name: resumen, label: "Resumen", type: text }
+      - { name: imagen,  label: "Imagen de portada", type: image }
+      - name: categorias
+        label: "Categorías"
+        type: string
+        list: true
+      - { name: body,    label: "Contenido", type: rich-text }
+
+  # ---------------------------------------------------- Ajustes
+  - name: parametros
+    label: "Ajustes del sitio"
+    type: file
+    path: config/_default/params.yaml
+    fields:
+      - { name: descripcion, label: "Descripción del sitio (SEO)", type: text }
+      - { name: lema,        label: "Lema", type: string }
+      - name: contacto
+        label: "Datos de contacto"
+        type: object
+        fields:
+          - { name: email,       label: "Correo", type: string }
+          - { name: telefono,    label: "Teléfono", type: string }
+          - { name: institucion, label: "Institución", type: string }
+          - { name: direccion,   label: "Dirección", type: string }
+          - { name: mapa,        label: "URL del mapa", type: string }
+      - name: redes
+        label: "Enlaces del pie"
+        type: object
+        list: true
+        fields:
+          - { name: nombre, label: "Nombre", type: string }
+          - { name: url,    label: "URL", type: string }

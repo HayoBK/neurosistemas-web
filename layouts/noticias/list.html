@@ -1,0 +1,28 @@
+{{ define "main" }}
+{{ partial "encabezado.html" . }}
+
+<section class="ns-seccion">
+  <div class="ns-wrap">
+    {{- $col := partial "color.html" (dict "tipo" "secciones" "clave" "noticias") }}
+    {{- $paginas := .Paginate .RegularPagesRecursive }}
+    {{- if $paginas.Pages }}
+    <div class="ns-rejilla ns-rejilla--noticias">
+      {{- range $paginas.Pages }}
+      <article class="ns-nota" style="--ns-acento:{{ $col }}">
+        {{- with .Params.imagen }}<img class="ns-nota__img" src="{{ (printf "images/%s" .) | relURL }}" alt="" loading="lazy">{{ end }}
+        <div class="ns-nota__cuerpo">
+          <p class="ns-nota__fecha">{{ time.Format "2 Jan 2006" .Date }}</p>
+          <h2 class="ns-nota__tit"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+          <p class="ns-nota__res">{{ with .Params.resumen }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 150 }}{{ end }}</p>
+          <a class="ns-nota__mas" href="{{ .RelPermalink }}">Leer →</a>
+        </div>
+      </article>
+      {{- end }}
+    </div>
+    {{ partial "paginacion.html" . }}
+    {{- else }}
+    <p class="ns-vacio">Todavía no hay noticias publicadas.</p>
+    {{- end }}
+  </div>
+</section>
+{{ end }}

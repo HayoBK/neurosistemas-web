@@ -1,0 +1,39 @@
+{{- /*
+  Devuelve el hex del color asignado a un elemento, leído de data/colores.yaml.
+
+  Uso:  {{ partial "color.html" (dict "tipo" "areas" "clave" .numero "i" $i) }}
+
+    tipo   — qué tabla mirar: "areas", "grupos" o "secciones".
+    clave  — la llave dentro de esa tabla (el número del área, el título
+             del grupo, el nombre de la sección).
+    i      — posición del elemento, opcional. Se usa como reserva cuando la
+             clave no está en la tabla: se toma el tono que corresponda del
+             orden del espectro, rotando. Así nunca queda un bloque sin color
+             aunque alguien renombre un grupo desde el CMS.
+
+  Si falta el archivo de colores entero, devuelve la tinta y no se rompe nada.
+*/ -}}
+{{- $c := hugo.Data.colores -}}
+{{- $espectro := dict -}}
+{{- $orden := slice "rojo" "naranja" "ambar" "lima" "verde" "cian" "azul" "morado" "magenta" -}}
+{{- with $c }}
+  {{- with .espectro }}{{ $espectro = . }}{{ end }}
+  {{- with .franja }}{{ $orden = . }}{{ end }}
+{{- end -}}
+
+{{- $nombre := "" -}}
+{{- with $c }}
+  {{- with index . ($.tipo | default "") }}
+    {{- with index . ($.clave | default "") }}{{ $nombre = . }}{{ end }}
+  {{- end }}
+{{- end -}}
+
+{{- if not $nombre }}
+  {{- if gt (len $orden) 0 }}
+    {{- $nombre = index $orden (mod (int (.i | default 0)) (len $orden)) }}
+  {{- end }}
+{{- end -}}
+
+{{- $hex := "" -}}
+{{- with index $espectro $nombre }}{{ $hex = . }}{{ end -}}
+{{- with $hex }}{{ . }}{{ else }}#101214{{ end -}}

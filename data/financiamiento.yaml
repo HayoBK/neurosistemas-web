@@ -1,0 +1,19 @@
+# ============================================================
+# Fuentes de financiamiento mostradas en el Inicio
+# ============================================================
+- codigo: 'FONDECYT #1090101'
+  nombre: Fondo Nacional de Desarrollo Científico y Tecnológico
+- codigo: CONICYT
+  nombre: Becas de Doctorado (Ph.D. Fellowships)
+- codigo: CONICYT
+  nombre: Becas Postdoctorales (Postdoctoral Fellowships)
+- codigo: ACT 66
+  nombre: Anillos de Investigación en Ciencia y Tecnología, CONICYT
+- codigo: ICM P09-015-F
+  nombre: Iniciativa Científica Milenio · Instituto de Neurociencia Biomédica (BNI)
+- codigo: ICM P10-001-F
+  nombre: Iniciativa Científica Milenio · Centro para la Neurociencia de la Memoria (CENEM)
+- codigo: Fundación Guillermo Puelma
+  nombre: Aporte institucional
+- codigo: FONDEF IDeA
+  nombre: Proyecto Akori

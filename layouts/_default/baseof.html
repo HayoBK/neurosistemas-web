@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.Locale | default "es-CL" }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  <a class="ns-saltar" href="#contenido">Saltar al contenido</a>
+  {{ partial "header.html" . }}
+  <main id="contenido">
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "footer.html" . }}
+  {{ partial "scripts.html" . }}
+</body>
+</html>

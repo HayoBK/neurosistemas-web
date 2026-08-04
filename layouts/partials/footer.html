@@ -1,0 +1,56 @@
+<footer class="ns-pie">
+  <div class="ns-franja" aria-hidden="true"></div>
+  <div class="ns-wrap ns-pie__cuerpo">
+    <div class="ns-pie__rejilla">
+
+      <div>
+        <p class="ns-pie__marca">Laboratorio de Neurosistemas</p>
+        <p style="margin:0; max-width:34ch;">
+          {{ with site.Params.contacto.institucion }}{{ . }}{{ end }}
+        </p>
+      </div>
+
+      <div>
+        <h4>Navegación</h4>
+        <ul>
+          {{- range site.Menus.main }}{{ if not .Parent }}
+          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+          {{- end }}{{ end }}
+        </ul>
+      </div>
+
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          {{- with site.Params.contacto.email }}
+          <li><a href="mailto:{{ . }}">{{ . }}</a></li>
+          {{- end }}
+          {{- with site.Params.contacto.telefono }}
+          <li>{{ . }}</li>
+          {{- end }}
+          {{- with site.Params.contacto.direccion }}
+          <li>{{ . }}</li>
+          {{- end }}
+        </ul>
+      </div>
+
+      <div>
+        <h4>Enlaces</h4>
+        <ul>
+          {{- range site.Params.redes }}
+          <li><a href="{{ .url }}" rel="noopener">{{ .nombre }}</a></li>
+          {{- end }}
+          {{- with .OutputFormats }}{{ with .Get "rss" }}
+          <li><a href="{{ .Permalink }}">RSS de noticias</a></li>
+          {{- end }}{{ end }}
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="ns-pie__legal">
+      <span>© {{ now.Year }} Laboratorio de Neurosistemas</span>
+      <span>Sitio estático construido con Hugo</span>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,45 @@
+# ============================================================
+# Navegación principal — Laboratorio de Neurosistemas
+# Rutas SIEMPRE con pageRef (nunca paths absolutos hardcodeados).
+# ============================================================
+
+main:
+  - name: "Inicio"
+    pageRef: "/"
+    weight: 10
+
+  - name: "Investigación"
+    pageRef: "/investigacion"
+    weight: 20
+
+  - name: "Publicaciones"
+    pageRef: "/publicaciones"
+    weight: 30
+
+  - name: "Equipo"
+    pageRef: "/miembros"
+    weight: 40
+  - name: "Miembros actuales"
+    pageRef: "/miembros"
+    parent: "Equipo"
+    weight: 41
+  - name: "Miembros visitantes"
+    pageRef: "/visitantes"
+    parent: "Equipo"
+    weight: 42
+  - name: "Ex miembros"
+    pageRef: "/ex-miembros"
+    parent: "Equipo"
+    weight: 43
+
+  - name: "Noticias"
+    pageRef: "/noticias"
+    weight: 50
+
+  - name: "Galería"
+    pageRef: "/galeria"
+    weight: 60
+
+  - name: "Contacto"
+    pageRef: "/contacto"
+    weight: 70

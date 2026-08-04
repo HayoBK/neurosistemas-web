@@ -1,0 +1,8 @@
+{{- $col := partial "color.html" (dict "tipo" "secciones" "clave" .Section) -}}
+<section class="ns-encabezado-pag" style="--ns-acento:{{ $col }}">
+  <div class="ns-wrap">
+    {{- with .Params.rotulo }}<p class="ns-rotulo">{{ . }}</p>{{ end }}
+    <h1>{{ .Title }}</h1>
+    {{- with .Params.bajada }}<p class="ns-bajada">{{ . }}</p>{{ end }}
+  </div>
+</section>

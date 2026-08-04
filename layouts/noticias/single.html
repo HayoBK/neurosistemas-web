@@ -1,0 +1,14 @@
+{{ define "main" }}
+<article class="ns-articulo">
+  <div class="ns-wrap-txt">
+    <p class="ns-rotulo">{{ time.Format "2 de January de 2006" .Date }}</p>
+    <h1>{{ .Title }}</h1>
+    {{- with .Params.resumen }}<p class="ns-bajada">{{ . }}</p>{{ end }}
+    {{- with .Params.imagen }}
+    <img src="{{ (printf "images/%s" .) | relURL }}" alt="" style="border-radius:var(--ns-radio); margin:2rem 0;">
+    {{- end }}
+    <div class="ns-articulo__cuerpo ns-prosa">{{ .Content }}</div>
+    <p style="margin-top:3rem;"><a class="ns-btn ns-btn--fantasma" href="{{ "noticias/" | relURL }}">← Volver a noticias</a></p>
+  </div>
+</article>
+{{ end }}

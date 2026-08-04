@@ -1,0 +1,48 @@
+# ============================================================
+# Líneas de investigación — editable desde Pages CMS
+# 'numero' se usa como ancla (#01, #02...) en la página.
+# ============================================================
+- numero: '01'
+  titulo: Correlatos neurofisiológicos de la percepción visual y la coordinación sensorio-motora
+  resumen: Buscamos entender cómo la actividad eléctrica de las redes neuronales da cuenta de comportamientos
+    complejos como la percepción visual. Examinamos la conectividad funcional en señales electroencefalográficas
+    registradas en voluntarios mientras exploran imágenes de escenas naturales en una pantalla. También
+    estudiamos estos registros en personas que realizan tareas de aprendizaje motor o juegan videojuegos,
+    para examinar la dinámica de los cambios cerebrales que ocurren en la coordinación visuomotora y el
+    aprendizaje motor. Además, registramos señales eléctricas de poblaciones neuronales en distintas áreas
+    corticales de ratas mientras realizan una tarea de discriminación, con el fin de determinar los mecanismos
+    específicos de la coordinación sensorio-motriz precisa que se producen en la percepción activa.
+  proyectos:
+  - Patrón temporal de la coherencia EEG durante el cambio y la estabilidad de la percepción de un estímulo
+    visual biestable.
+  - Fijación y actividad EEG relacionada con la sacada durante la exploración libre de escenas naturales.
+  - Modulación de los recursos cognitivos por la temperatura ambiental.
+  - Circuitos sensorio-motores en la corteza sensorial.
+  - Papel de la actividad oscilatoria acoplada entre cerebelo y corteza motora durante la adquisición
+    de modelos internos en tareas de aprendizaje visuomotor.
+  - Modulación atencional de la integración sensorio-motora durante la percepción activa.
+- numero: '02'
+  titulo: La percepción visual como marcador de estados mentales
+  resumen: Los patrones de movimientos oculares y la temperatura corporal reflejan procesos fisiológicos
+    subyacentes asociados a distintos estados mentales. Estos comportamientos pueden caracterizarse y
+    utilizarse para predecir la conducta. Tienen aplicaciones en la industria —medir fatiga y prevenir
+    accidentes— y en el diseño de interfaces y navegación web.
+  proyectos:
+  - La respuesta autonómica en la emoción como determinante de la rápida integración sensorial y del comportamiento
+    motor.
+  - 'Reactividad pupilar: evidencia de mecanismos descendentes en el procesamiento emocional.'
+  - Plataforma para el análisis de preferencias y la extrapolación del comportamiento de usuarios web
+    a partir de patrones de exploración visual y herramientas avanzadas de informática cerebral (Web Intelligence).
+- numero: '03'
+  titulo: Correlatos neurofisiológicos de las enfermedades psiquiátricas y neurológicas
+  resumen: Buscamos marcadores biológicos que mejoren la clasificación de las enfermedades psiquiátricas
+    y neurológicas y aumenten nuestra comprensión de su patogénesis. Este enfoque permite la detección
+    temprana y puede contribuir a terapias más eficientes. Estudiamos grupos de pacientes con diagnóstico
+    de esquizofrenia o enfermedad de Alzheimer, utilizando medidas pupilares, caracterización de movimientos
+    oculares y registros de EEG para encontrar marcadores conductuales y electroencefalográficos de estas
+    condiciones.
+  proyectos:
+  - Marcadores neurofisiológicos en la esquizofrenia.
+  - Actividad pupilar y cognición en la esquizofrenia.
+  - Modificación de la conectividad funcional como mecanismo temprano de alteración de la memoria espacial
+    en pacientes con deterioro cognitivo.

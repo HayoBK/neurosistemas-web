@@ -1,0 +1,8 @@
+{{- $p := .Paginator }}
+{{- if gt $p.TotalPages 1 }}
+<nav class="ns-paginacion" aria-label="Paginación">
+  {{- with $p.Prev }}<a class="ns-btn ns-btn--fantasma" href="{{ .URL }}">← Anterior</a>{{ end }}
+  <span class="ns-paginacion__pos">Página {{ $p.PageNumber }} de {{ $p.TotalPages }}</span>
+  {{- with $p.Next }}<a class="ns-btn ns-btn--fantasma" href="{{ .URL }}">Siguiente →</a>{{ end }}
+</nav>
+{{- end }}

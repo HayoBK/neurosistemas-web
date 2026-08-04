@@ -1,0 +1,15 @@
+{{ define "main" }}
+{{ partial "encabezado.html" . }}
+<section class="ns-seccion">
+  <div class="ns-wrap">
+    <div class="ns-prosa">{{ .Content }}</div>
+    {{- with .RegularPagesRecursive }}
+    <ul class="ns-pubs" style="margin-top:2rem;">
+      {{- range . }}
+      <li class="ns-pub"><h3 class="ns-pub__tit"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3></li>
+      {{- end }}
+    </ul>
+    {{- end }}
+  </div>
+</section>
+{{ end }}

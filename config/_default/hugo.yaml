@@ -1,0 +1,49 @@
+# ============================================================
+# LABORATORIO DE NEUROSISTEMAS — Configuración principal de Hugo
+# Sitio autocontenido (sin módulos Go, sin Tailwind, sin npm).
+# Hugo extended 0.162.1
+# ============================================================
+
+# baseURL para builds LOCALES. En producción el workflow de GitHub Actions
+# lo sobreescribe con la URL real de Pages:
+#   hugo --baseURL "${{ steps.pages.outputs.base_url }}/"
+# Cuando el dominio neurosistemas.cl apunte al sitio, cambiar por
+# "https://www.neurosistemas.cl/" y agregar static/CNAME.
+baseURL: "https://hayobk.github.io/neurosistemas-web/"
+
+title: "Laboratorio de Neurosistemas"
+locale: "es-CL"
+defaultContentLanguage: "es"
+hasCJKLanguage: false
+
+enableEmoji: true
+enableRobotsTXT: true
+summaryLength: 30
+buildFuture: true
+
+removePathAccents: true
+disableAliases: false
+
+pagination:
+  pagerSize: 12
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: false
+    style: github
+
+imaging:
+  resampleFilter: lanczos
+  quality: 88
+  anchor: smart
+
+taxonomies:
+  tag: tags
+  categoria: categorias
+
+outputs:
+  home: [HTML, RSS]
+  section: [HTML, RSS]

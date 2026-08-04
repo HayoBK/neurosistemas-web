@@ -1,0 +1,57 @@
+{{ define "main" }}
+{{ partial "encabezado.html" . }}
+
+{{- $col := partial "color.html" (dict "tipo" "secciones" "clave" "publicaciones") }}
+<section class="ns-seccion" style="--ns-acento:{{ $col }}">
+  <div class="ns-wrap">
+    {{- with .Content }}<div class="ns-prosa ns-tras-lista">{{ . }}</div>{{ end }}
+
+    {{/* ---- Fusionar las dos fuentes: ORCID (automática) + histórico (curado) ---- */}}
+    {{- $todas := slice }}
+    {{- $actualizado := "" }}
+    {{- with hugo.Data.publicaciones_orcid }}
+      {{- with .actualizado }}{{ $actualizado = . }}{{ end }}
+      {{- with .publicaciones }}{{ $todas = $todas | append . }}{{ end }}
+    {{- end }}
+    {{- with hugo.Data.publicaciones_historicas }}{{ $todas = $todas | append . }}{{ end }}
+
+    <div class="ns-pub-barra">
+      <input type="search" id="ns-buscar-pub" placeholder="Buscar por autor, título, revista o DOI…" aria-label="Buscar publicaciones">
+      <span class="ns-pub-barra__meta" id="ns-contador-pub">{{ len $todas }} de {{ len $todas }}</span>
+      {{- with $actualizado }}
+      <span class="ns-pub-barra__fuente">ORCID · actualizado {{ . }}</span>
+      {{- end }}
+    </div>
+
+    {{/* ---- Años únicos, de mayor a menor ----
+         OJO: Hugo decodifica los números de JSON como float64 y los de YAML
+         como int. Se castea todo a int para que uniq/sort/eq no vean dos
+         tipos distintos para el mismo año. ---- */}}
+    {{- $anios := slice }}
+    {{- range $todas }}{{ $anios = $anios | append (int .anio) }}{{ end }}
+    {{- $anios = sort (uniq $anios) "value" "desc" }}
+
+    {{/* Grilla de dos columnas: el año se queda pegado a la izquierda mientras
+         se recorren sus publicaciones, como en las revistas científicas. */}}
+    {{- range $anio := $anios }}
+      {{- $delAnio := slice }}
+      {{- range $todas }}{{ if eq (int .anio) $anio }}{{ $delAnio = $delAnio | append . }}{{ end }}{{ end }}
+      <div class="ns-anio">
+        <div class="ns-anio__col">
+          <h2 class="ns-anio__tit">{{ $anio }}</h2>
+          <span class="ns-anio__n">{{ len $delAnio }} {{ cond (eq (len $delAnio) 1) "publicación" "publicaciones" }}</span>
+        </div>
+        <ul class="ns-pubs">
+          {{- range $delAnio }}{{ partial "publicacion.html" . }}{{ end }}
+        </ul>
+      </div>
+    {{- end }}
+
+    <p class="ns-vacio" id="ns-vacio-pub" hidden>Sin resultados para esa búsqueda.</p>
+
+    {{- with site.Params.publicaciones.nota }}
+    <p class="ns-nota-pie">{{ . }}</p>
+    {{- end }}
+  </div>
+</section>
+{{ end }}

@@ -1,0 +1,30 @@
+{{- /*
+  Ficha de una persona.
+
+  Admite dos formas de llamada:
+    {{ partial "persona.html" (dict "p" $persona "color" $hex) }}  ← con color de grupo
+    {{ partial "persona.html" $persona }}                          ← sin color (usa tinta)
+
+  El color del grupo se usa en el anillo de la foto y, cuando no hay foto,
+  en el círculo de iniciales (relleno al 10 %, texto en el color pleno).
+*/ -}}
+{{- $p := . -}}
+{{- $color := "" -}}
+{{- if isset . "p" }}{{ $p = .p }}{{ $color = .color }}{{ end -}}
+<article class="ns-persona"{{ with $color }} style="--ns-acento:{{ . }}"{{ end }}>
+  {{- if $p.foto }}
+    <img class="ns-persona__foto" src="{{ (printf "images/equipo/%s" $p.foto) | relURL }}" alt="{{ $p.nombre }}" width="128" height="128" loading="lazy">
+  {{- else }}
+    <div class="ns-persona__ini" aria-hidden="true">{{ partial "iniciales.html" $p.nombre }}</div>
+  {{- end }}
+  <h3 class="ns-persona__nombre">{{ $p.nombre }}</h3>
+  {{- with $p.rol }}<p class="ns-persona__rol">{{ . }}</p>{{ end }}
+  {{- with $p.afiliacion }}<p class="ns-persona__afil">{{ . | safeHTML }}</p>{{ end }}
+  {{- with $p.linea }}<p class="ns-persona__afil"><b>Línea:</b> {{ . }}</p>{{ end }}
+  <div class="ns-persona__links">
+    {{- with $p.email }}<a class="ns-chip" href="mailto:{{ . }}">correo</a>{{ end }}
+    {{- with $p.orcid }}<a class="ns-chip ns-chip--orcid" href="https://orcid.org/{{ . }}" rel="noopener">ORCID</a>{{ end }}
+    {{- with $p.perfil }}<a class="ns-chip" href="{{ . }}" rel="noopener">perfil</a>{{ end }}
+    {{- with $p.scholar }}<a class="ns-chip" href="{{ . }}" rel="noopener">Scholar</a>{{ end }}
+  </div>
+</article>

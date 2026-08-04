@@ -1,0 +1,42 @@
+<header class="ns-cab">
+  <div class="ns-wrap ns-cab__fila">
+
+    <a class="ns-marca" href="{{ "" | relURL }}">
+      <img class="ns-marca__logo" src="{{ "images/isotipo.png" | relURL }}" alt="" width="47" height="34">
+      <span class="ns-marca__txt">
+        <span class="ns-marca__nombre">Neurosistemas</span>
+        <span class="ns-marca__sub">Facultad de Medicina · U. de Chile</span>
+      </span>
+    </a>
+
+    <button class="ns-hamburguesa" type="button" aria-label="Abrir menú"
+            aria-controls="nav-principal" aria-expanded="false" data-menu-boton>
+      <span></span>
+    </button>
+
+    <nav class="ns-nav" id="nav-principal" aria-label="Navegación principal" data-menu>
+      <ul class="ns-nav__lista">
+        {{- range site.Menus.main }}
+          {{- if not .Parent }}
+          <li class="ns-nav__item">
+            <a class="ns-nav__link{{ if or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }} es-activo{{ end }}"
+               href="{{ .URL }}">{{ .Name }}</a>
+            {{- with .Children }}
+            <ul class="ns-nav__sub">
+              {{- range . }}
+              <li><a class="ns-nav__link{{ if $.IsMenuCurrent "main" . }} es-activo{{ end }}" href="{{ .URL }}">{{ .Name }}</a></li>
+              {{- end }}
+            </ul>
+            {{- end }}
+          </li>
+          {{- end }}
+        {{- end }}
+      </ul>
+    </nav>
+
+  </div>
+
+  {{/* Franja espectral: la firma del sitio. Los 9 tonos del logo en bandas
+       iguales. Solo aquí y al inicio del pie el color ocupa el ancho completo. */}}
+  <div class="ns-franja" aria-hidden="true"></div>
+</header>

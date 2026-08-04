@@ -1,0 +1,28 @@
+{{- /*
+  Iniciales para el fallback de foto: primer nombre + último apellido.
+
+  No sirve tomar las dos primeras palabras, porque los nombres del equipo
+  traen segundo nombre e inicial ("Pedro E. Maldonado" daría PE) y partículas
+  ("María de los Ángeles Juricic" daría MD). Se descartan las partículas y las
+  iniciales sueltas tipo "E.", y se toma la primera y la última palabra que
+  quedan en pie.
+
+  Uso:  {{ partial "iniciales.html" .nombre }}
+*/ -}}
+{{- $particulas := slice "de" "del" "la" "las" "los" "y" "da" "do" "dos" "van" "von" "di" -}}
+{{- $palabras := slice -}}
+{{- range (split . " ") }}
+  {{- $p := trim . " " -}}
+  {{- $limpia := replace $p "." "" -}}
+  {{- if and (gt (len $limpia) 1) (not (in $particulas (lower $limpia))) }}
+    {{- $palabras = $palabras | append $limpia }}
+  {{- end }}
+{{- end -}}
+{{- $ini := "" -}}
+{{- if gt (len $palabras) 0 }}
+  {{- $ini = substr (index $palabras 0) 0 1 -}}
+  {{- if gt (len $palabras) 1 }}
+    {{- $ini = printf "%s%s" $ini (substr (index $palabras (sub (len $palabras) 1)) 0 1) -}}
+  {{- end }}
+{{- end -}}
+{{- upper $ini -}}

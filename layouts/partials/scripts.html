@@ -1,0 +1,58 @@
+<script>
+/* --- Menú móvil --- */
+(function(){
+  var boton = document.querySelector('[data-menu-boton]');
+  var nav   = document.querySelector('[data-menu]');
+  if(!boton || !nav) return;
+  boton.addEventListener('click', function(){
+    var abierto = nav.classList.toggle('es-abierto');
+    boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+    boton.setAttribute('aria-label', abierto ? 'Cerrar menú' : 'Abrir menú');
+  });
+  nav.addEventListener('click', function(e){
+    if(e.target.tagName === 'A' && window.innerWidth <= 900){
+      nav.classList.remove('es-abierto');
+      boton.setAttribute('aria-expanded','false');
+    }
+  });
+})();
+</script>
+
+{{- if eq .Section "publicaciones" }}
+<script>
+/* --- Buscador en vivo del listado de publicaciones --- */
+(function(){
+  var caja = document.getElementById('ns-buscar-pub');
+  if(!caja) return;
+  var items = Array.prototype.slice.call(document.querySelectorAll('.ns-pub'));
+  var anios = Array.prototype.slice.call(document.querySelectorAll('.ns-anio'));
+  var contador = document.getElementById('ns-contador-pub');
+  var vacio = document.getElementById('ns-vacio-pub');
+  var total = items.length;
+
+  function normalizar(s){
+    return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  }
+
+  var indice = items.map(function(el){ return normalizar(el.textContent); });
+
+  function filtrar(){
+    var q = normalizar(caja.value).trim();
+    var visibles = 0;
+    items.forEach(function(el, i){
+      var ok = !q || indice[i].indexOf(q) !== -1;
+      el.hidden = !ok;
+      if(ok) visibles++;
+    });
+    anios.forEach(function(bloque){
+      var algo = bloque.querySelector('.ns-pub:not([hidden])');
+      bloque.hidden = !algo;
+    });
+    if(contador) contador.textContent = visibles + ' de ' + total;
+    if(vacio) vacio.hidden = visibles !== 0;
+  }
+
+  caja.addEventListener('input', filtrar);
+})();
+</script>
+{{- end }}

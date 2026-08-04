@@ -1,0 +1,333 @@
+# ============================================================
+# ARCHIVO HISTÓRICO DE PUBLICACIONES (curado a mano)
+#
+# Este archivo NO se toca automáticamente. Es el respaldo del listado
+# que existía en el sitio WordPress y cubre 1988–2023.
+#
+# Las publicaciones nuevas llegan solas desde ORCID a
+# data/publicaciones_orcid.json (ver scripts/orcid_sync.py).
+# La página de Publicaciones fusiona ambas fuentes y agrupa por año.
+#
+# Campos:
+#   anio    : año (entero) — se usa para agrupar
+#   cita    : cita completa en HTML. <b> marca a los miembros del lab,
+#             <i> los títulos de revistas o libros.
+#   revista : revista / volumen / páginas (se muestra en cursiva)
+#   doi     : solo el identificador, SIN "https://doi.org/"
+# ============================================================
+- anio: 2023
+  cita: Oliva, C. A., Rivera, D. S., Torres, A. K., <b>Lindsay, C. B.</b>, Tapia-Rojas, C., Bozinovic, F., &amp; Inestrosa, N. C. (2023). Age-dependent behavioral and synaptic dysfunction impairment are improved with long-term Andrographolide administration in long-lived female degus (<i>Octodon degus</i>).
+  revista: International Journal of Molecular Sciences, 24(2)
+  doi: 10.3390/ijms24021105
+- anio: 2023
+  cita: <b>Plaza-Rosales, I.</b>, Brunetti, E. P., <b>Montefusco-Siegmund, R.</b>, <b>Madariaga, S.</b>, Häfelin, R., Ponce De La Vega, D., Behrens, M. I., <b>Maldonado, P. E.</b>, &amp; Paula-Lima, A. C. (2023). Visual-spatial processing impairment in the occipital-frontal connectivity network.
+  revista: Frontiers in Aging Neuroscience
+  doi: 10.3389/fnagi.2023.1097577
+- anio: 2023
+  cita: 'Castillo-Astorga, R., Del Valle-Batalla, L., <b>Mariman, J. J.</b>, <b>Plaza-Rosales, I.</b>, <b>de los Ángeles Juricic, M.</b>, <b>Maldonado, P. E.</b>, Vogel, M., &amp; Fuentes-Flores, R. (2023). Combined therapy of bilateral transcranial direct current stimulation and ocular occlusion improves visual function in adults with amblyopia: a randomized pilot study.'
+  revista: Frontiers in Human Neuroscience, 17, 1056432
+  doi: 10.3389/fnhum.2023.1056432
+- anio: 2023
+  cita: '<b>Madariaga, S.</b>, <b>Babul, C.</b>, <b>Egaña, J. I.</b>, South, G., <b>Concha-Miranda, M.</b>, <b>Maldonado, P. E.</b>, &amp; <b>Devia, C.</b> (2023). SaFiDe: Detection of saccade and fixation periods based on eye-movement attributes from video-oculography, scleral coil or electrooculography data.'
+  revista: MethodsX, 102041
+  doi: 10.1016/j.mex.2023.102041
+- anio: 2022
+  cita: <b>Loyola-Navarro, R.</b>, Moënne-Loccoz, C., <b>Vergara, R. C.</b>, Hyafil, A., Aboitiz, F., &amp; <b>Maldonado, P. E.</b> (2022). Voluntary self-initiation of the stimuli onset improves working memory and accelerates visual and attentional processing.
+  revista: Heliyon, 8(12), e12215
+  doi: 10.1016/j.heliyon.2022.e12215
+- anio: 2022
+  cita: '<b>Vicencio-Jimenez, S.</b>, Villalobos, M., <b>Maldonado, P. E.</b>, &amp; <b>Vergara, R. C.</b> (2022). The Energy Homeostasis Principle: a naturalistic approach to explain the emergence of behavior.'
+  revista: Frontiers in Systems Neuroscience, 15, 782781
+  doi: 10.3389/fnsys.2021.782781
+- anio: 2022
+  cita: Aertsen, A., Grün, S., <b>Maldonado, P. E.</b>, &amp; Palm, G. (Eds.) (2022). <i>Introducing Computation to Neuroscience</i>. Springer, Alemania.
+  revista: Springer (libro editado)
+  doi: ''
+- anio: 2022
+  cita: <b>Maldonado, P. E.</b> (2022). Plasticity in the receptive fields by microstimulation. En Aertsen, Grün, <b>Maldonado</b> &amp; Palm (Eds.), <i>Introducing Computation to Neuroscience</i>. Springer, Alemania.
+  revista: Capítulo de libro
+  doi: ''
+- anio: 2022
+  cita: 'Low, F., <b>Maldonado, P.</b>, Pezoa, R., Szoloch, N., &amp; Varas, M. (2022). The impact of flashing on the efficacy of variable message signs: a vehicle-by-vehicle approach.'
+  revista: Sustainability, 14(15), 9705
+  doi: 10.3390/su14159705
+- anio: 2022
+  cita: <b>Montefusco-Siegmund, R.</b>, Schwalm, M., Rosales, E., <b>Devia, C.</b>, Win, J. I., &amp; <b>Maldonado, P. E.</b> (2022). Alpha EEG activity and pupil diameter coupling during inactive wakefulness in humans.
+  revista: eNeuro
+  doi: 10.1523/ENEURO.0060-21.2022
+- anio: 2022
+  cita: Ito, J., Joana, C., Yamane, Y., Fujita, I., Tamura, H., <b>Maldonado, P. E.</b>, &amp; Grün, S. (2022). Latency shortening with enhanced sparseness and responsiveness in V1 during active visual sensing.
+  revista: Scientific Reports, 12, 6021
+  doi: 10.1038/s41598-022-09405-4
+- anio: 2022
+  cita: <b>García-Pérez, M. A.</b>, Irani, M., Tiznado, V., Bustamante, T., Inostroza, M., <b>Maldonado, P. E.</b>, &amp; Valdés, J. L. (2022). Cortico-hippocampal oscillations are associated with the developmental onset of hippocampal-dependent memory.
+  revista: Frontiers in Neuroscience, 16, 891523
+  doi: 10.3389/fnins.2022.891523
+- anio: 2021
+  cita: <b>Jaras, I.</b>, Harada, T., Orchard, M. E., <b>Maldonado, P. E.</b>, &amp; <b>Vergara, R. C.</b> (2021). Extending the integrate-and-fire model to account for metabolic dependencies.
+  revista: European Journal of Neuroscience, 54(4), 5249–5260
+  doi: 10.1111/ejn.15326
+- anio: 2021
+  cita: <b>Maldonado, P. E.</b> (2021). The neuroscience of pandemic behaviors.
+  revista: Anales del Instituto de Chile, 40, 235
+  doi: ''
+- anio: 2020
+  cita: <b>Aguilar-Rivera, M.</b>, Kim, S., Coleman, T. P., <b>Maldonado, P. E.</b>, &amp; Torrealba, F. (2020). Interoceptive insular cortex participates in sensory processing of gastrointestinal malaise and associated behaviors.
+  revista: Scientific Reports, 10, 21642
+  doi: 10.1038/s41598-020-78200-w
+- anio: 2020
+  cita: Sáez, D. M., Valdés, N. R., <b>Fernández, C. M.</b>, &amp; Pacheco, R. E. (2020). Progressive multifocal leukoencephalopathy, more than an encephalopathy.
+  revista: Journal of HIV for Clinical and Scientific Research, 9(1), 001–004
+  doi: 10.17352/2455-3786.000032
+- anio: 2019
+  cita: '<b>Vergara, R. C.</b>, Moënne-Loccoz, C., Ávalos, C., <b>Egaña, J.</b>, &amp; <b>Maldonado, P. E.</b> (2019). Finger temperature: a psychophysiological assessment of the attentional state.'
+  revista: Frontiers in Human Neuroscience, 13, 66
+  doi: 10.3389/fnhum.2019.00066
+- anio: 2019
+  cita: '<b>Concha-Miranda, M.</b>, Ríos, J., <b>Bou, J.</b>, Valdés, J. L., &amp; <b>Maldonado, P. E.</b> (2019). Timing is of the essence: improvement in perception during active sensing.'
+  revista: Frontiers in Behavioral Neuroscience, 13, 96
+  doi: 10.3389/fnbeh.2019.00096
+- anio: 2019
+  cita: <b>Devia, C.</b>, <b>Mayol-Troncoso, R.</b>, Parrini, J., Orellana, G., <b>Maldonado, P. E.</b>, &amp; <b>Egaña, J. I.</b> (2019). EEG classification during scene free-viewing for schizophrenia detection.
+  revista: IEEE Transactions on Neural Systems and Rehabilitation Engineering
+  doi: 10.1109/TNSRE.2019.2913799
+- anio: 2019
+  cita: '<b>Vergara, R. C.</b>, Jaramillo-Riveri, S., Luarte, A., Moënne-Loccoz, C., <b>Fuentes, R.</b>, Couve, A., &amp; <b>Maldonado, P. E.</b> (2019). The Energy Homeostasis Principle: neuronal energy regulation drives local network dynamics generating behavior.'
+  revista: Frontiers in Computational Neuroscience, 13, 49
+  doi: 10.3389/fncom.2019.00049
+- anio: 2019
+  cita: <b>Maldonado, P. E.</b> (2019). <i>¿Por qué tenemos el cerebro en la cabeza?</i> Editorial Debate. ISBN 978-956-6042-07-5.
+  revista: Libro
+  doi: ''
+- anio: 2019
+  cita: '<b>Ibáñez, C.</b>, <b>Vicencio, C.</b>, Quintanilla, M. E., &amp; <b>Maldonado, P. E.</b> (2019). Interoception and alcohol addiction: vagotomy induces long-lasting suppression of relapse-type behavior.'
+  revista: Addiction Biology
+  doi: 10.1111/adb.12836
+- anio: 2018
+  cita: <b>Astudillo, C.</b>, <b>Muñoz, K.</b>, &amp; <b>Maldonado, P. E.</b> (2018). Emotional content modulates attentional visual orientation during free viewing of natural images.
+  revista: Frontiers in Human Neuroscience, 12, 459
+  doi: 10.3389/fnhum.2018.00459
+- anio: 2018
+  cita: <b>Burgos, P. I.</b>, <b>Mariman, J. J.</b>, Makeig, S., <b>Rivera-Lillo, G.</b>, &amp; <b>Maldonado, P. E.</b> (2018). Visuomotor coordination and cortical connectivity of modular motor learning.
+  revista: Human Brain Mapping, 39, 3836–3853
+  doi: 10.1002/hbm.24215
+- anio: 2018
+  cita: Fajnzylber, V., González, L., <b>Maldonado, P.</b>, Del Villar, R., Yáñez, R., <b>Madariaga, S.</b>, &amp; Magdics, M. (2018). Augmented film narrative by use of non-photorealistic rendering.
+  revista: International Conference on 3D Immersion (IC3D), Bruselas
+  doi: 10.1109/IC3D.2017.8251912
+- anio: 2018
+  cita: 'Gajardo, A. I. J., <b>Madariaga, S.</b>, &amp; <b>Maldonado, P. E.</b> (2018). Autonomic nervous system assessment by pupillary response as a potential biomarker for cardiovascular risk: a pilot study.'
+  revista: Journal of Clinical Neuroscience
+  doi: 10.1016/j.jocn.2018.11.015
+- anio: 2018
+  cita: Galindo, J., Contreras, M., <b>Maldonado, P.</b>, Torrealba, F., Lagos, N., &amp; Valdés, J. L. (2018). Long-lasting, reversible and non-neurotoxic inactivation of hippocampus activity induced by neosaxitoxin.
+  revista: Journal of Neuroscience Methods, 308, 197–204
+  doi: 10.1016/j.jneumeth.2018.08.013
+- anio: 2018
+  cita: <b>Mariman, J. J.</b>, <b>Burgos, P.</b>, &amp; <b>Maldonado, P. E.</b> (2018). Parallel learning processes of a visuomotor adaptation task in a changing environment.
+  revista: European Journal of Neuroscience
+  doi: 10.1111/ejn.14258
+- anio: 2018
+  cita: '<b>Montefusco-Siegmund, R.</b>, Toro, M., <b>Maldonado, P. E.</b>, &amp; Aylwin, M. L. (2018). Unsupervised visual discrimination learning of complex stimuli: accuracy, bias and generalization.'
+  revista: Vision Research, 148, 37–48
+  doi: 10.1016/j.visres.2018.05.002
+- anio: 2018
+  cita: <b>Rivera-Lillo, G.</b>, <b>Rojas, D.</b>, <b>Burgos, P.</b>, <b>Egaña, J. I.</b>, Chennu, S., &amp; <b>Maldonado, P. E.</b> (2018). Reduced delta-band modulation underlies the loss of P300 responses in disorders of consciousness.
+  revista: Clinical Neurophysiology, 129(12), 2613–2622
+  doi: 10.1016/j.clinph.2018.09.104
+- anio: 2018
+  cita: Rojas-Líbano, D., <b>Wimmer del Solar, J.</b>, <b>Aguilar-Rivera, M.</b>, <b>Montefusco-Siegmund, R.</b>, &amp; <b>Maldonado, P. E.</b> (2018). Local cortical activity of distant brain areas can phase-lock to the olfactory bulb's respiratory rhythm in the freely behaving rat.
+  revista: Journal of Neurophysiology, 120, 960–972
+  doi: 10.1152/jn.00088.2018
+- anio: 2017
+  cita: <b>Varas-Díaz, G.</b>, <b>Brunetti, E. P.</b>, <b>Rivera-Lillo, G.</b>, &amp; <b>Maldonado, P. E.</b> (2017). Patients with chronic spinal cord injury exhibit reduced autonomic modulation during an emotion recognition task.
+  revista: Frontiers in Human Neuroscience, 11, 59
+  doi: 10.3389/fnhum.2017.00059
+- anio: 2017
+  cita: <b>Vásquez-Rosati, A.</b>, <b>Brunetti, E. P.</b>, Cordero, C., &amp; <b>Maldonado, P.</b> (2017). Pupillary response to negative emotional stimuli is differentially affected in meditation practitioners.
+  revista: Frontiers in Human Neuroscience, 11, 209
+  doi: 10.3389/fnhum.2017.00209
+- anio: 2017
+  cita: '<b>Vergara, R.</b>, Moënne-Loccoz, C., &amp; <b>Maldonado, P. E.</b> (2017). Cold-blooded attention: temperature predicts attentional performance.'
+  revista: Frontiers in Human Neuroscience, 11, 454
+  doi: 10.3389/fnhum.2017.00454
+- anio: 2017
+  cita: Villalobos, C., <b>Maldonado, P. E.</b>, &amp; Valdés, J. L. (2017). Asynchronous ripple oscillations between left and right hippocampi during slow-wave sleep.
+  revista: PLoS ONE, 12(2), e0171304
+  doi: 10.1371/journal.pone.0171304
+- anio: 2016
+  cita: Mochizuki, Y., Onaga, T., Shimazaki, H., … <b>Babul, C.</b>, <b>Maldonado, P. E.</b>, … &amp; Shinomoto, S. (2016). Similarity in neuronal firing regimes across mammalian species.
+  revista: Journal of Neuroscience, 36(21), 5736–5747
+  doi: 10.1523/JNEUROSCI.0230-16.2016
+- anio: 2015
+  cita: <b>Loyola, P.</b>, Martínez, G., <b>Muñoz, K.</b>, Velásquez, J., <b>Maldonado, P.</b>, &amp; Couve, A. (2015). Combining eye tracking and pupillary dilation analysis to identify website key objects.
+  revista: Neurocomputing, 168, 179–189
+  doi: ''
+- anio: 2014
+  cita: <b>Loyola, P.</b>, <b>Brunetti, E.</b>, Martínez, G., Velásquez, J., &amp; <b>Maldonado, P.</b> (2014). Leveraging neurodata to support web user behavior analysis. En <i>Wisdom Web of Things (W2T)</i>. Springer.
+  revista: Capítulo de libro
+  doi: ''
+- anio: 2013
+  cita: <b>Brunetti, E.</b>, <b>Maldonado, P. E.</b>, &amp; Aboitiz, F. (2013). Phase synchronization of delta and theta oscillations increase during the detection of relevant lexical information.
+  revista: Frontiers in Psychology, 4, 1–13
+  doi: 10.3389/fpsyg.2013.00308
+- anio: 2013
+  cita: <b>Egaña, J. I.</b>, <b>Devia, C.</b>, <b>Mayol, R.</b>, Parrini, J., Orellana, G., Ruiz, A., &amp; <b>Maldonado, P. E.</b> (2013). Small saccades and image complexity during free viewing of natural images in schizophrenia.
+  revista: Frontiers in Psychiatry, 4, 37
+  doi: 10.3389/fpsyt.2013.00037
+- anio: 2013
+  cita: Ito, J., <b>Maldonado, P.</b>, &amp; Grün, S. (2013). Cross-frequency interaction of the eye-movement related LFP signals in V1 of freely viewing monkeys.
+  revista: Frontiers in Systems Neuroscience, 7, 1
+  doi: 10.3389/fnsys.2013.00001
+- anio: 2013
+  cita: <b>Montefusco-Siegmund, R.</b>, &amp; <b>Maldonado, P.</b> (2013). Effects of ocular artifact removal through ICA decomposition on EEG phase.
+  revista: 6th International IEEE/EMBS Conference on Neural Engineering (NER), San Diego
+  doi: ''
+- anio: 2012
+  cita: Berger, D., Pazienti, A., <b>Flores, F. J.</b>, Nawrot, M. P., <b>Maldonado, P. E.</b>, &amp; Grün, S. (2012). Viewing strategy of Cebus monkeys during free exploration of natural images.
+  revista: Brain Research, 24, 34–46
+  doi: 10.1016/j.brainres.2011.10.013
+- anio: 2012
+  cita: <b>Manzur, H.</b>, <b>Álvarez, J.</b>, <b>Babul, C.</b>, &amp; <b>Maldonado, P. E.</b> (2012). Synchronization across sensory cortical areas by electrical microstimulation is sufficient for behavioral discrimination.
+  revista: Cerebral Cortex, 23(12), 2976–2986
+  doi: 10.1093/cercor/bhs288
+- anio: 2011
+  cita: Ito, J., <b>Maldonado, P. E.</b>, Singer, W., &amp; Grün, S. (2011). Saccade-related modulations of neuronal excitability support synchrony of visually elicited spikes.
+  revista: Cerebral Cortex, 21, 2482–2497
+  doi: 10.1093/cercor/bhr020
+- anio: 2010
+  cita: <b>Délano, P. H.</b>, Elgueda, D., <b>Ramírez, F.</b>, Robles, L., &amp; <b>Maldonado, P. E.</b> (2010). A visual cue modulates the firing rate and latency of auditory-cortex neurons in the chinchilla.
+  revista: Journal of Physiology-Paris, 104, 190–196
+  doi: 10.1016/j.jphysparis.2009.11.023
+- anio: 2010
+  cita: Ito, H., <b>Maldonado, P. E.</b>, &amp; Gray, C. M. (2010). Dynamics of stimulus-evoked correlations in the cat lateral geniculate nucleus.
+  revista: Journal of Neurophysiology, 104, 3276–3292
+  doi: 10.1152/jn.01000.2009
+- anio: 2010
+  cita: <b>Ossandón, J. P.</b>, <b>Helo, A.</b>, <b>Montefusco, R.</b>, &amp; <b>Maldonado, P. E.</b> (2010). Superposition model predicts EEG occipital activity during free viewing of natural scenes.
+  revista: Journal of Neuroscience, 30, 4787–4795
+  doi: 10.1523/JNEUROSCI.5769-09.2010
+- anio: 2000
+  cita: 'Friedman-Hill, S. R., <b>Maldonado, P. E.</b>, &amp; Gray, C. M. (2000). Temporal dynamics of neuronal activity in the striate cortex of alert macaque: I. Incidence and stimulus-dependence of oscillations.'
+  revista: Cerebral Cortex, 10, 1105–1116
+  doi: 10.1093/cercor/10.11.1105
+- anio: 2000
+  cita: '<b>Maldonado, P. E.</b>, Friedman-Hill, S. R., &amp; Gray, C. M. (2000). Temporal dynamics of neuronal activity in the striate cortex of alert macaque: II. Short and long-range temporally-correlated activity.'
+  revista: Cerebral Cortex, 10, 1117–1131
+  doi: 10.1093/cercor/10.11.1117
+- anio: 2001
+  cita: '<b>Maldonado, P. E.</b>, &amp; Vivaldi, E. (2001). Computadores en investigación biomédica: II. Control experimental, adquisición y almacenaje de datos.'
+  revista: Revista Médica de Chile, 129, 1085–1092
+  doi: 10.4067/S0034-98872001000900017
+- anio: 2001
+  cita: 'Vivaldi, E., &amp; <b>Maldonado, P. E.</b> (2001). Computadores en investigación biomédica: I. Análisis de señales bioeléctricas.'
+  revista: Revista Médica de Chile, 129, 955–962
+  doi: 10.4067/S0034-98872001000800016
+- anio: 2002
+  cita: Goldman, M., <b>Maldonado, P. E.</b>, &amp; Abbott, L. F. (2002). Redundancy reduction and sustained firing with stochastic depressing synapses.
+  revista: Journal of Neuroscience, 22, 584–591
+  doi: ''
+- anio: 2004
+  cita: <b>Maldonado, P.</b> (2004). El cerebro humano, desafío para el nuevo milenio. En Á. Fischer (Ed.), <i>Nuevos paradigmas a comienzos del tercer milenio</i>. Editorial El Mercurio/Aguilar.
+  revista: Capítulo de libro
+  doi: ''
+- anio: 2005
+  cita: Aylwin, M. L., Díaz, E., &amp; <b>Maldonado, P. E.</b> (2005). Simultaneous single unit recording in the mitral cell layer of the rat olfactory bulb under nasal and tracheal breathing.
+  revista: Biological Research, 38(1), 13–26
+  doi: 10.4067/S0716-97602005000100003
+- anio: 2005
+  cita: Aylwin, M. L., &amp; <b>Maldonado, P. E.</b> (2005). Una perspectiva sobre la Neurociencia en la investigación médica. En A. Fuller (Ed.), <i>Huella y Presencia</i>. Universidad de Chile Ediciones.
+  revista: Capítulo de libro
+  doi: ''
+- anio: 2005
+  cita: <b>Egaña, J. I.</b>, Aylwin, M. L., &amp; <b>Maldonado, P. E.</b> (2005). Odor response properties of adjacent mitral/tufted cells in the rat olfactory bulb.
+  revista: Neuroscience, 134(3), 1069
+  doi: 10.1016/j.neuroscience.2005.04.027
+- anio: 2006
+  cita: Valdés, J. L., <b>Maldonado, P.</b>, Recabarren, M., <b>Fuentes, R.</b>, &amp; Torrealba, F. (2006). The infralimbic cortical area commands the behavioral and vegetative arousal during appetitive behavior in the rat.
+  revista: European Journal of Neuroscience, 23, 1352–1364
+  doi: 10.1111/j.1460-9568.2006.04659.x
+- anio: 2007
+  cita: <b>Maldonado, P. E.</b>, &amp; <b>Babul, C. M.</b> (2007). Neuronal activity in the primary visual cortex of the cat freely viewing natural images.
+  revista: Neuroscience, 144, 1536–1543
+  doi: 10.1016/j.neuroscience.2006.11.021
+- anio: 2007
+  cita: '<b>Maldonado, P. E.</b>, &amp; <b>Ossandón, J. P.</b> (2007). Time is of the essence: new approaches in neurophysiological research. En A. Ibáñez &amp; D. Cosmelli (Eds.), <i>Nuevos enfoques de la cognición</i> (pp. 53–70). Ediciones Universidad Diego Portales.'
+  revista: Capítulo de libro
+  doi: ''
+- anio: 2008
+  cita: <b>Délano, P. E.</b>, Robles, L., &amp; <b>Maldonado, P. E.</b> (2008). Stimulus-dependent oscillations and evoked potentials in chinchilla auditory cortex.
+  revista: Journal of Comparative Physiology A, 194(8), 693–700
+  doi: 10.1007/s00359-008-0340-4
+- anio: 2008
+  cita: Donoso, A. M., Falcón, F., Esparza, P., &amp; <b>Maldonado, P. E.</b> (2008). Olfactory or auditory stimulation and their hedonic values differentially modulate visual working memory.
+  revista: Biological Research, 41, 379–387
+  doi: 10.4067/S0716-97602008000400003
+- anio: 2008
+  cita: <b>Fuentes, R.</b>, <b>Aguilar, M.</b>, Aylwin, M. L., &amp; <b>Maldonado, P. E.</b> (2008). Neuronal activity of mitral-tufted cells in awake rats during passive and active odorant stimulation.
+  revista: Journal of Neurophysiology, 100, 422–430
+  doi: 10.1152/jn.00095.2008
+- anio: 2008
+  cita: <b>Maldonado, P. E.</b> (2008). Anatomía de la percepción visual. En A. Slachevsky, F. Manes, E. Labos &amp; P. Fuentes (Eds.), <i>Tratado de Neurología Cognitiva y Neuropsicología</i>. Buenos Aires, Argentina.
+  revista: Capítulo de libro
+  doi: ''
+- anio: 2008
+  cita: '<b>Maldonado, P. E.</b> (2008). What we see is how we are: new paradigms in visual research.'
+  revista: Biological Research, 40(1), 439–450
+  doi: 10.4067/S0716-97602007000500006
+- anio: 2008
+  cita: <b>Maldonado, P. E.</b>, <b>Babul, C.</b>, Singer, W., Rodríguez, E., Berger, D., &amp; Grün, S. (2008). Synchronization of neuronal responses in primary visual cortex of monkeys viewing natural images.
+  revista: Journal of Neurophysiology, 100, 1523–1532
+  doi: 10.1152/jn.00076.2008
+- anio: 2008
+  cita: <b>Maldonado, P. E.</b>, <b>Ossandón, J. P.</b>, &amp; <b>Flores, F. J.</b> (2008). Attention and neurodynamical correlates of natural vision. En D. Cosmelli &amp; F. Aboitiz (Eds.), <i>From attention to goal-directed behavior</i> (pp. 67–82). Berlín.
+  revista: Capítulo de libro
+  doi: ''
+- anio: 2008
+  cita: Pazienti, A., <b>Maldonado, P.</b>, Diesmann, M., &amp; Grün, S. (2008). The effectiveness of systematic spike dithering depends on the precision of cortical synchronization.
+  revista: Brain Research, 1225, 39–46
+  doi: 10.1016/j.brainres.2008.04.073
+- anio: 2009
+  cita: Aylwin, M. L., Aguilar, G. A., <b>Flores, F. J.</b>, &amp; <b>Maldonado, P. E.</b> (2009). Odorant modulation of neuronal activity and local field potential in olfactory bulb.
+  revista: Neuroscience, 162, 1265–1278
+  doi: 10.1016/j.neuroscience.2009.05.051
+- anio: 1995
+  cita: Gray, C. M., <b>Maldonado, P. E.</b>, Wilson, M., &amp; McNaughton, B. (1995). Tetrodes markedly improve the reliability and yield of multiple single-unit isolation from multi-unit recordings in cat striate cortex.
+  revista: Journal of Neuroscience Methods, 63, 43–54
+  doi: 10.1016/0165-0270(95)00085-2
+- anio: 1996
+  cita: <b>Maldonado, P. E.</b>, Altman, J., &amp; Gerstein, G. L. (1996). Neuronal afterdischarges in the rat auditory cortex and cortical electrical microstimulation.
+  revista: Sechenov Physiological Journal, 82, 3–17
+  doi: ''
+- anio: 1996
+  cita: <b>Maldonado, P. E.</b>, &amp; Gerstein, G. L. (1996). Neuronal assembly dynamics in the rat auditory cortex during reorganization induced by intracortical microstimulation.
+  revista: Experimental Brain Research, 112, 431–441
+  doi: 10.1007/BF00227949
+- anio: 1996
+  cita: '<b>Maldonado, P. E.</b>, &amp; Gerstein, G. L. (1996). Reorganization in the auditory cortex of the rat induced by intracortical microstimulation: a multiple single-unit study.'
+  revista: Experimental Brain Research, 112, 420–430
+  doi: 10.1007/BF00227948
+- anio: 1996
+  cita: <b>Maldonado, P. E.</b>, &amp; Gray, C. M. (1996). Heterogeneity in local distribution of orientation-selective neurons in the cat primary visual cortex.
+  revista: Visual Neuroscience, 13, 509–516
+  doi: 10.1017/S095252380000818X
+- anio: 1997
+  cita: <b>Maldonado, P. E.</b>, Gödecke, I., Gray, C. M., &amp; Bonhoeffer, T. (1997). Orientation selectivity in pinwheel centers in cat striate cortex.
+  revista: Science, 276, 1551–1555
+  doi: 10.1126/science.276.5318.1551
+- anio: 1998
+  cita: <b>Maldonado, P. E.</b>, Altman, J. A., &amp; Gerstein, G. L. (1998). Neuron discharges in the rat auditory cortex during electrical intracortical stimulation.
+  revista: Neuroscience and Behavioral Physiology, 28(1), 48–59
+  doi: 10.1007/BF02461912
+- anio: 1999
+  cita: '<b>Maldonado, P.</b> (1999). Neuronas de la corteza visual: orientación selectiva.'
+  revista: Investigación y Ciencia (edición española de Scientific American), p. 37
+  doi: ''
+- anio: 1988
+  cita: <b>Maldonado, P. E.</b>, Maturana, H., &amp; Varela, F. (1988). Frontal and lateral visual systems in birds.
+  revista: Brain, Behavior and Evolution, 32, 57–62
+  doi: 10.1159/000116532
+- anio: 1988
+  cita: <b>Maldonado, P. E.</b>, Rose, B., &amp; Loewenstein, W. R. (1988). Growth factors modulate junctional communication.
+  revista: Journal of Membrane Biology, 106, 203–210
+  doi: 10.1007/BF01872158

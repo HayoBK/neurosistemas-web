@@ -1,0 +1,64 @@
+# ============================================================
+# PALETA Y ASIGNACIÓN DE COLOR — editable desde Pages CMS
+#
+# Regla del sitio: el color es información, no decoración.
+# El lienzo es blanco y la tinta negra; estos 9 tonos (muestreados
+# del logo) entran en dosis pequeñas y siempre significando algo:
+# qué área, qué grupo, qué sección.
+#
+# CÓMO CAMBIAR UN COLOR
+#   - Para reasignar: cambia el nombre del tono en 'areas', 'grupos'
+#     o 'secciones' por otro de la lista 'espectro'.
+#   - Para retocar un tono: edita su hex en 'espectro' y cambia en
+#     todos lados a la vez.
+#
+# OJO CON EL CONTRASTE: sobre blanco, solo rojo, azul, morado,
+# magenta y verde pasan AA como color de TEXTO. Ámbar y lima se usan
+# como trazo o relleno con texto negro encima, nunca como texto.
+# ============================================================
+
+espectro:
+  rojo: "#B12313"
+  naranja: "#C65A16"
+  ambar: "#C98510"
+  lima: "#6E9A1B"
+  verde: "#2F8F5B"
+  cian: "#2E9DBC"
+  azul: "#2186B7"
+  morado: "#762D60"
+  magenta: "#9A2A53"
+
+# Orden de la franja espectral y de los colores de reserva.
+# Es el mismo orden del logo, de izquierda a derecha.
+franja: ["rojo", "naranja", "ambar", "lima", "verde", "cian", "azul", "morado", "magenta"]
+
+# Áreas de investigación, por el campo 'numero' de data/lineas.yaml
+areas:
+  "01": "azul"
+  "02": "ambar"
+  "03": "magenta"
+
+# Grupos del equipo, por el campo 'titulo' de data/miembros.yaml.
+# Si un título no calza, la plantilla usa un tono de reserva según
+# la posición del grupo: no se rompe nada.
+grupos:
+  "Investigadores principales": "azul"
+  "Gestión y apoyo técnico": "verde"
+  "Investigadores postdoctorales y asistentes": "cian"
+  "Estudiantes de postgrado": "morado"
+  "Estudiantes de pregrado y ayudantes": "lima"
+
+# Secciones del sitio
+secciones:
+  publicaciones: "rojo"
+  noticias: "naranja"
+  miembros: "azul"
+  visitantes: "cian"
+  ex-miembros: "morado"
+  investigacion: "azul"
+  galeria: "verde"
+  contacto: "magenta"
+
+# Colores de los números de las cifras del Home, en orden.
+# Solo tonos que pasan AA como texto.
+cifras: ["azul", "magenta", "verde", "morado"]

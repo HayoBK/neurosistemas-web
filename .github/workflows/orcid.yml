@@ -1,0 +1,40 @@
+name: Sincronizar publicaciones desde ORCID
+
+on:
+  schedule:
+    # Todos los días a las 08:10 UTC (~05:10 hora de Chile)
+    - cron: '10 8 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sincronizar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Instalar Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependencias
+        run: pip install requests PyYAML
+
+      - name: Consultar ORCID
+        run: python scripts/orcid_sync.py
+
+      - name: Commitear cambios si los hay
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [[ -n "$(git status --porcelain data/publicaciones_orcid.json)" ]]; then
+            git add data/publicaciones_orcid.json
+            git commit -m "chore(orcid): actualización automática de publicaciones"
+            git push
+          else
+            echo "Sin cambios en las publicaciones ORCID."
+          fi

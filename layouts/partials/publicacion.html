@@ -1,0 +1,19 @@
+{{- $p := . -}}
+<li class="ns-pub">
+  {{- if $p.cita }}
+    <p class="ns-pub__autores" style="margin-bottom:.35rem;">{{ $p.cita | safeHTML }}</p>
+  {{- else }}
+    <h3 class="ns-pub__tit">
+      {{- if $p.url }}<a href="{{ $p.url }}" rel="noopener">{{ $p.titulo }}</a>{{ else }}{{ $p.titulo }}{{ end -}}
+    </h3>
+    {{/* safeHTML porque orcid_sync.py resalta a los miembros del laboratorio
+         con <b>. Es seguro: ese script ya escapa el texto que viene de la API
+         antes de insertar las etiquetas. */}}
+    {{- with $p.autores }}<p class="ns-pub__autores">{{ . | safeHTML }}</p>{{ end }}
+  {{- end }}
+  <p class="ns-pub__meta">
+    {{- with $p.revista }}<span class="ns-pub__revista">{{ . }}</span>{{ end }}
+    {{- with $p.doi }}<a class="ns-pub__doi" href="https://doi.org/{{ . }}" rel="noopener">doi:{{ . }}</a>{{ end }}
+    {{- if and (not $p.doi) $p.url }}<a class="ns-pub__doi" href="{{ $p.url }}" rel="noopener">enlace</a>{{ end }}
+  </p>
+</li>

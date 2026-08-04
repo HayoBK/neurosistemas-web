@@ -1,0 +1,25 @@
+{{ define "main" }}
+{{ partial "encabezado.html" . }}
+
+<section class="ns-seccion">
+  <div class="ns-wrap">
+    {{- with .Content }}<div class="ns-prosa ns-tras-lista">{{ . }}</div>{{ end }}
+
+    {{- range $i, $l := hugo.Data.lineas }}
+    <article class="ns-area" id="{{ $l.numero }}" style="--ns-acento:{{ partial "color.html" (dict "tipo" "areas" "clave" $l.numero "i" $i) }}">
+      <span class="ns-tarjeta__n">Área {{ $l.numero }}</span>
+      <h2 class="ns-area__tit">{{ $l.titulo }}</h2>
+      <div class="ns-prosa">
+        <p>{{ $l.resumen | safeHTML }}</p>
+      </div>
+      {{- with $l.proyectos }}
+      <h3 class="ns-area__sub">Proyectos de esta área</h3>
+      <ul class="ns-proyectos">
+        {{- range . }}<li>{{ . }}</li>{{ end }}
+      </ul>
+      {{- end }}
+    </article>
+    {{- end }}
+  </div>
+</section>
+{{ end }}

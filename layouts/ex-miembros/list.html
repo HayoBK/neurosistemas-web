@@ -1,0 +1,51 @@
+{{ define "main" }}
+{{ partial "encabezado.html" . }}
+
+<section class="ns-seccion">
+  <div class="ns-wrap">
+    {{- with .Content }}<div class="ns-prosa" style="margin-bottom:2.5rem;">{{ . }}</div>{{ end }}
+
+    <div class="ns-pub-barra">
+      <input type="search" id="ns-buscar-alumni" placeholder="Buscar por nombre o institución…" aria-label="Buscar ex miembros">
+      <span class="ns-pub-barra__meta" id="ns-contador-alumni">{{ len hugo.Data.exmiembros }} personas</span>
+    </div>
+
+    {{- $col := partial "color.html" (dict "tipo" "secciones" "clave" "ex-miembros") }}
+    <div class="ns-alumni" style="--ns-acento:{{ $col }}">
+      {{- range hugo.Data.exmiembros }}
+      <article class="ns-alumno">
+        <div class="ns-alumno__ini" aria-hidden="true">{{ partial "iniciales.html" .nombre }}</div>
+        <div>
+          <h3 class="ns-alumno__nombre">{{ .nombre }}</h3>
+          {{- with .afiliacion }}<p class="ns-alumno__afil">{{ . | safeHTML }}</p>{{ end }}
+          {{- with .email }}<p class="ns-alumno__afil ns-alumno__mail"><a href="mailto:{{ . }}">{{ . }}</a></p>{{ end }}
+        </div>
+      </article>
+      {{- end }}
+    </div>
+    <p class="ns-vacio" id="ns-vacio-alumni" hidden>Sin resultados para esa búsqueda.</p>
+  </div>
+</section>
+
+<script>
+(function(){
+  var caja = document.getElementById('ns-buscar-alumni');
+  if(!caja) return;
+  var items = Array.prototype.slice.call(document.querySelectorAll('.ns-alumno'));
+  var contador = document.getElementById('ns-contador-alumni');
+  var vacio = document.getElementById('ns-vacio-alumni');
+  function norm(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  var idx = items.map(function(el){ return norm(el.textContent); });
+  caja.addEventListener('input', function(){
+    var q = norm(caja.value).trim(), n = 0;
+    items.forEach(function(el,i){
+      var ok = !q || idx[i].indexOf(q) !== -1;
+      el.style.display = ok ? '' : 'none';
+      if(ok) n++;
+    });
+    if(contador) contador.textContent = n + ' personas';
+    if(vacio) vacio.hidden = n !== 0;
+  });
+})();
+</script>
+{{ end }}

@@ -1,0 +1,174 @@
+{{ define "main" }}
+
+{{/* Colores de las cifras, desde data/colores.yaml. Si el archivo no está o
+     quedó corto, se usa una reserva de 4 tonos que pasan AA como texto. */}}
+{{- $esp := dict }}
+{{- with hugo.Data.colores }}{{ with .espectro }}{{ $esp = . }}{{ end }}{{ end }}
+{{- $hexCifras := slice }}
+{{- with hugo.Data.colores }}
+  {{- range .cifras }}{{ with index $esp . }}{{ $hexCifras = $hexCifras | append . }}{{ end }}{{ end }}
+{{- end }}
+{{- if lt (len $hexCifras) 4 }}{{ $hexCifras = slice "#2186B7" "#9A2A53" "#2F8F5B" "#762D60" }}{{ end }}
+
+<section class="ns-hero">
+  <div class="ns-wrap ns-hero__cont">
+    <p class="ns-rotulo" style="--ns-acento:{{ partial "color.html" (dict "tipo" "secciones" "clave" "investigacion") }}">Facultad de Medicina · Universidad de Chile</p>
+
+    <img class="ns-hero__logo" src="{{ "images/logo-neurosistemas.png" | relURL }}"
+         alt="Laboratorio de Neurosistemas" width="505" height="227">
+
+    <h1 class="ns-hero__titulo">{{ site.Params.lema }}</h1>
+    <p class="ns-hero__bajada">Un espacio colaborativo y horizontal donde biología, medicina, ingeniería, kinesiología, psicología, fonoaudiología y tecnología médica trabajan sobre la misma pregunta: cómo el cerebro construye la experiencia.</p>
+
+    <div class="ns-hero__acciones">
+      <a class="ns-btn ns-btn--primario" href="{{ "investigacion/" | relURL }}">Líneas de investigación</a>
+      <a class="ns-btn ns-btn--fantasma" href="{{ "publicaciones/" | relURL }}">Ver publicaciones</a>
+    </div>
+
+    {{- $orcid := hugo.Data.publicaciones_orcid }}
+    {{- $hist := hugo.Data.publicaciones_historicas }}
+    {{- $nPubs := 0 }}
+    {{- with $orcid }}{{ with .publicaciones }}{{ $nPubs = add $nPubs (len .) }}{{ end }}{{ end }}
+    {{- with $hist }}{{ $nPubs = add $nPubs (len .) }}{{ end }}
+    {{- $nMiembros := 0 }}
+    {{- range hugo.Data.miembros }}{{ $nMiembros = add $nMiembros (len .personas) }}{{ end }}
+    <div class="ns-cifras">
+      <div class="ns-cifra" style="--ns-acento:{{ index $hexCifras 0 }}">
+        <div class="ns-cifra__n">{{ $nMiembros }}</div><div class="ns-cifra__t">Miembros activos</div>
+      </div>
+      <div class="ns-cifra" style="--ns-acento:{{ index $hexCifras 1 }}">
+        <div class="ns-cifra__n">{{ $nPubs }}</div><div class="ns-cifra__t">Publicaciones</div>
+      </div>
+      <div class="ns-cifra" style="--ns-acento:{{ index $hexCifras 2 }}">
+        <div class="ns-cifra__n">{{ len hugo.Data.lineas }}</div><div class="ns-cifra__t">Áreas de investigación</div>
+      </div>
+      <div class="ns-cifra" style="--ns-acento:{{ index $hexCifras 3 }}">
+        <div class="ns-cifra__n">{{ len hugo.Data.exmiembros }}</div><div class="ns-cifra__t">Ex miembros</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ partial "eeg.html" . }}
+
+<!-- Quiénes somos -->
+<section class="ns-seccion">
+  <div class="ns-wrap ns-dos-col">
+    <div>
+      <p class="ns-rotulo" style="--ns-acento:{{ partial "color.html" (dict "tipo" "secciones" "clave" "miembros") }}">Quiénes somos</p>
+      <h2>Trabajo colaborativo, infraestructura compartida</h2>
+    </div>
+    <div class="ns-prosa">
+      {{ .Content }}
+    </div>
+  </div>
+</section>
+
+{{ partial "eeg.html" . }}
+
+<!-- Líneas de investigación -->
+<section class="ns-seccion">
+  <div class="ns-wrap">
+    <p class="ns-rotulo" style="--ns-acento:{{ partial "color.html" (dict "tipo" "secciones" "clave" "investigacion") }}">Qué investigamos</p>
+    <h2>Tres áreas, una pregunta común</h2>
+    <p class="ns-bajada">Cómo la actividad de las redes neuronales da cuenta de la percepción, la acción y los estados mentales.</p>
+
+    <div class="ns-rejilla ns-rejilla--3 ns-rejilla--sep">
+      {{- range $i, $l := hugo.Data.lineas }}
+      <article class="ns-tarjeta" style="--ns-acento:{{ partial "color.html" (dict "tipo" "areas" "clave" $l.numero "i" $i) }}">
+        <span class="ns-tarjeta__n">Área {{ $l.numero }}</span>
+        <h3>{{ $l.titulo }}</h3>
+        <p class="ns-tarjeta__txt">{{ $l.resumen | truncate 240 }}</p>
+        <p><a class="ns-tarjeta__mas" href="{{ "investigacion/" | relURL }}#{{ $l.numero }}">Leer más →</a></p>
+      </article>
+      {{- end }}
+    </div>
+  </div>
+</section>
+
+{{ partial "eeg.html" . }}
+
+<!-- Publicaciones recientes -->
+{{- $colPub := partial "color.html" (dict "tipo" "secciones" "clave" "publicaciones") }}
+<section class="ns-seccion">
+  <div class="ns-wrap">
+    <p class="ns-rotulo" style="--ns-acento:{{ $colPub }}">Producción científica</p>
+    <h2>Publicaciones recientes</h2>
+    <p class="ns-bajada">Sincronizadas automáticamente desde los perfiles ORCID del equipo.</p>
+
+    {{- $recientes := slice }}
+    {{- with hugo.Data.publicaciones_orcid }}
+      {{- with .publicaciones }}{{ $recientes = first 6 (sort . "anio" "desc") }}{{ end }}
+    {{- end }}
+    {{- if not $recientes }}
+      {{- with hugo.Data.publicaciones_historicas }}{{ $recientes = first 6 (sort . "anio" "desc") }}{{ end }}
+    {{- end }}
+
+    <ul class="ns-pubs ns-tras-lista" style="--ns-acento:{{ $colPub }}">
+      {{- range $recientes }}{{ partial "publicacion.html" . }}{{ end }}
+    </ul>
+    <p class="ns-tras-lista"><a class="ns-btn ns-btn--fantasma" href="{{ "publicaciones/" | relURL }}">Ver todas las publicaciones</a></p>
+  </div>
+</section>
+
+{{ partial "eeg.html" . }}
+
+<!-- Equipo (avance) -->
+<section class="ns-seccion">
+  <div class="ns-wrap">
+    <p class="ns-rotulo" style="--ns-acento:{{ partial "color.html" (dict "tipo" "secciones" "clave" "miembros") }}">El equipo</p>
+    <h2>Quiénes lideran el laboratorio</h2>
+    <div class="ns-rejilla ns-rejilla--4 ns-rejilla--sep">
+      {{- range $i, $g := first 1 hugo.Data.miembros }}
+        {{- $colG := partial "color.html" (dict "tipo" "grupos" "clave" $g.titulo "i" $i) }}
+        {{- range $g.personas }}{{ partial "persona.html" (dict "p" . "color" $colG) }}{{ end }}
+      {{- end }}
+    </div>
+    <p class="ns-tras-lista"><a class="ns-btn ns-btn--fantasma" href="{{ "miembros/" | relURL }}">Conocer a todo el equipo</a></p>
+  </div>
+</section>
+
+<!-- Noticias -->
+{{- $noticias := where site.RegularPages "Section" "noticias" }}
+{{- if $noticias }}
+{{- $colNot := partial "color.html" (dict "tipo" "secciones" "clave" "noticias") }}
+{{ partial "eeg.html" . }}
+<section class="ns-seccion">
+  <div class="ns-wrap">
+    <p class="ns-rotulo" style="--ns-acento:{{ $colNot }}">Actualidad</p>
+    <h2>Últimas noticias</h2>
+    <div class="ns-rejilla ns-rejilla--noticias ns-rejilla--sep">
+      {{- range first 3 $noticias }}
+      <article class="ns-nota" style="--ns-acento:{{ $colNot }}">
+        {{- with .Params.imagen }}<img class="ns-nota__img" src="{{ (printf "images/%s" .) | relURL }}" alt="" loading="lazy">{{ end }}
+        <div class="ns-nota__cuerpo">
+          <p class="ns-nota__fecha">{{ time.Format "2 Jan 2006" .Date }}</p>
+          <h3 class="ns-nota__tit"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          <p class="ns-nota__res">{{ with .Params.resumen }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 150 }}{{ end }}</p>
+          <a class="ns-nota__mas" href="{{ .RelPermalink }}">Leer →</a>
+        </div>
+      </article>
+      {{- end }}
+    </div>
+  </div>
+</section>
+{{- end }}
+
+<!-- Financiamiento -->
+{{- with hugo.Data.financiamiento }}
+{{- $colFin := index $esp "ambar" | default "#C98510" }}
+<section class="ns-seccion ns-seccion--alt">
+  <div class="ns-wrap">
+    <p class="ns-rotulo" style="--ns-acento:{{ $colFin }}">Con el apoyo de</p>
+    <h2>Financiamiento</h2>
+    <p class="ns-bajada">Las investigaciones de este laboratorio son posibles gracias a:</p>
+    <ul class="ns-fondos ns-tras-lista" style="--ns-acento:{{ $colFin }}">
+      {{- range . }}
+      <li><b>{{ .codigo }}</b><br>{{ .nombre }}</li>
+      {{- end }}
+    </ul>
+  </div>
+</section>
+{{- end }}
+
+{{ end }}

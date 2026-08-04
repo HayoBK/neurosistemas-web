@@ -1,0 +1,24 @@
+{{ define "main" }}
+{{ partial "encabezado.html" . }}
+
+<section class="ns-seccion">
+  <div class="ns-wrap">
+    {{- with .Content }}<div class="ns-prosa ns-tras-lista">{{ . }}</div>{{ end }}
+
+    {{- range $i, $g := hugo.Data.miembros }}
+    {{- $colG := partial "color.html" (dict "tipo" "grupos" "clave" $g.titulo "i" $i) }}
+    <div class="ns-grupo" style="--ns-acento:{{ $colG }}">
+      <h2 class="ns-grupo__tit">{{ $g.titulo }} <span>{{ len $g.personas }}</span></h2>
+      <div class="ns-rejilla ns-rejilla--4">
+        {{- range $g.personas }}{{ partial "persona.html" (dict "p" . "color" $colG) }}{{ end }}
+      </div>
+    </div>
+    {{- end }}
+
+    <p class="ns-acciones">
+      <a class="ns-btn ns-btn--fantasma" href="{{ "visitantes/" | relURL }}">Miembros visitantes</a>
+      <a class="ns-btn ns-btn--fantasma" href="{{ "ex-miembros/" | relURL }}">Ex miembros</a>
+    </p>
+  </div>
+</section>
+{{ end }}

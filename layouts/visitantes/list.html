@@ -1,0 +1,13 @@
+{{ define "main" }}
+{{ partial "encabezado.html" . }}
+
+<section class="ns-seccion">
+  <div class="ns-wrap">
+    {{- with .Content }}<div class="ns-prosa ns-tras-lista">{{ . }}</div>{{ end }}
+    {{- $col := partial "color.html" (dict "tipo" "secciones" "clave" "visitantes") }}
+    <div class="ns-rejilla ns-rejilla--4">
+      {{- range hugo.Data.visitantes }}{{ partial "persona.html" (dict "p" . "color" $col) }}{{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

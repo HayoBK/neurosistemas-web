@@ -1,0 +1,38 @@
+# ============================================================
+# Parámetros del sitio — editables desde Pages CMS
+# ============================================================
+
+descripcion: >-
+  Laboratorio de Neurosistemas de la Facultad de Medicina de la Universidad de
+  Chile. Investigación en percepción visual activa, coordinación sensorio-motora
+  y marcadores neurofisiológicos de enfermedades neuropsiquiátricas.
+
+lema: "Percepción activa, redes neuronales y estados mentales"
+
+# --- Contacto ---
+contacto:
+  email: "neurosistemas@med.uchile.cl"
+  telefono: "+56 2 2978 6034"
+  institucion: "Departamento de Neurociencia, Facultad de Medicina, Universidad de Chile"
+  direccion: "Av. Independencia 1027, Independencia, Santiago, Chile"
+  mapa: "https://www.openstreetmap.org/?mlat=-33.4185&mlon=-70.6520#map=17/-33.4185/-70.6520"
+
+# --- Redes ---
+redes:
+  - nombre: "Departamento de Neurociencia"
+    url: "https://deptoneuro.med.uchile.cl/"
+  - nombre: "Facultad de Medicina U. de Chile"
+    url: "https://medicina.uchile.cl/"
+
+# --- Publicaciones ---
+publicaciones:
+  # Cuántos años mostrar expandidos por defecto en la línea de tiempo
+  anios_abiertos: 3
+  # Texto que se muestra bajo el título de la sección
+  nota: >-
+    Este listado se actualiza automáticamente cada día desde los perfiles ORCID
+    de los miembros del laboratorio, y se complementa con el archivo histórico
+    curado del laboratorio.
+
+# --- SEO / social ---
+imagen_og: "images/og-neurosistemas.jpg"

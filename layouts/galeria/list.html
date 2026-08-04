@@ -1,0 +1,21 @@
+{{ define "main" }}
+{{ partial "encabezado.html" . }}
+
+<section class="ns-seccion">
+  <div class="ns-wrap">
+    {{- with .Content }}<div class="ns-prosa" style="margin-bottom:2.5rem;">{{ . }}</div>{{ end }}
+    {{- with hugo.Data.galeria }}
+    <div class="ns-galeria">
+      {{- range . }}
+      <figure>
+        <img src="{{ (printf "images/galeria/%s" .archivo) | relURL }}" alt="{{ .titulo | default "" }}" loading="lazy">
+        {{- with .titulo }}<figcaption>{{ . }}</figcaption>{{ end }}
+      </figure>
+      {{- end }}
+    </div>
+    {{- else }}
+    <p class="ns-vacio">La galería está en preparación. Las imágenes se cargan en <code>static/images/galeria/</code> y se listan en <code>data/galeria.yaml</code>.</p>
+    {{- end }}
+  </div>
+</section>
+{{ end }}

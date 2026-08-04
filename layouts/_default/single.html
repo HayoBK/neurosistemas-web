@@ -1,0 +1,9 @@
+{{ define "main" }}
+<article class="ns-articulo">
+  <div class="ns-wrap-txt">
+    <h1>{{ .Title }}</h1>
+    {{- with .Params.bajada }}<p class="ns-bajada">{{ . }}</p>{{ end }}
+    <div class="ns-articulo__cuerpo ns-prosa">{{ .Content }}</div>
+  </div>
+</article>
+{{ end }}

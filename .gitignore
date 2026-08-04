@@ -1,0 +1,17 @@
+# Hugo
+/public/
+/resources/
+/.hugo_build.lock
+hugo_stats.json
+
+# OS / editores
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Python (script ORCID)
+__pycache__/
+*.pyc
+.venv/
