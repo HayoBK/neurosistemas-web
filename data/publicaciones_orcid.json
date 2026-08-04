@@ -1,0 +1,233 @@
+{
+  "actualizado": "2026-08-04",
+  "fuentes": [
+    {
+      "nombre": "Pedro E. Maldonado",
+      "orcid": "0000-0001-9895-7684",
+      "trabajos": 66
+    },
+    {
+      "nombre": "Christ Devia",
+      "orcid": "0000-0002-2416-0864",
+      "trabajos": 15
+    },
+    {
+      "nombre": "María de los Ángeles Juricic",
+      "orcid": "0000-0002-9059-1988",
+      "trabajos": 1
+    },
+    {
+      "nombre": "José Ignacio Egaña",
+      "orcid": "0000-0003-1242-0232",
+      "trabajos": 21
+    },
+    {
+      "nombre": "Iván Plaza",
+      "orcid": "0000-0002-2112-8439",
+      "trabajos": 4
+    },
+    {
+      "nombre": "Rocío Loyola",
+      "orcid": "0000-0001-7637-4277",
+      "trabajos": 5
+    }
+  ],
+  "publicaciones": [
+    {
+      "anio": 2026,
+      "titulo": "Consciousness as subjective experience emerges from the dynamics of the mental-simulation versus environment-coupling axis.",
+      "autores": "<b>Maldonado, P.</b> &amp; Bote, R. M.",
+      "revista": "",
+      "doi": "10.31234/osf.io/hwt3a_v1",
+      "url": "",
+      "tipo": "preprint",
+      "miembros": [
+        "Pedro E. Maldonado"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2026,
+      "titulo": "Eye Movement-Related Eardrum Oscillations (EMREOs) Occur without Visual Input But Are Reduced during Closed Eyelids",
+      "autores": "Leon, M. E., Ramos, C. &amp; <b>Maldonado, P. E.</b>",
+      "revista": "The Journal of Neuroscience, 46, e0908252025",
+      "doi": "10.1523/jneurosci.0908-25.2025",
+      "url": "",
+      "tipo": "journal-article",
+      "miembros": [
+        "Pedro E. Maldonado"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2025,
+      "titulo": "Cerebellar Transcranial Alternating Current Stimulation Accelerates Motor Adaptation via the Modulation of Cortical Synchrony",
+      "autores": "Mariman, J. J., Rojas‐Líbano, D., Burgos, P. I., Valero‐Cabré, A. &amp; <b>Maldonado, P. E.</b>",
+      "revista": "European Journal of Neuroscience, 62",
+      "doi": "10.1111/ejn.70373",
+      "url": "",
+      "tipo": "journal-article",
+      "miembros": [
+        "Pedro E. Maldonado"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2025,
+      "titulo": "Resting-State Electroencephalogram and Speech Perception in Young Children with Developmental Language Disorder",
+      "autores": "Campos, A., <b>Loyola-Navarro, R.</b>, González, C. &amp; Iverson, P.",
+      "revista": "Brain Sciences, 15, 219",
+      "doi": "10.3390/brainsci15030219",
+      "url": "",
+      "tipo": "journal-article",
+      "miembros": [
+        "Rocío Loyola"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2025,
+      "titulo": "The convergence between neuroscience and education: a pending challenge",
+      "autores": "<b>Maldonado, P. E.</b>",
+      "revista": "MedUNAB, 27, 258-261",
+      "doi": "10.29375/01237047.5345",
+      "url": "",
+      "tipo": "journal-article",
+      "miembros": [
+        "Pedro E. Maldonado"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2025,
+      "titulo": "The relationship between confidence and gaze-at-nothing oculomotor dynamics during decision-making",
+      "autores": "Cos, I., Senel, G., <b>Maldonado, P. E.</b> &amp; Moreno-Bote, R.",
+      "revista": "PLOS One, 20, e0310231",
+      "doi": "10.1371/journal.pone.0310231",
+      "url": "",
+      "tipo": "journal-article",
+      "miembros": [
+        "Pedro E. Maldonado"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2025,
+      "titulo": "Unveiling the role of local metabolic constraints on the structure and activity of spiking neural networks",
+      "autores": "<b>Jaras, I.</b>, Orchard, M. E., <b>Maldonado, P. E.</b> &amp; Vergara, R. C.",
+      "revista": "PLOS Computational Biology, 21, e1013148",
+      "doi": "10.1371/journal.pcbi.1013148",
+      "url": "",
+      "tipo": "journal-article",
+      "miembros": [
+        "Pedro E. Maldonado"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2024,
+      "titulo": "Exploring the benefits of images with frequency visual content in predicting human ocular scanpaths using Artificial Neural Networks",
+      "autores": "Jara Do Nascimento, C., Orchard, M. E. &amp; <b>Devia, C.</b>",
+      "revista": "Expert Systems with Applications, 239, 121839",
+      "doi": "10.1016/j.eswa.2023.121839",
+      "url": "",
+      "tipo": "journal-article",
+      "miembros": [
+        "Christ Devia"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2023,
+      "titulo": "Autogenous cerebral processes: an invitation to look at the brain from inside out",
+      "autores": "<b>Maldonado, P. E.</b>, Concha-Miranda, M. &amp; Schwalm, M.",
+      "revista": "Frontiers in Neural Circuits, 17",
+      "doi": "10.3389/fncir.2023.1253609",
+      "url": "",
+      "tipo": "journal-article",
+      "miembros": [
+        "Pedro E. Maldonado"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2023,
+      "titulo": "Effect of Repeated Exposure to Sevoflurane on Electroencephalographic Alpha Oscillation in Pediatric Patients Undergoing Radiation Therapy: A Prospective Observational Study",
+      "autores": "<b>Madariaga, S.</b>, <b>Devia, C.</b>, Penna, A., <b>Egaña, J. I.</b>, Lucero, V., Ramírez, S., <b>Maldonado, F.</b>, Ganga, M., Valls, N., Villablanca, N., Stamm, T., Purdon, P. L. &amp; Gutiérrez, R.",
+      "revista": "Journal of Neurosurgical Anesthesiology, 36, 125-133",
+      "doi": "10.1097/ana.0000000000000938",
+      "url": "",
+      "tipo": "journal-article",
+      "miembros": [
+        "Christ Devia",
+        "José Ignacio Egaña"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2023,
+      "titulo": "Effects of the self‐perceived sensorimotor demand and immersion during video gaming on visual‐attention skills",
+      "autores": "Moënne‐Loccoz, C., Hernández, A., Larraguibel, C., Lam, G., Lorca‐Ponce, E., Montefusco‐Siegmund, R., <b>Maldonado, P.</b> &amp; Vergara, R. C.",
+      "revista": "European Journal of Neuroscience, 57, 1870-1891",
+      "doi": "10.1111/ejn.15986",
+      "url": "",
+      "tipo": "journal-article",
+      "miembros": [
+        "Pedro E. Maldonado"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2023,
+      "titulo": "Exploring Biological Challenges in Building a Thinking Machine",
+      "autores": "<b>Devia, C.</b>, Jara Do Nascimento, C., <b>Madariaga, S.</b>, Murúa, C., <b>Maldonado, P. E.</b> &amp; Vergara, R. C.",
+      "revista": "SSRN",
+      "doi": "10.2139/ssrn.4660873",
+      "url": "",
+      "tipo": "preprint",
+      "miembros": [
+        "Christ Devia"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2023,
+      "titulo": "Neuronal Population Activity in Macaque Visual Cortices Dynamically Changes through Repeated Fixations in Active Free Viewing",
+      "autores": "Yamane, Y., Ito, J., Joana, C., Fujita, I., Tamura, H., <b>Maldonado, P. E.</b>, Doya, K. &amp; Grün, S.",
+      "revista": "eneuro, 10, ENEURO.0086-23.2023",
+      "doi": "10.1523/eneuro.0086-23.2023",
+      "url": "",
+      "tipo": "journal-article",
+      "miembros": [
+        "Pedro E. Maldonado"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2023,
+      "titulo": "Non-pharmacological prevention of postoperative delirium by occupational therapy teams: A randomized clinical trial",
+      "autores": "Alvarez, E. A., Rojas, V. A., Caipo, L. I., Galaz, M. M., Ponce, D. P., Gutierrez, R. G., Salech, F., Tobar, E., Reyes, F. I., Vergara, R. C., <b>Egaña, J. I.</b>, Briceño, C. A. &amp; Penna, A.",
+      "revista": "Frontiers in Medicine, 10",
+      "doi": "10.3389/fmed.2023.1099594",
+      "url": "",
+      "tipo": "journal-article",
+      "miembros": [
+        "José Ignacio Egaña"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2023,
+      "titulo": "Training in retinoscopy: learning curves using a standardized method",
+      "autores": "Estay, A. M., <b>Plaza-Rosales, I.</b>, Torres, H. R. &amp; Cerfogli, F. I.",
+      "revista": "BMC Medical Education, 23",
+      "doi": "10.1186/s12909-023-04750-y",
+      "url": "",
+      "tipo": "journal-article",
+      "miembros": [
+        "Iván Plaza"
+      ],
+      "fuente": "orcid"
+    }
+  ]
+}

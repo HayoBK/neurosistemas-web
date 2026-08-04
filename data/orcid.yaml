@@ -1,0 +1,84 @@
+# ============================================================
+# FUENTES ORCID PARA LA SINCRONIZACIÓN AUTOMÁTICA
+#
+# El script scripts/orcid_sync.py recorre esta lista una vez al día
+# (GitHub Action .github/workflows/orcid.yml), consulta la API pública
+# de ORCID y escribe data/publicaciones_orcid.json.
+#
+# CÓMO AGREGAR A ALGUIEN
+#   1. Pídele su identificador ORCID (o búscalo en https://orcid.org).
+#      Tiene la forma 0000-0000-0000-0000.
+#   2. Agrégalo abajo con su nombre.
+#   3. Si además quieres que aparezca el botón ORCID en su ficha del
+#      equipo, copia el mismo id en data/miembros.yaml.
+#
+# NOTA: solo se leen los registros PÚBLICOS de cada perfil ORCID.
+#       Si un perfil está en privado, no aparecerá nada.
+#
+# 'apellidos' se usa para resaltar en negrita a los miembros del
+# laboratorio dentro de la lista de autores.
+# ============================================================
+
+miembros:
+  - nombre: "Pedro E. Maldonado"
+    orcid: "0000-0001-9895-7684"
+    apellidos: ["Maldonado"]
+
+  - nombre: "Christ Devia"
+    orcid: "0000-0002-2416-0864"
+    apellidos: ["Devia"]
+
+  - nombre: "María de los Ángeles Juricic"
+    orcid: "0000-0002-9059-1988"
+    apellidos: ["Juricic"]
+
+  - nombre: "José Ignacio Egaña"
+    orcid: "0000-0003-1242-0232"
+    apellidos: ["Egaña", "Egana"]
+
+  - nombre: "Iván Plaza"
+    orcid: "0000-0002-2112-8439"
+    apellidos: ["Plaza-Rosales", "Plaza"]
+
+  - nombre: "Cecilia Babul"
+    orcid: ""
+    apellidos: ["Babul"]
+
+  - nombre: "Karla Padilla"
+    orcid: ""
+    apellidos: ["Padilla"]
+
+  - nombre: "Rocío Loyola"
+    orcid: "0000-0001-7637-4277"
+    apellidos: ["Loyola-Navarro", "Loyola"]
+
+  - nombre: "Samuel Madariaga"
+    orcid: ""
+    apellidos: ["Madariaga"]
+
+  - nombre: "Ismael Jaras"
+    orcid: ""
+    apellidos: ["Jaras"]
+
+  - nombre: "Carolina Lindsay"
+    orcid: ""
+    apellidos: ["Lindsay"]
+
+# ------------------------------------------------------------
+# Opciones del sincronizador
+# ------------------------------------------------------------
+opciones:
+  # No traer nada anterior a este año (el archivo histórico ya lo cubre).
+  anio_minimo: 2023
+  # Enriquecer cada publicación con Crossref (autores, revista, páginas).
+  usar_crossref: true
+  # Correo de contacto para el "polite pool" de Crossref.
+  correo_contacto: "neurosistemas@med.uchile.cl"
+  # Tipos de obra ORCID que se aceptan.
+  tipos_aceptados:
+    - "journal-article"
+    - "book"
+    - "book-chapter"
+    - "conference-paper"
+    - "preprint"
+    - "review"
