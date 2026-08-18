@@ -2,7 +2,7 @@
 
 Estado del repo y qué falta. Actualizar este archivo al cerrar cada sesión.
 
-**Última actualización:** 4 de agosto de 2026
+**Última actualización:** 18 de agosto de 2026
 
 ---
 
@@ -12,6 +12,10 @@ Sitio compilado, rediseñado y publicado. En la sesión del 4 de agosto de 2026 
 hizo la primera compilación real (el repo venía de Cowork, que no tiene Hugo),
 se descartó la estética original, se prepararon los derivados del logo, se
 cosecharon los ORCID iD y se rescataron las imágenes del WordPress antiguo.
+
+El **18 de agosto de 2026** se migró el dominio propio: `www.neurosistemas.cl`
+dejó de apuntar al WordPress y hoy sirve este sitio, con HTTPS forzado. Ver
+**"Dominio y publicación"** más abajo.
 
 ### Qué está listo
 
@@ -36,6 +40,8 @@ cosecharon los ORCID iD y se rescataron las imágenes del WordPress antiguo.
 | ORCID: 6 de 11 iD cosechados + sincronización corriendo | ⚠️ faltan 5 |
 | Pages CMS (`.pages.yml`) | ✅ |
 | Workflow de deploy a GitHub Pages | ✅ |
+| Dominio propio `www.neurosistemas.cl` con HTTPS forzado | ✅ |
+| Redirecciones de las URLs del WordPress antiguo (`aliases`) | ✅ |
 | Página 404 | ✅ |
 
 ### Scripts nuevos (todos con `--simular` salvo el del logo)
@@ -50,6 +56,56 @@ cosecharon los ORCID iD y se rescataron las imágenes del WordPress antiguo.
 
 Necesitan `.venv` (está en `.gitignore`):
 `python3 -m venv .venv && .venv/bin/pip install pillow requests PyYAML numpy`
+
+---
+
+## Dominio y publicación
+
+Migrado el **18 de agosto de 2026**. El sitio vive en
+**https://www.neurosistemas.cl** con HTTPS forzado (certificado emitido por
+GitHub, se renueva solo).
+
+### Cómo está armado
+
+- **Zona DNS: Cloudflare.** La zona de `neurosistemas.cl` se trasladó a
+  Cloudflare, que es hoy la única fuente de verdad del DNS. `www` es un CNAME a
+  `hayobk.github.io`, en modo **solo DNS** (nube gris): Cloudflare no hace de
+  proxy, el tráfico llega directo a GitHub Pages y el certificado lo emite
+  GitHub. No activar el proxy sin pensarlo, porque cambia quién sirve el TLS.
+- **SiteGround quedó fuera.** Era el hosting del WordPress antiguo y ya **no
+  interviene en nada**: ni DNS, ni web, ni correo. Cualquier instructivo que
+  mande a tocar el panel de SiteGround está obsoleto.
+- **Correo `@neurosistemas.cl`: dado de baja a propósito.** Se decidió no migrar
+  las casillas del dominio; no hay registros MX apuntando a un servidor de
+  correo. El contacto del laboratorio va por la dirección institucional de la
+  Universidad (`config/_default/params.yaml`). Si alguna vez se quiere correo en
+  el dominio, hay que crear los MX en Cloudflare desde cero.
+
+### Dos cosas que no son obvias
+
+1. **El `baseURL` sale de `config/_default/hugo.yaml`**, que dice
+   `https://www.neurosistemas.cl/`. El workflow **ya no** pasa
+   `--baseURL "${{ steps.pages.outputs.base_url }}/"`, porque ese valor devuelve
+   la URL de `github.io` y compilaría el sitio con el prefijo
+   `/neurosistemas-web/`, dejándolo sin CSS. El paso de build es solo
+   `hugo --gc --minify`. **No reponer esa bandera.**
+2. **`static/CNAME` no basta por sí solo.** Como el repo publica con
+   `build_type: workflow` (GitHub Actions), GitHub no registra el dominio a
+   partir del archivo del artefacto: hubo que declararlo por API con
+   `gh api -X PUT repos/HayoBK/neurosistemas-web/pages -f cname=www.neurosistemas.cl`.
+   El archivo igual es necesario y debe quedarse. Si alguna vez el dominio
+   "se pierde", revisar primero ese registro:
+   `gh api repos/HayoBK/neurosistemas-web/pages --jq '{cname,https_enforced}'`.
+   (Ojo: `https_enforced` es booleano, va con `-F`, no con `-f`.)
+
+### URLs del sitio antiguo
+
+Las rutas del WordPress se preservan con `aliases` en el front-matter de
+`content/*/_index.md`: las variantes `/es/` y `/en/`, los slugs largos
+(`/miembros-del-laboratorio/`, `/galeria-de-imagenes/`…) y las **fichas
+individuales** de cada persona (`/2020/11/01/pedro-maldonado/` y compañía), que
+el sitio nuevo no tiene y por eso caen todas en el listado del equipo. Hugo
+genera 46 redirecciones. Al renombrar una sección, mover su `aliases` con ella.
 
 ---
 
@@ -81,10 +137,14 @@ Ver **`INFORME-ORCID.md`**, que trae los candidatos con enlace a cada perfil.
       grupo, que se ve bien y no está roto.
       Formato: cuadrado 400×400 px, JPG, en `static/images/equipo/`, y el nombre
       del archivo en el campo `foto` de `data/miembros.yaml`.
-- [ ] **Galería:** hay 3 fotos. La biblioteca del WordPress tiene ~713 archivos
-      más, con fotos de laboratorio de 2013–2017 sin curar. Para sumar alguna,
-      agregar su nombre a `GALERIA_ARCHIVOS` en `scripts/rescatar_imagenes.py` y
-      volver a correrlo. **Hacerlo antes de dar de baja el WordPress.**
+- [x] ~~**Galería:** sumar fotos desde la biblioteca del WordPress (~713 archivos
+      de 2013–2017 sin curar) con `GALERIA_ARCHIVOS` en
+      `scripts/rescatar_imagenes.py`.~~ **Ya no se puede: se acabó el plazo.**
+      Desde el 18 de agosto de 2026 `neurosistemas.cl` apunta a GitHub Pages, así
+      que `scripts/rescatar_imagenes.py` no tiene de dónde bajar (su `BASES` y el
+      `wp-json` apuntan a ese dominio). Quedan las 3 fotos actuales. Para sumar
+      más habrá que pedirle imágenes al laboratorio, o un respaldo del WordPress
+      si alguien lo guardó.
 - [ ] **Logo:** el original es un JPG de 553×230, así que el wordmark negro no
       sirve sobre fondos oscuros y el favicon no se lee a 16 px. Si aparece el
       archivo vectorial, conviene rehacer los derivados con
@@ -115,10 +175,10 @@ antiguo solo tenía un formulario sin datos visibles:
       secciones en vez de alternar fondos grises. Es más fiel al "mucho aire" del
       concepto; si se prefiere más contraste, se alterna agregando
       `ns-seccion--alt` a las secciones de `layouts/index.html`.
-- [ ] **Fotos de ex miembros.** El WordPress tiene 46 retratos de ex miembros que
-      no se bajaron, porque su plantilla los muestra como filas compactas con
-      iniciales. Si alguna vez se quieren, hay que rescatarlos antes de dar de
-      baja el sitio antiguo.
+- [x] ~~**Fotos de ex miembros.** Rescatar del WordPress los 46 retratos que no se
+      bajaron.~~ **Cerrado sin hacer**, por la misma razón que la galería: el
+      dominio ya no sirve el sitio antiguo. La plantilla de ex miembros los
+      muestra como filas compactas con iniciales, así que no se ve roto.
 
 ---
 
