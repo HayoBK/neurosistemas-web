@@ -4,12 +4,12 @@
 # Hugo extended 0.162.1
 # ============================================================
 
-# baseURL para builds LOCALES. En producción el workflow de GitHub Actions
-# lo sobreescribe con la URL real de Pages:
-#   hugo --baseURL "${{ steps.pages.outputs.base_url }}/"
-# Cuando el dominio neurosistemas.cl apunte al sitio, cambiar por
-# "https://www.neurosistemas.cl/" y agregar static/CNAME.
-baseURL: "https://hayobk.github.io/neurosistemas-web/"
+# Dominio propio. Esta línea es la ÚNICA fuente de verdad del baseURL: el
+# workflow de GitHub Actions ya no lo sobreescribe, así que el build local y el
+# de producción son idénticos. El dominio se le declara a GitHub Pages con
+# static/CNAME, que Hugo copia a public/ en cada build.
+# `hugo server` ignora este valor y usa localhost:1313, como siempre.
+baseURL: "https://www.neurosistemas.cl/"
 
 title: "Laboratorio de Neurosistemas"
 locale: "es-CL"

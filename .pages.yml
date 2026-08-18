@@ -16,6 +16,12 @@ content:
     fields:
       - { name: title, label: "Título", type: string }
       - { name: body,  label: "Texto de bienvenida", type: rich-text }
+      # No borrar: sin este campo declarado, el CMS elimina los aliases del
+      # front-matter al guardar y se rompen las redirecciones del sitio antiguo.
+      - name: aliases
+        label: "Redirecciones del sitio antiguo — no editar"
+        type: string
+        list: true
 
   - name: pagina_investigacion
     label: "Investigación — encabezado"
@@ -25,6 +31,11 @@ content:
       - { name: title,  label: "Título", type: string }
       - { name: rotulo, label: "Rótulo pequeño", type: string }
       - { name: bajada, label: "Bajada", type: text }
+      # No borrar: ver la nota en el bloque "inicio".
+      - name: aliases
+        label: "Redirecciones del sitio antiguo — no editar"
+        type: string
+        list: true
 
   - name: pagina_contacto
     label: "Contacto — encabezado y texto"
@@ -35,6 +46,11 @@ content:
       - { name: rotulo, label: "Rótulo pequeño", type: string }
       - { name: bajada, label: "Bajada", type: text }
       - { name: body,   label: "Texto", type: rich-text }
+      # No borrar: ver la nota en el bloque "inicio".
+      - name: aliases
+        label: "Redirecciones del sitio antiguo — no editar"
+        type: string
+        list: true
 
   # ---------------------------------------------------- Datos
   - name: lineas

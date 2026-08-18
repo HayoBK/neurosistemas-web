@@ -37,9 +37,13 @@ jobs:
       - name: Configurar Pages
         id: pages
         uses: actions/configure-pages@v6
+      # El baseURL sale de config/_default/hugo.yaml (dominio propio), NO de
+      # steps.pages.outputs.base_url: ese valor solo conoce el dominio propio
+      # DESPUÉS del primer deploy con static/CNAME, así que usarlo compilaría
+      # el sitio con el prefijo /neurosistemas-web/ y lo dejaría sin CSS.
       - name: Build con Hugo
         run: |
-          hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+          hugo --gc --minify
       - name: Subir artefacto
         uses: actions/upload-pages-artifact@v5
         with:

@@ -1,5 +1,8 @@
 ---
 title: "Laboratorio de Neurosistemas"
+aliases:
+  - /es/
+  - /en/
 ---
 
 El **Laboratorio de Neurosistemas** de la Facultad de Medicina de la Universidad

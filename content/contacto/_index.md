@@ -2,6 +2,9 @@
 title: "Contacto"
 rotulo: "Escríbenos"
 bajada: "¿Te interesa hacer tu tesis con nosotros, colaborar en un proyecto o visitar el laboratorio? Escríbenos."
+aliases:
+  - /es/contacto/
+  - /en/contact/
 ---
 
 Recibimos estudiantes de pregrado, magíster y doctorado de distintas disciplinas.
