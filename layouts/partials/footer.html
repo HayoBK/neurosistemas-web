@@ -21,16 +21,13 @@
 
       <div>
         <h4>Contacto</h4>
+        {{- /* Sin correo ni teléfono de laboratorio: el contacto es con cada
+               integrante, desde su ficha en /miembros/. */ -}}
         <ul>
-          {{- with site.Params.contacto.email }}
-          <li><a href="mailto:{{ . }}">{{ . }}</a></li>
-          {{- end }}
-          {{- with site.Params.contacto.telefono }}
-          <li>{{ . }}</li>
-          {{- end }}
           {{- with site.Params.contacto.direccion }}
           <li>{{ . }}</li>
           {{- end }}
+          <li><a href="{{ "contacto/" | relURL }}">Cómo contactarnos</a></li>
         </ul>
       </div>
 

@@ -10,14 +10,25 @@
 {{- end }}
 {{- if lt (len $hexCifras) 4 }}{{ $hexCifras = slice "#2186B7" "#9A2A53" "#2F8F5B" "#762D60" }}{{ end }}
 
+{{/* El equipo actual vive en content/miembros/*.md, una página por persona.
+     De ahí salen tanto la cifra de miembros activos como los líderes. */}}
+{{- $equipo := sort (where site.RegularPages "Section" "miembros") "Weight" }}
+
 <section class="ns-hero">
   <div class="ns-wrap ns-hero__cont">
-    <p class="ns-rotulo" style="--ns-acento:{{ partial "color.html" (dict "tipo" "secciones" "clave" "investigacion") }}">Facultad de Medicina · Universidad de Chile</p>
+    <p class="ns-rotulo ns-hero__rotulo" style="--ns-acento:{{ partial "color.html" (dict "tipo" "secciones" "clave" "investigacion") }}">Facultad de Medicina · Universidad de Chile</p>
 
-    <img class="ns-hero__logo" src="{{ "images/logo-neurosistemas.png" | relURL }}"
-         alt="Laboratorio de Neurosistemas" width="505" height="227">
+    {{/* El logo ES el título de la portada: por eso va dentro del h1, con el
+         nombre del laboratorio como texto alternativo. El h1 no lleva estilos
+         de titular (ver .ns-hero__titulo en el CSS), manda la imagen.
+         width/height son las medidas reales del PNG, para que no salte la
+         maquetación mientras carga. */}}
+    <h1 class="ns-hero__titulo">
+      <img class="ns-hero__logo" src="{{ "images/logo-neurosistemas.png" | relURL }}"
+           alt="Laboratorio de Neurosistemas" width="1400" height="593">
+    </h1>
 
-    <h1 class="ns-hero__titulo">{{ site.Params.lema }}</h1>
+    <p class="ns-hero__lema">{{ site.Params.lema }}</p>
     <p class="ns-hero__bajada">Un espacio colaborativo y horizontal donde biología, medicina, ingeniería, kinesiología, psicología, fonoaudiología y tecnología médica trabajan sobre la misma pregunta: cómo el cerebro construye la experiencia.</p>
 
     <div class="ns-hero__acciones">
@@ -30,8 +41,7 @@
     {{- $nPubs := 0 }}
     {{- with $orcid }}{{ with .publicaciones }}{{ $nPubs = add $nPubs (len .) }}{{ end }}{{ end }}
     {{- with $hist }}{{ $nPubs = add $nPubs (len .) }}{{ end }}
-    {{- $nMiembros := 0 }}
-    {{- range hugo.Data.miembros }}{{ $nMiembros = add $nMiembros (len .personas) }}{{ end }}
+    {{- $nMiembros := len $equipo }}
     <div class="ns-cifras">
       <div class="ns-cifra" style="--ns-acento:{{ index $hexCifras 0 }}">
         <div class="ns-cifra__n">{{ $nMiembros }}</div><div class="ns-cifra__t">Miembros activos</div>
@@ -119,10 +129,9 @@
     <p class="ns-rotulo" style="--ns-acento:{{ partial "color.html" (dict "tipo" "secciones" "clave" "miembros") }}">El equipo</p>
     <h2>Quiénes lideran el laboratorio</h2>
     <div class="ns-rejilla ns-rejilla--4 ns-rejilla--sep">
-      {{- range $i, $g := first 1 hugo.Data.miembros }}
-        {{- $colG := partial "color.html" (dict "tipo" "grupos" "clave" $g.titulo "i" $i) }}
-        {{- range $g.personas }}{{ partial "persona.html" (dict "p" . "color" $colG) }}{{ end }}
-      {{- end }}
+      {{- $grupoLid := "Investigadores principales" }}
+      {{- $colLid := partial "color.html" (dict "tipo" "grupos" "clave" $grupoLid) }}
+      {{- range where $equipo "Params.grupo" $grupoLid }}{{ partial "persona.html" (dict "pagina" . "color" $colLid) }}{{ end }}
     </div>
     <p class="ns-tras-lista"><a class="ns-btn ns-btn--fantasma" href="{{ "miembros/" | relURL }}">Conocer a todo el equipo</a></p>
   </div>

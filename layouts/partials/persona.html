@@ -1,23 +1,49 @@
 {{- /*
-  Ficha de una persona.
+  Ficha compacta de una persona, para las grillas del equipo.
 
-  Admite dos formas de llamada:
-    {{ partial "persona.html" (dict "p" $persona "color" $hex) }}  ← con color de grupo
-    {{ partial "persona.html" $persona }}                          ← sin color (usa tinta)
+  Admite tres formas de llamada:
+    {{ partial "persona.html" (dict "pagina" $pg "color" $hex) }}  ← página de content/miembros/
+    {{ partial "persona.html" (dict "p" $persona "color" $hex) }}  ← entrada de un data/*.yaml
+    {{ partial "persona.html" $persona }}                          ← ídem, sin color de grupo
+
+  La primera es la del equipo actual, cuyo roster vive en content/miembros/*.md:
+  ahí el nombre y la foto enlazan a la página propia de la persona. Las otras
+  dos siguen vivas porque data/visitantes.yaml no tiene páginas propias.
 
   El color del grupo se usa en el anillo de la foto y, cuando no hay foto,
   en el círculo de iniciales (relleno al 10 %, texto en el color pleno).
 */ -}}
 {{- $p := . -}}
 {{- $color := "" -}}
-{{- if isset . "p" }}{{ $p = .p }}{{ $color = .color }}{{ end -}}
+{{- $url := "" -}}
+{{- if reflect.IsMap . }}
+  {{- if isset . "pagina" }}
+    {{- $pg := .pagina -}}
+    {{- $color = .color -}}
+    {{- $url = $pg.RelPermalink -}}
+    {{- $p = dict "nombre" $pg.Title
+                  "rol"    $pg.Params.rol
+                  "foto"   $pg.Params.foto
+                  "email"  $pg.Params.email
+                  "orcid"  $pg.Params.orcid
+                  "perfil" $pg.Params.perfil -}}
+  {{- else if isset . "p" }}
+    {{- $p = .p }}{{ $color = .color -}}
+  {{- end }}
+{{- end -}}
 <article class="ns-persona"{{ with $color }} style="--ns-acento:{{ . }}"{{ end }}>
+  {{- /* El retrato repite el enlace del nombre: se oculta a lectores de
+         pantalla y al tabulador para no duplicar el destino. */ -}}
+  {{- if $url }}<a class="ns-persona__enl-foto" href="{{ $url }}" tabindex="-1" aria-hidden="true">{{ end }}
   {{- if $p.foto }}
     <img class="ns-persona__foto" src="{{ (printf "images/equipo/%s" $p.foto) | relURL }}" alt="{{ $p.nombre }}" width="128" height="128" loading="lazy">
   {{- else }}
     <div class="ns-persona__ini" aria-hidden="true">{{ partial "iniciales.html" $p.nombre }}</div>
   {{- end }}
-  <h3 class="ns-persona__nombre">{{ $p.nombre }}</h3>
+  {{- if $url }}</a>{{ end }}
+  <h3 class="ns-persona__nombre">
+    {{- if $url }}<a href="{{ $url }}">{{ $p.nombre }}</a>{{ else }}{{ $p.nombre }}{{ end -}}
+  </h3>
   {{- with $p.rol }}<p class="ns-persona__rol">{{ . }}</p>{{ end }}
   {{- with $p.afiliacion }}<p class="ns-persona__afil">{{ . | safeHTML }}</p>{{ end }}
   {{- with $p.linea }}<p class="ns-persona__afil"><b>Línea:</b> {{ . }}</p>{{ end }}

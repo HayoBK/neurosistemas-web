@@ -5,12 +5,31 @@
   <div class="ns-wrap">
     {{- with .Content }}<div class="ns-prosa ns-tras-lista">{{ . }}</div>{{ end }}
 
-    {{- range $i, $g := hugo.Data.miembros }}
+    {{- /*
+      El roster vive en content/miembros/*.md, una página por persona.
+
+      GroupByParam ordena los grupos alfabéticamente, que no es el orden que
+      queremos: "Estudiantes de postgrado" quedaría antes que "Investigadores
+      principales". Por eso se reordenan por el weight más bajo de cada grupo,
+      que es el mismo número que ordena a las personas dentro de él
+      (100 investigadores principales, 200 gestión, 300 postdoctorales,
+      400 postgrado, 600 pregrado y ayudantes).
+    */ -}}
+    {{- $grupos := slice }}
+    {{- range .Pages.GroupByParam "grupo" }}
+      {{- $paginas := sort .Pages "Weight" }}
+      {{- $peso := 9999 }}
+      {{- with index $paginas 0 }}{{ $peso = .Weight }}{{ end }}
+      {{- $grupos = $grupos | append (dict "titulo" .Key "peso" $peso "paginas" $paginas) }}
+    {{- end }}
+    {{- $grupos = sort $grupos "peso" }}
+
+    {{- range $i, $g := $grupos }}
     {{- $colG := partial "color.html" (dict "tipo" "grupos" "clave" $g.titulo "i" $i) }}
     <div class="ns-grupo" style="--ns-acento:{{ $colG }}">
-      <h2 class="ns-grupo__tit">{{ $g.titulo }} <span>{{ len $g.personas }}</span></h2>
+      <h2 class="ns-grupo__tit">{{ $g.titulo }} <span>{{ len $g.paginas }}</span></h2>
       <div class="ns-rejilla ns-rejilla--4">
-        {{- range $g.personas }}{{ partial "persona.html" (dict "p" . "color" $colG) }}{{ end }}
+        {{- range $g.paginas }}{{ partial "persona.html" (dict "pagina" . "color" $colG) }}{{ end }}
       </div>
     </div>
     {{- end }}

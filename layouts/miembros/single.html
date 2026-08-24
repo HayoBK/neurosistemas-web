@@ -1,0 +1,91 @@
+{{ define "main" }}
+{{- $col := partial "color.html" (dict "tipo" "grupos" "clave" .Params.grupo) -}}
+
+{{- /*
+  Publicaciones de esta persona, desde data/publicaciones_orcid.json.
+
+  El JSON identifica a los autores del laboratorio por el campo 'nombre' de
+  data/orcid.yaml, que no siempre calza con el título de la ficha ("Iván Plaza"
+  vs "Iván Plaza Rosales"). Por eso el emparejamiento va por ORCID iD, que sí es
+  único: se busca el iD de la ficha en data/orcid.yaml y se toma el nombre con
+  el que quedó escrito en el JSON. El título de la ficha se deja igual como
+  segunda opción, para quien todavía no tenga iD.
+*/ -}}
+{{- $nombres := slice .Title }}
+{{- with .Params.orcid }}
+  {{- $oid := . }}
+  {{- with hugo.Data.orcid }}
+    {{- range .miembros }}
+      {{- if and .orcid (eq .orcid $oid) }}{{ $nombres = $nombres | append .nombre }}{{ end }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- $mias := slice }}
+{{- with hugo.Data.publicaciones_orcid }}
+  {{- range .publicaciones }}
+    {{- $pub := . }}{{ $suya := false }}
+    {{- range $pub.miembros }}{{ if in $nombres . }}{{ $suya = true }}{{ end }}{{ end }}
+    {{- if $suya }}{{ $mias = $mias | append $pub }}{{ end }}
+  {{- end }}
+{{- end }}
+
+<article class="ns-perfil" style="--ns-acento:{{ $col }}">
+
+  <div class="ns-wrap ns-perfil__cab">
+    <div class="ns-perfil__retrato">
+      {{- with .Params.foto }}
+      <img class="ns-perfil__foto" src="{{ (printf "images/equipo/%s" .) | relURL }}" alt="{{ $.Title }}" width="240" height="240">
+      {{- else }}
+      <div class="ns-perfil__ini" aria-hidden="true">{{ partial "iniciales.html" .Title }}</div>
+      {{- end }}
+    </div>
+
+    <div class="ns-perfil__id">
+      {{- with .Params.grupo }}<p class="ns-rotulo">{{ . }}</p>{{ end }}
+      <h1 class="ns-perfil__nombre">{{ .Title }}</h1>
+      {{- with .Params.rol }}<p class="ns-perfil__rol">{{ . }}</p>{{ end }}
+
+      {{- if or .Params.email .Params.orcid .Params.perfil }}
+      <div class="ns-persona__links ns-perfil__links">
+        {{- with .Params.email }}<a class="ns-chip" href="mailto:{{ . }}">{{ . }}</a>{{ end }}
+        {{- with .Params.orcid }}<a class="ns-chip ns-chip--orcid" href="https://orcid.org/{{ . }}" rel="noopener">ORCID {{ . }}</a>{{ end }}
+        {{- with .Params.perfil }}<a class="ns-chip" href="{{ . }}" rel="noopener">perfil institucional</a>{{ end }}
+      </div>
+      {{- end }}
+
+      {{- with .Params.intereses }}
+      <p class="ns-perfil__intereses">
+        <span class="ns-perfil__et">Áreas de interés</span>
+        {{ . }}
+      </p>
+      {{- end }}
+    </div>
+  </div>
+
+  {{- with .Content }}
+  <div class="ns-wrap">
+    <div class="ns-prosa ns-perfil__cuerpo">{{ . }}</div>
+  </div>
+  {{- end }}
+
+  {{- /* Si no hay publicaciones, la sección entera no se dibuja. */ -}}
+  {{- if $mias }}
+  {{ partial "eeg.html" . }}
+  {{- $colPub := partial "color.html" (dict "tipo" "secciones" "clave" "publicaciones") }}
+  <div class="ns-wrap ns-perfil__pubs">
+    <p class="ns-rotulo" style="--ns-acento:{{ $colPub }}">Producción científica</p>
+    <h2>Publicaciones</h2>
+    <ul class="ns-pubs ns-tras-lista" style="--ns-acento:{{ $colPub }}">
+      {{- range sort $mias "anio" "desc" }}{{ partial "publicacion.html" . }}{{ end }}
+    </ul>
+  </div>
+  {{- end }}
+
+  <div class="ns-wrap">
+    <p class="ns-acciones">
+      <a class="ns-btn ns-btn--fantasma" href="{{ "miembros/" | relURL }}">← Volver al equipo</a>
+    </p>
+  </div>
+
+</article>
+{{ end }}

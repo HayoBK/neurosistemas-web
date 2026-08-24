@@ -52,8 +52,8 @@ miembros:
     orcid: "0000-0001-7637-4277"
     apellidos: ["Loyola-Navarro", "Loyola"]
 
-  - nombre: "Samuel Madariaga"
-    orcid: ""
+  - nombre: "Samuel Madariaga Román"
+    orcid: "0000-0001-6516-5867"
     apellidos: ["Madariaga"]
 
   - nombre: "Ismael Jaras"
@@ -64,6 +64,34 @@ miembros:
     orcid: ""
     apellidos: ["Lindsay"]
 
+  - nombre: "Hayo Breinbauer"
+    orcid: "0000-0002-3278-065X"
+    apellidos: ["Breinbauer"]
+
+  - nombre: "Joaquín Valdés Bize"
+    orcid: "0000-0003-3222-8440"
+    apellidos: ["Valdés Bize", "Valdes Bize", "Valdés", "Valdes"]
+
+  - nombre: "Cristian Fernández"
+    orcid: "0009-0001-7005-7761"
+    apellidos: ["Fernández", "Fernandez"]
+
+  - nombre: "Andrés Contreras"
+    orcid: "0009-0009-8317-106X"
+    apellidos: ["Contreras"]
+
+  - nombre: "Pablo Pozo Santelices"
+    orcid: "0009-0002-1841-0801"
+    apellidos: ["Pozo", "Pozo Santelices"]
+
+  - nombre: "Matías Urrea Cabezas"
+    orcid: "0009-0008-1887-4124"
+    apellidos: ["Urrea", "Urrea Cabezas"]
+
+  - nombre: "Irma Cisternas"
+    orcid: "0000-0003-3357-2147"
+    apellidos: ["Cisternas"]
+
 # ------------------------------------------------------------
 # Opciones del sincronizador
 # ------------------------------------------------------------
@@ -73,7 +101,7 @@ opciones:
   # Enriquecer cada publicación con Crossref (autores, revista, páginas).
   usar_crossref: true
   # Correo de contacto para el "polite pool" de Crossref.
-  correo_contacto: "neurosistemas@med.uchile.cl"
+  correo_contacto: "pedro@uchile.cl"
   # Tipos de obra ORCID que se aceptan.
   tipos_aceptados:
     - "journal-article"

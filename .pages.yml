@@ -67,25 +67,48 @@ content:
         type: string
         list: true
 
+  # El equipo actual ya no vive en data/miembros.yaml: cada persona es una
+  # página en content/miembros/, con biografía propia y su propia URL.
   - name: miembros
     label: "Miembros actuales"
-    type: file
-    path: data/miembros.yaml
-    list: true
+    type: collection
+    path: content/miembros
+    filename: "{primary}.md"
+    exclude: ["_index.md"]
+    view:
+      fields: [title, grupo, rol, weight]
+      sort: [weight, title]
     fields:
-      - { name: titulo, label: "Nombre del grupo", type: string }
-      - name: personas
-        label: "Personas"
-        type: object
+      - { name: title, label: "Nombre", type: string }
+      - { name: rol,   label: "Rol", type: string }
+      - name: grupo
+        label: "Grupo"
+        type: select
+        options:
+          values:
+            - "Investigadores principales"
+            - "Gestión y apoyo técnico"
+            - "Investigadores postdoctorales y asistentes"
+            - "Estudiantes de postgrado"
+            - "Estudiantes de pregrado y ayudantes"
+      # El orden de la página del equipo sale de aquí, nunca del alfabeto:
+      # 100 investigadores principales · 200 gestión · 300 postdoctorales ·
+      # 400 postgrado · 600 pregrado y ayudantes. El 500 quedó libre a
+      # propósito, por si aparece un grupo intermedio.
+      - { name: weight,    label: "Orden dentro del sitio (ver la ayuda)", type: number }
+      - { name: foto,      label: "Foto (archivo en images/equipo/)", type: string }
+      - { name: email,     label: "Correo", type: string }
+      - { name: orcid,     label: "ORCID iD", type: string }
+      - { name: perfil,    label: "URL de perfil externo", type: string }
+      - { name: intereses, label: "Áreas de interés (una línea)", type: text }
+      - { name: draft,     label: "Borrador", type: boolean, default: false }
+      # No borrar: sin este campo declarado, el CMS elimina los aliases del
+      # front-matter al guardar y se rompen las redirecciones del sitio antiguo.
+      - name: aliases
+        label: "Redirecciones del sitio antiguo — no editar"
+        type: string
         list: true
-        fields:
-          - { name: nombre,     label: "Nombre", type: string }
-          - { name: rol,        label: "Rol", type: string }
-          - { name: afiliacion, label: "Afiliación", type: text }
-          - { name: foto,       label: "Foto (archivo en images/equipo/)", type: string }
-          - { name: email,      label: "Correo", type: string }
-          - { name: orcid,      label: "ORCID iD", type: string }
-          - { name: perfil,     label: "URL de perfil externo", type: string }
+      - { name: body,      label: "Biografía", type: rich-text }
 
   - name: visitantes
     label: "Miembros visitantes"
@@ -210,8 +233,8 @@ content:
         label: "Datos de contacto"
         type: object
         fields:
-          - { name: email,       label: "Correo", type: string }
-          - { name: telefono,    label: "Teléfono", type: string }
+          # Sin correo ni teléfono: el laboratorio no tiene casilla común y el
+          # contacto es con cada integrante, desde su ficha en /miembros/.
           - { name: institucion, label: "Institución", type: string }
           - { name: direccion,   label: "Dirección", type: string }
           - { name: mapa,        label: "URL del mapa", type: string }
