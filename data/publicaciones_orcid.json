@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-08-24",
+  "actualizado": "2026-08-25",
   "fuentes": [
     {
       "nombre": "Pedro E. Maldonado",
@@ -30,6 +30,46 @@
       "nombre": "Rocío Loyola",
       "orcid": "0000-0001-7637-4277",
       "trabajos": 5
+    },
+    {
+      "nombre": "Samuel Madariaga Román",
+      "orcid": "0000-0001-6516-5867",
+      "trabajos": 8
+    },
+    {
+      "nombre": "Hayo Breinbauer",
+      "orcid": "0000-0002-3278-065X",
+      "trabajos": 18
+    },
+    {
+      "nombre": "Joaquín Valdés Bize",
+      "orcid": "0000-0003-3222-8440",
+      "trabajos": 10
+    },
+    {
+      "nombre": "Cristian Fernández",
+      "orcid": "0009-0001-7005-7761",
+      "trabajos": 1
+    },
+    {
+      "nombre": "Andrés Contreras",
+      "orcid": "0009-0009-8317-106X",
+      "trabajos": 2
+    },
+    {
+      "nombre": "Pablo Pozo Santelices",
+      "orcid": "0009-0002-1841-0801",
+      "trabajos": 0
+    },
+    {
+      "nombre": "Matías Urrea Cabezas",
+      "orcid": "0009-0008-1887-4124",
+      "trabajos": 0
+    },
+    {
+      "nombre": "Irma Cisternas",
+      "orcid": "0000-0003-3357-2147",
+      "trabajos": 0
     }
   ],
   "publicaciones": [
@@ -60,6 +100,19 @@
       "fuente": "orcid"
     },
     {
+      "anio": 2026,
+      "titulo": "Personalized Music-Embedded Sound Therapy Based on Gating Modulation and Neural Decoupling Reduces Tinnitus Severity",
+      "autores": "Henriquez, P. I., Delano, P. H., Herrada, J., Guevara, C. &amp; <b>Breinbauer, H. A.</b>",
+      "revista": "Brain Sciences, 16, 644",
+      "doi": "10.3390/brainsci16060644",
+      "url": "",
+      "tipo": "journal-article",
+      "miembros": [
+        "Hayo Breinbauer"
+      ],
+      "fuente": "orcid"
+    },
+    {
       "anio": 2025,
       "titulo": "Cerebellar Transcranial Alternating Current Stimulation Accelerates Motor Adaptation via the Modulation of Cortical Synchrony",
       "autores": "Mariman, J. J., Rojas‐Líbano, D., Burgos, P. I., Valero‐Cabré, A. &amp; <b>Maldonado, P. E.</b>",
@@ -69,6 +122,32 @@
       "tipo": "journal-article",
       "miembros": [
         "Pedro E. Maldonado"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2025,
+      "titulo": "Increased basal ganglia volume in older adults with tinnitus",
+      "autores": "Martin, S. S., Medel, V., <b>Breinbauer, H.</b>, Delgado, C. &amp; Delano, P. H.",
+      "revista": "",
+      "doi": "10.1101/2025.06.08.658513",
+      "url": "",
+      "tipo": "preprint",
+      "miembros": [
+        "Hayo Breinbauer"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2025,
+      "titulo": "Processing of Descriptive and Prescriptive Stereotypes About Men and Women and Electrophysiological Correlates",
+      "autores": "Weinstein, F., <b>Contreras, A.</b>, López, V. &amp; Rodríguez-Gómez, P.",
+      "revista": "Archives of Sexual Behavior, 54, 1837-1858",
+      "doi": "10.1007/s10508-025-03150-1",
+      "url": "",
+      "tipo": "journal-article",
+      "miembros": [
+        "Andrés Contreras"
       ],
       "fuente": "orcid"
     },
@@ -126,6 +205,20 @@
     },
     {
       "anio": 2024,
+      "titulo": "Exploring biological challenges in building a thinking machine",
+      "autores": "<b>Devia, C.</b>, Jara Do Nascimento, C., <b>Madariaga, S.</b>, <b>Maldonado, P.</b>, Murúa, C. &amp; Vergara, R. C.",
+      "revista": "Cognitive Systems Research, 87, 101260",
+      "doi": "10.1016/j.cogsys.2024.101260",
+      "url": "",
+      "tipo": "journal-article",
+      "miembros": [
+        "Samuel Madariaga Román",
+        "Christ Devia"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2024,
       "titulo": "Exploring the benefits of images with frequency visual content in predicting human ocular scanpaths using Artificial Neural Networks",
       "autores": "Jara Do Nascimento, C., Orchard, M. E. &amp; <b>Devia, C.</b>",
       "revista": "Expert Systems with Applications, 239, 121839",
@@ -160,7 +253,8 @@
       "tipo": "journal-article",
       "miembros": [
         "Christ Devia",
-        "José Ignacio Egaña"
+        "José Ignacio Egaña",
+        "Samuel Madariaga Román"
       ],
       "fuente": "orcid"
     },
@@ -179,14 +273,14 @@
     },
     {
       "anio": 2023,
-      "titulo": "Exploring Biological Challenges in Building a Thinking Machine",
-      "autores": "<b>Devia, C.</b>, Jara Do Nascimento, C., <b>Madariaga, S.</b>, Murúa, C., <b>Maldonado, P. E.</b> &amp; Vergara, R. C.",
-      "revista": "SSRN",
-      "doi": "10.2139/ssrn.4660873",
+      "titulo": "Functional Dizziness as a Spatial Cognitive Dysfunction",
+      "autores": "<b>Breinbauer, H. A.</b>, Arévalo-Romero, C., Villarroel, K., Lavin, C., Faúndez, F., Garrido, R., Alarcón, K., Stecher, X., Zamorano, F., Billeke, P. &amp; Delano, P. H.",
+      "revista": "Brain Sciences, 14, 16",
+      "doi": "10.3390/brainsci14010016",
       "url": "",
-      "tipo": "preprint",
+      "tipo": "journal-article",
       "miembros": [
-        "Christ Devia"
+        "Hayo Breinbauer"
       ],
       "fuente": "orcid"
     },
