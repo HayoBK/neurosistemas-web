@@ -96,8 +96,17 @@ miembros:
 # Opciones del sincronizador
 # ------------------------------------------------------------
 opciones:
-  # No traer nada anterior a este año (el archivo histórico ya lo cubre).
-  anio_minimo: 2023
+  # Año de corte. En 0 = sin corte: se trae TODO el registro público de cada
+  # perfil ORCID, que es lo que se quiere —el listado debe tener todas las
+  # publicaciones de todos los integrantes, no solo las recientes.
+  #
+  # Estuvo en 2023 para que ORCID no duplicara el archivo histórico curado,
+  # pero esa precaución sobraba: las 79 entradas de
+  # data/publicaciones_historicas.yaml tienen DOI, y orcid_sync.py descarta por
+  # DOI todo lo que ya está ahí (y además compara títulos normalizados). Si
+  # alguna vez se agrega al histórico una entrada SIN DOI, esa sí podría salir
+  # dos veces.
+  anio_minimo: 0
   # Enriquecer cada publicación con Crossref (autores, revista, páginas).
   usar_crossref: true
   # Correo de contacto para el "polite pool" de Crossref.

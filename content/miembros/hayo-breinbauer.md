@@ -3,7 +3,7 @@ title: Hayo Breinbauer
 rol: Líder de grupo
 grupo: Investigadores principales
 weight: 103
-foto: ''
+foto: hayo-breinbauer.jpg
 email: hbreinbauer@uchile.cl
 orcid: 0000-0002-3278-065X
 perfil: https://deptoneuro.med.uchile.cl/academico/hayo-andres-breinbauer-krebs/

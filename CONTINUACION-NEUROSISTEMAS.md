@@ -2,7 +2,7 @@
 
 Estado del repo y qué falta. Actualizar este archivo al cerrar cada sesión.
 
-**Última actualización:** 24 de agosto de 2026
+**Última actualización:** 25 de agosto de 2026
 
 ---
 
@@ -29,6 +29,12 @@ El **24 de agosto de 2026** se hicieron tres cambios grandes:
    marcadores inventados y nunca existieron: se sacaron de `params.yaml`, de las
    plantillas y del pie. El contacto es con cada integrante, desde su ficha.
 
+El **25 de agosto de 2026** se sacó el corte de año de la sincronización ORCID:
+`anio_minimo` pasó de 2023 a **0**. El listado saltó de 94 a **159 entradas**
+(1988–2026) y las fichas con publicaciones propias, de 5 a 10. Ver
+**"Publicaciones: por qué faltaba gente"** más abajo. También entró el retrato de
+Hayo Breinbauer.
+
 ### Qué está listo
 
 | Área | Estado |
@@ -41,16 +47,17 @@ El **24 de agosto de 2026** se hicieron tres cambios grandes:
 | Navegación con submenús + menú móvil | ✅ |
 | Home (hero con logo, cifras, líneas, publicaciones, equipo, noticias, financiamiento) | ✅ |
 | Líneas de investigación (3 áreas, 12 proyectos) | ✅ |
-| Publicaciones: 94 entradas (79 históricas + 15 de ORCID), dos columnas con año pegajoso | ✅ |
+| Publicaciones: 159 entradas (79 históricas + 80 de ORCID), 1988–2026 | ✅ |
+| Publicaciones en la ficha de cada persona (10 de 31 tienen) | ✅ |
 | Equipo: 31 miembros en 5 grupos, **cada uno con página propia** | ✅ |
-| Fichas del equipo: 25 con foto, 14 con ORCID, 13 con biografía | ⚠️ faltan bios y retratos |
+| Fichas del equipo: 26 con foto, 14 con ORCID, 13 con biografía | ⚠️ faltan bios y retratos |
 | Ex miembros: 52 personas con buscador | ✅ |
 | Visitantes: 8 personas, todas con foto | ✅ |
 | Noticias (con una nota de estreno) + RSS | ✅ |
 | Galería: 3 fotos del laboratorio | ✅ |
 | Contacto: por persona (sin casilla común), dirección y mapa OSM | ⚠️ dirección sin confirmar |
 | Logo: PNG transparente en alta resolución (1400×593), isotipo, favicon, OG | ✅ |
-| ORCID: 14 de 18 iD + sincronización corriendo | ⚠️ faltan 4 |
+| ORCID: 14 de 18 iD, sin corte de año, sincronización corriendo | ⚠️ faltan 4 |
 | Pages CMS (`.pages.yml`) | ✅ |
 | Workflow de deploy a GitHub Pages | ✅ |
 | Dominio propio `www.neurosistemas.cl` con HTTPS forzado | ✅ |
@@ -176,6 +183,60 @@ dos, hay que apuntarlo al front-matter de las fichas.
 
 ---
 
+## Publicaciones: por qué faltaba gente
+
+`/publicaciones/` concatena dos fuentes y agrupa por año: el archivo curado
+`data/publicaciones_historicas.yaml` (79 entradas, 1988–2023, no se toca a mano) y
+`data/publicaciones_orcid.json`, que **escribe el bot** —`scripts/orcid_sync.py`,
+todos los días a las 08:10 UTC.
+
+El **25 de agosto de 2026** el listado tenía 94 entradas y solo 5 personas
+mostraban publicaciones en su ficha. Eran **dos causas distintas**, y conviene
+saber distinguirlas si vuelve a pasar:
+
+1. **El JSON estaba viejo.** `data/orcid.yaml` pasó de 6 a 14 iD el 24 de agosto,
+   pero el bot todavía no había corrido con esa lista. **Ojo con este desfase: al
+   agregar un ORCID iD, sus publicaciones no aparecen hasta la corrida siguiente.**
+   Para no esperar: `gh workflow run orcid.yml`, o correrlo local con
+   `.venv/bin/python scripts/orcid_sync.py`.
+2. **`anio_minimo: 2023` cortaba casi todo.** Estaba así para que ORCID no
+   duplicara el archivo histórico, pero dejaba fuera toda la obra anterior a 2023
+   de quien entrara nuevo al laboratorio —a Hayo Breinbauer le tapaba 15 de sus
+   17 papers. Quedó en **0: sin corte**. El listado debe tener todas las
+   publicaciones de todos los integrantes.
+
+**La precaución del corte sobraba.** Las 79 entradas del histórico tienen DOI, y
+`orcid_sync.py` descarta por DOI todo lo que ya está ahí (y de paso compara
+títulos normalizados). Se verificó tras el cambio: **cero DOI repetidos** entre
+las dos fuentes y cero dentro de ORCID. El riesgo real es otro: **si alguna vez
+se agrega al histórico una entrada sin DOI, esa sí puede salir dos veces.**
+
+Resultado: 159 entradas (79 + 80), 1988–2026, y 10 de las 31 fichas con
+publicaciones propias.
+
+### Cómo se enganchan las publicaciones a cada ficha
+
+Por **ORCID iD, no por nombre** (`layouts/miembros/single.html`). El JSON marca a
+los autores del laboratorio con el campo `nombre` de `data/orcid.yaml`, que no
+siempre calza con el `title` de la ficha ("Iván Plaza" vs "Iván Plaza Rosales").
+La plantilla busca el iD de la ficha en `data/orcid.yaml` y usa el nombre con el
+que quedó escrito en el JSON. **Quien no tiene iD no muestra publicaciones aunque
+las tenga**: es la razón número uno de una ficha vacía.
+
+Cuatro personas tienen iD pero cero publicaciones en el listado (Cristian
+Fernández, Pablo Pozo, Matías Urrea, Irma Cisternas): sus perfiles ORCID están
+vacíos o sus obras no son de un tipo aceptado en `tipos_aceptados`.
+
+### Suciedad heredada de los registros ORCID
+
+El sincronizador fusiona versiones distintas del mismo trabajo comparando títulos
+normalizados, pero no lo atrapa todo. Quedó al menos un caso a la vista: la
+republicación en francés de un artículo de Hayo Breinbauer de 2022 ("Republication
+de : Central nystagmus…") aparece junto al original, porque el título cambia
+demasiado. Se arregla en el perfil ORCID de origen, no en el sitio.
+
+---
+
 ## Pendientes, por prioridad
 
 ### 1. ORCID iD — faltan 4 (es lo que completa la actualización automática)
@@ -190,9 +251,8 @@ Ver **`INFORME-ORCID.md`**, que trae los candidatos con enlace a cada perfil.
       segundo dibuja el chip ORCID y engancha sus publicaciones en su página.
 - [ ] Verificar que sus registros ORCID estén en **visibilidad pública**: la API
       solo devuelve lo público.
-- [ ] Revisar `anio_minimo: 2023` en `data/orcid.yaml`. Está así para que ORCID no
-      duplique el archivo histórico. Si se quiere que ORCID reemplace por completo
-      al histórico, bajarlo y limpiar `publicaciones_historicas.yaml`.
+- [x] ~~Revisar `anio_minimo: 2023` en `data/orcid.yaml`.~~ **Resuelto el 25 de
+      agosto de 2026:** quedó en 0. Ver la sección de publicaciones más abajo.
 
 > **Cuidado al asignar un ORCID a mano.** Buscar por apellido devuelve homónimos y
 > también a gente que lo lleva como *segundo* apellido. Pasó con José Ignacio
@@ -200,9 +260,9 @@ Ver **`INFORME-ORCID.md`**, que trae los candidatos con enlace a cada perfil.
 > metió publicaciones ajenas al listado. Conviene abrir el perfil y mirar que sus
 > obras y su afiliación calcen antes de escribir el iD.
 
-### 2. Imágenes — faltan 6 retratos y 18 biografías
-- [ ] Sin foto: **Antonia Haberle, Ricardo Mendoza, Sofía Onetti, Sofía Berndt,
-      Rodrigo González y Hayo Breinbauer.** No hay imagen suya en el WordPress
+### 2. Imágenes — faltan 5 retratos y 18 biografías
+- [ ] Sin foto: **Antonia Haberle, Ricardo Mendoza, Sofía Onetti, Sofía Berndt
+      y Rodrigo González.** (El de Hayo Breinbauer entró el 25 de agosto de 2026.) No hay imagen suya en el WordPress
       antiguo y ese sitio ya no es alcanzable, así que hay que pedirlas.
       Mientras tanto se muestran sus iniciales sobre el color de su grupo, que se
       ve bien y no está roto, también en su página propia.
