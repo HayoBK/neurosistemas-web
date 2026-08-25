@@ -32,8 +32,8 @@ El **24 de agosto de 2026** se hicieron tres cambios grandes:
 El **25 de agosto de 2026** se sacó el corte de año de la sincronización ORCID:
 `anio_minimo` pasó de 2023 a **0**. El listado saltó de 94 a **159 entradas**
 (1988–2026) y las fichas con publicaciones propias, de 5 a 10. Ver
-**"Publicaciones: por qué faltaba gente"** más abajo. También entró el retrato de
-Hayo Breinbauer.
+**"Publicaciones: por qué faltaba gente"** más abajo. Entró además el retrato de
+Hayo Breinbauer y se fijó el orden de los investigadores principales.
 
 ### Qué está listo
 
@@ -155,6 +155,12 @@ en tres meses.
   300 postdoctorales y asistentes · 400 estudiantes de postgrado ·
   600 pregrado y ayudantes. **El 500 quedó libre a propósito**, por si aparece un
   grupo intermedio.
+- **El orden de los investigadores principales lo pidió el laboratorio** y no es
+  casual: **Pedro E. Maldonado va siempre primero** (101) y **Hayo Breinbauer
+  siempre último** (106). En medio, Christ Devia, María de los Ángeles Juricic,
+  José Ignacio Egaña e Iván Plaza Rosales. Vale para los dos lugares donde salen
+  los líderes: la portada y `/miembros/`. Al sumar a alguien a ese grupo,
+  intercalarlo antes de Hayo, no al final.
 - **Ojo con `GroupByParam`:** ordena los grupos alfabéticamente, que no es lo que
   queremos. `layouts/miembros/list.html` los reordena por el `weight` más bajo de
   cada grupo. Si algún día se ve "Estudiantes de postgrado" arriba de todo, es
