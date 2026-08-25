@@ -2,7 +2,7 @@
 title: Hayo Breinbauer
 rol: Líder de grupo
 grupo: Investigadores principales
-weight: 103
+weight: 106
 foto: hayo-breinbauer.jpg
 email: hbreinbauer@uchile.cl
 orcid: 0000-0002-3278-065X

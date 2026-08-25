@@ -2,7 +2,7 @@
 title: José Ignacio Egaña
 rol: Líder de grupo
 grupo: Investigadores principales
-weight: 105
+weight: 104
 foto: jose-ignacio-egana.jpg
 email: jiegana@uchile.cl
 orcid: 0000-0003-1242-0232

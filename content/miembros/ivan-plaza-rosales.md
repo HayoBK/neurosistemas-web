@@ -2,7 +2,7 @@
 title: Iván Plaza Rosales
 rol: Líder de grupo
 grupo: Investigadores principales
-weight: 106
+weight: 105
 foto: ivan-plaza.jpg
 email: ivanp@uchile.cl
 orcid: 0000-0002-2112-8439
