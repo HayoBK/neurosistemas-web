@@ -2,7 +2,7 @@
 
 Estado del repo y qué falta. Actualizar este archivo al cerrar cada sesión.
 
-**Última actualización:** 25 de agosto de 2026
+**Última actualización:** 3 de septiembre de 2026
 
 ---
 
@@ -35,6 +35,12 @@ El **25 de agosto de 2026** se sacó el corte de año de la sincronización ORCI
 **"Publicaciones: por qué faltaba gente"** más abajo. Entró además el retrato de
 Hayo Breinbauer y se fijó el orden de los investigadores principales.
 
+El **3 de septiembre de 2026**, para el stand en **NeuroFEST Chile 2026** (4 y 5 de
+septiembre, USACH), se creó la sección **Recursos** con el cuento infantil *El
+increíble viaje de lo que ves* (Macarena Pedraza Roca), legible en línea y
+descargable, y una noticia sobre la participación del laboratorio. Ver
+**"Recursos y la URL corta del QR"** más abajo.
+
 ### Qué está listo
 
 | Área | Estado |
@@ -53,7 +59,8 @@ Hayo Breinbauer y se fijó el orden de los investigadores principales.
 | Fichas del equipo: 26 con foto, 14 con ORCID, 13 con biografía | ⚠️ faltan bios y retratos |
 | Ex miembros: 52 personas con buscador | ✅ |
 | Visitantes: 8 personas, todas con foto | ✅ |
-| Noticias (con una nota de estreno) + RSS | ✅ |
+| Noticias (estreno del sitio + NeuroFEST 2026) + RSS | ✅ |
+| Recursos: sección nueva con visor página a página + PDF liviano (1 recurso) | ✅ |
 | Galería: 3 fotos del laboratorio | ✅ |
 | Contacto: por persona (sin casilla común), dirección y mapa OSM | ⚠️ dirección sin confirmar |
 | Logo: PNG transparente en alta resolución (1400×593), isotipo, favicon, OG | ✅ |
@@ -134,6 +141,47 @@ porque Simón San Martín pasó a ex miembro y no tiene página.
 Hugo genera **46 redirecciones**, las mismas de antes: no se perdió ninguna URL,
 solo mejoró el destino de 20 de ellas. Al renombrar una sección o borrar una
 ficha, mover su `aliases` con ella.
+
+---
+
+## Recursos y la URL corta del QR
+
+Sección **`/recursos/`** creada el **3 de septiembre de 2026** para el material de
+divulgación. Hoy tiene un solo recurso, el cuento *El increíble viaje de lo que
+ves*, hecho para el stand de NeuroFEST Chile 2026.
+
+### Cómo está armado
+
+- **Una página por recurso** en `content/recursos/*.md`. El front-matter manda:
+  `tipo`, `resumen`, `autor` + `credito`, `evento`, `publico`, `pdf` (ruta bajo
+  `static/`), `pdf_peso` (texto), `imagen_og` y la lista `paginas`
+  (`archivo` + `texto`). Todo tolera campos vacíos.
+- **Visor sin JavaScript** (`layouts/recursos/single.html`): las páginas van una
+  bajo otra como imágenes JPG de 1200 px de ancho en
+  `static/images/recursos/<carpeta>/`, con `loading="lazy"` desde la tercera y
+  `width/height` para que no salte. El `texto` de cada página es su `alt`: es lo
+  que lee un lector de pantalla y lo que indexa Google. Se descartó un flipbook
+  con JS por peso y porque el sitio no carga librerías.
+- **El PDF publicado es una versión liviana** (`static/docs/`, 150 dpi, ~1,2 MB,
+  hecha con Ghostscript `-dPDFSETTINGS=/ebook`). **El original de 35 MB no está
+  en el repo** a propósito; vive en el OneDrive de Hayo
+  (`2-Casper/00-Academia/Paginas Web Hayo Made/Neurosistemas/`). Para un recurso
+  nuevo: `gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dPDFSETTINGS=/ebook
+  -dColorImageResolution=150 -sOutputFile=liviano.pdf original.pdf` y las páginas
+  con `pdftoppm -r 225 -png` → JPG calidad 82.
+- **URL corta para el QR: `https://www.neurosistemas.cl/cuento/`**, que es un
+  `alias` en el front-matter del cuento y redirige a
+  `/recursos/el-increible-viaje-de-lo-que-ves/`. Es la URL impresa en el QR del
+  stand: **no borrar ni renombrar ese alias**. Si se cambia el slug de la página,
+  el alias se muda con ella. En `.pages.yml` el campo `aliases` está declarado
+  para que el CMS no lo borre al guardar.
+- **`imagen_og` por página:** `partials/head.html` ahora acepta una imagen propia
+  para redes en cualquier página (ruta bajo `images/`); si no la trae, usa la del
+  sitio. Se hizo para que el enlace del cuento se vea con su portada en WhatsApp.
+- Color de la sección: `recursos: "cian"` en `data/colores.yaml`. Menú: peso 55,
+  entre Noticias y Galería.
+- Los archivos del QR (PNG, SVG y cartel A4) quedaron en la misma carpeta del
+  OneDrive junto al PDF original, no en el repo.
 
 ---
 

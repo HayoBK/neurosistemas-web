@@ -731,6 +731,79 @@ hr{ border:0; border-top:1px solid var(--ns-linea); margin:2.5rem 0; }
   text-transform:uppercase; color:var(--ns-tenue);
 }
 
+/* ============================================================
+   RECURSOS — material de divulgación (cuentos, guías)
+   Tarjeta con portada vertical y visor de lectura página a página.
+   El acento (color de la sección) solo aparece en la barra superior de
+   la tarjeta, el rótulo y el hairline de cada página del visor.
+   ============================================================ */
+.ns-rejilla--recursos{ grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); }
+.ns-recurso{
+  display:grid; grid-template-columns:150px 1fr;
+  background:var(--ns-fondo);
+  border:1px solid var(--ns-linea);
+  border-top:3px solid var(--ns-acento);
+  border-radius:var(--ns-radio); overflow:hidden;
+  transition:border-color .16s ease;
+}
+.ns-recurso:hover{ border-color:var(--ns-tenue); border-top-color:var(--ns-acento); }
+.ns-recurso__portada{ display:block; background:var(--ns-fondo2); border-right:1px solid var(--ns-linea); }
+.ns-recurso__portada img{ display:block; width:100%; height:100%; object-fit:cover; }
+.ns-recurso__cuerpo{ padding:1.2rem 1.3rem 1.3rem; display:flex; flex-direction:column; }
+.ns-recurso__tit{ font-size:1.18rem; margin:.3rem 0 .4rem; }
+.ns-recurso__tit a{ color:var(--ns-tinta); text-decoration:none; }
+.ns-recurso__tit a:hover{ text-decoration:underline; text-decoration-color:var(--ns-acento); }
+.ns-recurso__autor{ font-size:.88rem; color:var(--ns-suave); margin:0 0 .6rem; }
+.ns-recurso__res{ font-size:.93rem; color:var(--ns-suave); margin:0 0 1.1rem; }
+.ns-recurso__acciones{ display:flex; flex-wrap:wrap; gap:.6rem; margin-top:auto; }
+.ns-recurso__acciones .ns-btn{ padding:.55rem 1rem; font-size:.9rem; }
+@media (max-width: 480px){
+  .ns-recurso{ grid-template-columns:1fr; }
+  .ns-recurso__portada{ border-right:0; border-bottom:1px solid var(--ns-linea); aspect-ratio:16/10; }
+}
+
+/* Página de un recurso: ficha + botones + visor */
+.ns-ficha-recurso{
+  display:flex; flex-wrap:wrap; gap:1.4rem 2.5rem;
+  margin:1.6rem 0 0; padding:1.1rem 0;
+  border-top:1px solid var(--ns-linea); border-bottom:1px solid var(--ns-linea);
+}
+.ns-ficha-recurso div{ margin:0; }
+.ns-ficha-recurso dt{
+  font-family:var(--ns-mono); font-size:11px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--ns-tenue); margin-bottom:.25rem;
+}
+.ns-ficha-recurso dd{ margin:0; font-size:.98rem; color:var(--ns-texto); }
+.ns-lectura__acciones{ display:flex; flex-wrap:wrap; gap:.7rem; margin:1.6rem 0; }
+
+/* El visor: una columna angosta, cada página como una lámina con hairline.
+   Sin JavaScript: el celular hace scroll y listo. width/height en el <img>
+   evitan que la página salte mientras cargan las imágenes. */
+.ns-visor{
+  width:min(100% - 2.5rem, 560px); margin:1.5rem auto 0;
+  display:flex; flex-direction:column; gap:1.4rem;
+}
+.ns-visor__pag{ margin:0; }
+.ns-visor__pag img{
+  display:block; width:100%; height:auto;
+  border:1px solid var(--ns-linea); border-radius:var(--ns-radio);
+  background:var(--ns-fondo2);
+}
+.ns-visor__pag figcaption{
+  font-family:var(--ns-mono); font-size:11px; letter-spacing:.08em;
+  color:var(--ns-tenue); text-align:right; margin-top:.4rem;
+}
+.ns-visor__pag:first-child img{ border-top:3px solid var(--ns-acento); }
+.ns-lectura__cierre{ margin-top:3rem; padding-top:2rem; border-top:1px solid var(--ns-linea); }
+@media (max-width: 560px){
+  .ns-visor{ width:min(100% - 1.5rem, 560px); gap:1rem; }
+}
+@media print{
+  .ns-lectura__acciones,.ns-lectura__cierre .ns-btn{ display:none !important; }
+  .ns-visor{ width:100%; }
+  .ns-visor__pag{ break-inside:avoid; }
+}
+
 @media (prefers-reduced-motion: reduce){
   *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
 }

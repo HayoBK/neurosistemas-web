@@ -36,6 +36,10 @@ main:
     pageRef: "/noticias"
     weight: 50
 
+  - name: "Recursos"
+    pageRef: "/recursos"
+    weight: 55
+
   - name: "Galería"
     pageRef: "/galeria"
     weight: 60

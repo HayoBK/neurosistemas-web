@@ -1,0 +1,59 @@
+{{ define "main" }}
+{{- $col := partial "color.html" (dict "tipo" "secciones" "clave" "recursos") -}}
+{{- $paginas := .Params.paginas -}}
+{{- $n := len $paginas -}}
+<article class="ns-articulo ns-lectura" style="--ns-acento:{{ $col }}">
+  <div class="ns-wrap-txt">
+    <p class="ns-rotulo">{{ .Params.tipo | default "Recurso" }}{{ with .Params.evento }} · {{ . }}{{ end }}</p>
+    <h1>{{ .Title }}</h1>
+    {{- with .Params.resumen }}<p class="ns-bajada">{{ . }}</p>{{ end }}
+
+    <dl class="ns-ficha-recurso">
+      {{- with .Params.autor }}<div><dt>{{ $.Param "credito" | default "Autoría" }}</dt><dd>{{ . }}</dd></div>{{ end }}
+      {{- with .Params.publico }}<div><dt>Para quién</dt><dd>{{ . }}</dd></div>{{ end }}
+      {{- if $n }}<div><dt>Extensión</dt><dd>{{ $n }} páginas</dd></div>{{ end }}
+    </dl>
+
+    <div class="ns-lectura__acciones">
+      {{- if $n }}<a class="ns-btn ns-btn--primario" href="#leer">Leer en línea</a>{{ end }}
+      {{- with .Params.pdf }}
+      <a class="ns-btn ns-btn--fantasma" href="{{ . | relURL }}" download>Descargar PDF{{ with $.Params.pdf_peso }} · {{ . }}{{ end }}</a>
+      {{- end }}
+    </div>
+
+    {{- with .Content }}<div class="ns-articulo__cuerpo ns-prosa">{{ . }}</div>{{ end }}
+  </div>
+
+  {{- if $n }}
+  {{/* Visor: las páginas una bajo otra, sin JavaScript. Las dos primeras cargan
+       de inmediato; el resto, al hacer scroll. width/height evitan saltos. */}}
+  <section class="ns-visor" id="leer" aria-label="{{ .Title }}, {{ $n }} páginas">
+    {{- range $i, $p := $paginas }}
+    <figure class="ns-visor__pag">
+      <img src="{{ (printf "images/%s" $p.archivo) | relURL }}"
+           alt="{{ $p.texto | default (printf "Página %d" (add $i 1)) }}"
+           width="1200" height="1875"
+           {{ if lt $i 2 }}loading="eager" fetchpriority="high"{{ else }}loading="lazy"{{ end }} decoding="async">
+      <figcaption>{{ add $i 1 }} / {{ $n }}</figcaption>
+    </figure>
+    {{- end }}
+  </section>
+  {{- end }}
+
+  <div class="ns-wrap-txt ns-lectura__cierre">
+    <p class="ns-rotulo">Fin</p>
+    <div class="ns-lectura__acciones">
+      {{- with .Params.pdf }}
+      <a class="ns-btn ns-btn--primario" href="{{ . | relURL }}" download>Descargar PDF{{ with $.Params.pdf_peso }} · {{ . }}{{ end }}</a>
+      {{- end }}
+      {{- if $n }}<a class="ns-btn ns-btn--fantasma" href="#leer">Volver al inicio del cuento</a>{{ end }}
+    </div>
+    <p class="ns-nota-pie">
+      {{- with .Params.autor }}{{ $.Param "credito" | default "Autoría" }}: {{ . }}. {{ end -}}
+      Laboratorio de Neurosistemas, Facultad de Medicina, Universidad de Chile.
+      Más sobre nosotros en <a href="{{ "investigacion/" | relURL }}">Investigación</a> y <a href="{{ "miembros/" | relURL }}">Equipo</a>.
+    </p>
+    <p><a class="ns-btn ns-btn--fantasma" href="{{ "recursos/" | relURL }}">← Todos los recursos</a></p>
+  </div>
+</article>
+{{ end }}

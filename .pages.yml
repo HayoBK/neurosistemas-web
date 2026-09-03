@@ -221,6 +221,58 @@ content:
         list: true
       - { name: body,    label: "Contenido", type: rich-text }
 
+  # ---------------------------------------------------- Recursos
+  # Material de divulgación (cuentos, guías). Cada recurso es una página en
+  # content/recursos/ con un PDF en static/docs/ y sus páginas como imágenes
+  # en static/images/recursos/<carpeta>/. El texto de cada página es el
+  # alt-text del visor: conviene llenarlo.
+  - name: pagina_recursos
+    label: "Recursos — encabezado"
+    type: file
+    path: content/recursos/_index.md
+    fields:
+      - { name: title,  label: "Título", type: string }
+      - { name: rotulo, label: "Rótulo pequeño", type: string }
+      - { name: bajada, label: "Bajada", type: text }
+
+  - name: recursos
+    label: "Recursos"
+    type: collection
+    path: content/recursos
+    filename: "{primary}.md"
+    exclude: ["_index.md"]
+    view:
+      fields: [title, tipo, date, draft]
+      sort: [date, title]
+    fields:
+      - { name: title,       label: "Título", type: string }
+      - { name: date,        label: "Fecha", type: date }
+      - { name: draft,       label: "Borrador", type: boolean, default: false }
+      - { name: tipo,        label: "Tipo (Cuento infantil, Guía…)", type: string }
+      - { name: resumen,     label: "Resumen", type: text }
+      - { name: description, label: "Descripción para buscadores y redes", type: text }
+      - { name: autor,       label: "Autoría", type: string }
+      - { name: credito,     label: "Tipo de crédito (Texto e ilustraciones, Autoría…)", type: string }
+      - { name: evento,      label: "Evento o contexto", type: string }
+      - { name: publico,     label: "Para quién", type: string }
+      - { name: pdf,         label: "PDF (ruta bajo static/, p. ej. docs/archivo.pdf)", type: string }
+      - { name: pdf_peso,    label: "Peso del PDF (texto, p. ej. 1,2 MB)", type: string }
+      - { name: imagen_og,   label: "Imagen para redes (ruta bajo images/)", type: string }
+      # No borrar: sin este campo declarado, el CMS elimina los aliases al
+      # guardar y se rompe la URL corta del QR (/cuento/).
+      - name: aliases
+        label: "URLs cortas / redirecciones — no editar"
+        type: string
+        list: true
+      - name: paginas
+        label: "Páginas del visor"
+        type: object
+        list: true
+        fields:
+          - { name: archivo, label: "Imagen (ruta bajo images/)", type: string }
+          - { name: texto,   label: "Texto de la página (alternativa accesible)", type: text }
+      - { name: body, label: "Presentación", type: rich-text }
+
   # ---------------------------------------------------- Ajustes
   - name: parametros
     label: "Ajustes del sitio"

@@ -57,6 +57,7 @@ secciones:
   ex-miembros: "morado"
   investigacion: "azul"
   galeria: "verde"
+  recursos: "cian"
   contacto: "magenta"
 
 # Colores de los números de las cifras del Home, en orden.

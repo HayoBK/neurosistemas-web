@@ -17,9 +17,13 @@
 <meta property="og:description" content="{{ $desc | plainify | truncate 180 }}">
 <meta property="og:type" content="{{ cond .IsPage "article" "website" }}">
 <meta property="og:url" content="{{ .Permalink }}">
-{{- with site.Params.imagen_og }}
+{{- /* Una página puede traer su propia imagen para redes (imagen_og, ruta
+       bajo images/); si no, se usa la del sitio. */ -}}
+{{- with .Params.imagen_og }}
+<meta property="og:image" content="{{ (printf "images/%s" .) | absURL }}">
+{{- else }}{{ with site.Params.imagen_og }}
 <meta property="og:image" content="{{ . | absURL }}">
-{{- end }}
+{{- end }}{{ end }}
 <meta name="twitter:card" content="summary_large_image">
 
 <!-- Iconos. Solo PNG: el isotipo es una acuarela con degradados y vectorizarlo

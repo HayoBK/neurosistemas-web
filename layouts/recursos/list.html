@@ -1,0 +1,40 @@
+{{ define "main" }}
+{{ partial "encabezado.html" . }}
+
+<section class="ns-seccion">
+  <div class="ns-wrap">
+    {{- with .Content }}<div class="ns-prosa" style="margin-bottom:2.5rem;">{{ . }}</div>{{ end }}
+    {{- $col := partial "color.html" (dict "tipo" "secciones" "clave" "recursos") }}
+    {{- $recursos := .RegularPagesRecursive }}
+    {{- if $recursos }}
+    <div class="ns-rejilla ns-rejilla--recursos">
+      {{- range $recursos }}
+      {{- $portada := "" }}
+      {{- with .Params.paginas }}{{ with index . 0 }}{{ $portada = .archivo }}{{ end }}{{ end }}
+      <article class="ns-recurso" style="--ns-acento:{{ $col }}">
+        <a class="ns-recurso__portada" href="{{ .RelPermalink }}" aria-hidden="true" tabindex="-1">
+          {{- with $portada }}
+          <img src="{{ (printf "images/%s" .) | relURL }}" alt="" loading="lazy" width="1200" height="1875">
+          {{- end }}
+        </a>
+        <div class="ns-recurso__cuerpo">
+          <p class="ns-rotulo">{{ .Params.tipo | default "Recurso" }}{{ with .Params.evento }} · {{ . }}{{ end }}</p>
+          <h2 class="ns-recurso__tit"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+          {{- with .Params.autor }}<p class="ns-recurso__autor">{{ $.Param "credito" | default "Autoría" }}: {{ . }}</p>{{ end }}
+          {{- with .Params.resumen }}<p class="ns-recurso__res">{{ . }}</p>{{ end }}
+          <div class="ns-recurso__acciones">
+            <a class="ns-btn ns-btn--primario" href="{{ .RelPermalink }}">Leer en línea</a>
+            {{- with .Params.pdf }}
+            <a class="ns-btn ns-btn--fantasma" href="{{ . | relURL }}" download>Descargar PDF{{ with $.Params.pdf_peso }} · {{ . }}{{ end }}</a>
+            {{- end }}
+          </div>
+        </div>
+      </article>
+      {{- end }}
+    </div>
+    {{- else }}
+    <p class="ns-vacio">Todavía no hay recursos publicados.</p>
+    {{- end }}
+  </div>
+</section>
+{{ end }}
