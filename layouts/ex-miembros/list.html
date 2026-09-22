@@ -97,7 +97,7 @@
             <g class="ns-mapa__ciudad{{ if .origen }} ns-mapa__ciudad--origen{{ end }}" data-ciudad="{{ $k }}" data-n="{{ $n }}" data-nombres="{{ delimit $nombres " · " }}" tabindex="0" role="button" aria-label="{{ $k }}: {{ $n }} {{ if eq $n 1 }}persona{{ else }}personas{{ end }}. Filtrar tarjetas.">
               <circle class="ns-mapa__halo" cx="{{ printf "%.1f" $x }}" cy="{{ printf "%.1f" $y }}" r="{{ printf "%.1f" (add $r 7.0) }}"/>
               <circle class="ns-mapa__punto" cx="{{ printf "%.1f" $x }}" cy="{{ printf "%.1f" $y }}" r="{{ printf "%.1f" $r }}"/>
-              <text class="ns-mapa__rotulo" x="{{ printf "%.1f" (add $x $dx) }}" y="{{ printf "%.1f" (add $y $dy) }}"{{ if ne $ancla "start" }} text-anchor="{{ $ancla }}"{{ end }}>{{ $k }} <tspan class="ns-mapa__n">{{ $n }}</tspan></text>
+              <text class="ns-mapa__rotulo" x="{{ printf "%.1f" (add $x $dx) }}" y="{{ printf "%.1f" (add $y $dy) }}"{{ if ne $ancla "start" }} text-anchor="{{ $ancla }}"{{ end }}>{{ $k }}&#160;<tspan class="ns-mapa__n">{{ $n }}</tspan></text>
             </g>
           {{- end }}
         {{- end }}

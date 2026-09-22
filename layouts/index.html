@@ -137,6 +137,49 @@
   </div>
 </section>
 
+<!-- Trayectorias de ex miembros (avance) -->
+{{- $al := partial "alumni-resumen.html" . }}
+{{- if gt (len $al.con) 0 }}
+{{- $colAl := partial "color.html" (dict "tipo" "secciones" "clave" "ex-miembros") }}
+{{ partial "eeg.html" . }}
+<section class="ns-seccion" style="--ns-acento:{{ $colAl }}">
+  <div class="ns-wrap ns-impacto">
+    <div class="ns-impacto__texto">
+      <p class="ns-rotulo">Trayectorias</p>
+      <h2>El impacto de nuestra gente en el tiempo</h2>
+      <p class="ns-bajada">Quienes se formaron aquí hoy dirigen laboratorios, hospitales y programas de investigación en {{ $al.paises }} países. Seguimos sus pasos: dónde están, en qué instituciones se agrupan y qué hacen.</p>
+      <div class="ns-cifras ns-cifras--impacto">
+        <div class="ns-cifra"><div class="ns-cifra__n">{{ $al.total }}</div><div class="ns-cifra__t">Ex miembros</div></div>
+        <div class="ns-cifra"><div class="ns-cifra__n">{{ $al.instituciones }}</div><div class="ns-cifra__t">Instituciones</div></div>
+        <div class="ns-cifra"><div class="ns-cifra__n">{{ $al.ciudades }}</div><div class="ns-cifra__t">Ciudades</div></div>
+        <div class="ns-cifra"><div class="ns-cifra__n">{{ $al.paises }}</div><div class="ns-cifra__t">Países</div></div>
+      </div>
+      <p class="ns-tras-lista"><a class="ns-btn ns-btn--fantasma" href="{{ "ex-miembros/" | relURL }}">Ver dónde están hoy</a></p>
+    </div>
+    {{- /* Anillo: una persona por punto, coloreado por sector; las sin datos, en gris.
+           Es la misma constelación de /ex-miembros/, reducida a su gesto. */}}
+    {{- $todos := $al.con | append $al.sin }}
+    {{- $n := len $todos }}
+    <a class="ns-impacto__anillo" href="{{ "ex-miembros/" | relURL }}" aria-label="Ver la constelación de ex miembros">
+      <svg viewBox="0 0 320 320" focusable="false" aria-hidden="true">
+        <g class="ns-impacto__radios" fill="none">
+        {{- range $i, $p := $todos }}
+          {{- $a := sub (mul (div (float $i) (float $n)) (mul 2.0 math.Pi)) (mul math.Pi 0.5) }}
+          <line x1="160" y1="160" x2="{{ printf "%.1f" (add 160.0 (mul 118.0 (math.Cos $a))) }}" y2="{{ printf "%.1f" (add 160.0 (mul 118.0 (math.Sin $a))) }}"/>
+        {{- end }}
+        </g>
+        {{- range $i, $p := $todos }}
+          {{- $a := sub (mul (div (float $i) (float $n)) (mul 2.0 math.Pi)) (mul math.Pi 0.5) }}
+          {{- $mudo := eq ($p.confianza | default "") "sin-datos" }}
+          <circle cx="{{ printf "%.1f" (add 160.0 (mul 128.0 (math.Cos $a))) }}" cy="{{ printf "%.1f" (add 160.0 (mul 128.0 (math.Sin $a))) }}" r="{{ if $mudo }}3.2{{ else }}4.2{{ end }}" fill="{{ if $mudo }}#E3E6E8{{ else }}{{ partial "color.html" (dict "tipo" "sectores" "clave" ($p.sector | default "otro")) }}{{ end }}"><title>{{ $p.nombre }}</title></circle>
+        {{- end }}
+        <circle cx="160" cy="160" r="6" fill="#101214"/>
+      </svg>
+    </a>
+  </div>
+</section>
+{{- end }}
+
 <!-- Noticias -->
 {{- $noticias := where site.RegularPages "Section" "noticias" }}
 {{- if $noticias }}

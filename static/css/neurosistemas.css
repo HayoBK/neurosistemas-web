@@ -900,6 +900,23 @@ hr{ border:0; border-top:1px solid var(--ns-linea); margin:2.5rem 0; }
 .ns-leyenda__item i{ width:9px; height:9px; border-radius:50%; flex:none; display:inline-block; }
 .ns-leyenda__mudo{ background:var(--ns-linea); }
 
+/* --- Home: avance de trayectorias (anillo + cifras) --- */
+.ns-impacto{ display:grid; grid-template-columns:minmax(0,1fr) minmax(260px,380px); gap:clamp(2rem,1.5rem + 3vw,4rem); align-items:center; }
+.ns-cifras--impacto{ margin-top:2rem; grid-template-columns:repeat(4,minmax(0,1fr)); }
+.ns-cifras--impacto .ns-cifra{ padding:0 1rem; }
+.ns-cifras--impacto .ns-cifra__n{ font-size:2.1rem; }
+.ns-impacto__anillo{ display:block; line-height:0; }
+.ns-impacto__anillo svg{ width:100%; height:auto; }
+.ns-impacto__radios line{ stroke:var(--ns-linea); stroke-width:1; vector-effect:non-scaling-stroke; }
+.ns-impacto__anillo circle{ stroke:var(--ns-fondo); stroke-width:1.2; vector-effect:non-scaling-stroke; transition:transform .16s ease; }
+.ns-impacto__anillo:hover .ns-impacto__radios line{ stroke:var(--ns-tenue); }
+@media (max-width: 820px){
+  .ns-impacto{ grid-template-columns:1fr; }
+  .ns-impacto__anillo{ max-width:300px; margin:0 auto; }
+  .ns-cifras--impacto{ grid-template-columns:repeat(2,minmax(0,1fr)); row-gap:1.4rem; }
+  .ns-cifras--impacto .ns-cifra:nth-child(3){ border-left:0; padding-left:0; }
+}
+
 /* --- Filtros --- */
 .ns-alumni-barra{ gap:.7rem 1rem; }
 .ns-filtros{ display:flex; flex-wrap:wrap; gap:.4rem; }

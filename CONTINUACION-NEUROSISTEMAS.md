@@ -200,6 +200,20 @@ páginas institucionales, ResearchGate, Crossref, prensa) quedó documentada en
 Sin librerías externas; todo el cálculo (proyección, ángulos) lo hace Hugo con
 `math.Sin/Cos/Sqrt`. El build no cambió de tiempo.
 
+### El Home y la caché del CSS
+
+Tras publicar, la página se veía rota en navegadores que conservaban la hoja
+de estilos anterior en caché (mapa negro, tarjetas en columnas sueltas). Desde
+entonces `partials/head.html` agrega al CSS una **huella** (`?v=` + md5 del
+archivo), que cambia solo cuando cambia la hoja: ningún visitante vuelve a ver
+un CSS viejo con un HTML nuevo. No quitarla.
+
+El Home ganó la sección **"Trayectorias — El impacto de nuestra gente en el
+tiempo"** (entre El equipo y Noticias): bajada, cuatro cifras y un anillo con
+un punto por persona coloreado por sector, todo desde
+`partials/alumni-resumen.html`, que devuelve el resumen del YAML. Enlaza a
+`/ex-miembros/`.
+
 ### Cómo mantenerla
 
 - Alguien cambia de trabajo → editar su entrada (`hoy`, `institucion`,

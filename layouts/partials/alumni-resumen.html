@@ -1,0 +1,18 @@
+{{- /*
+  Resumen de data/exmiembros.yaml para el Home (y quien lo necesite).
+  Devuelve un dict: total, con (lista con trayectoria), sin (lista sin datos),
+  instituciones, ciudades, paises (enteros).
+  Uso: {{ $a := partial "alumni-resumen.html" . }}
+*/ -}}
+{{- $ex := hugo.Data.exmiembros | default slice }}
+{{- $con := slice }}{{ $sin := slice }}
+{{- $insts := slice }}{{ $ciud := slice }}{{ $paises := slice }}
+{{- range $ex }}
+  {{- if eq (.confianza | default "") "sin-datos" }}{{ $sin = $sin | append . }}{{ else }}
+    {{- $con = $con | append . }}
+    {{- with .institucion_corta }}{{ if not (in $insts .) }}{{ $insts = $insts | append . }}{{ end }}{{ end }}
+    {{- with .ciudad }}{{ if not (in $ciud .) }}{{ $ciud = $ciud | append . }}{{ end }}{{ end }}
+    {{- with .pais }}{{ if not (in $paises .) }}{{ $paises = $paises | append . }}{{ end }}{{ end }}
+  {{- end }}
+{{- end }}
+{{- return (dict "total" (len $ex) "con" $con "sin" $sin "instituciones" (len $insts) "ciudades" (len $ciud) "paises" (len $paises)) }}

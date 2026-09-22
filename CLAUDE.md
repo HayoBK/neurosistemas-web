@@ -77,7 +77,10 @@ algo desde el CMS.
   `footer.html`, `scripts.html`, `encabezado.html`, `persona.html`, `publicacion.html`,
   `color.html` (resuelve el acento desde `colores.yaml`), `eeg.html` (divisor de sección),
   `iniciales.html` (primer nombre + último apellido, saltando partículas),
-  `mapa-mundo.html` (siluetas del mapa de ex miembros; lo genera `scripts/generar_mapa.py`).
+  `mapa-mundo.html` (siluetas del mapa de ex miembros; lo genera `scripts/generar_mapa.py`),
+  `alumni-resumen.html` (devuelve el resumen de `exmiembros.yaml` que usa el Home).
+- `head.html` enlaza el CSS con huella `?v=<md5>`: no quitarla, evita que un
+  navegador combine CSS viejo con HTML nuevo.
 - `layouts/index.html` → Home: hero + quiénes somos + 3 líneas + publicaciones recientes +
   líderes + noticias + financiamiento.
 - Secciones: `investigacion/`, `publicaciones/`, `miembros/`, `visitantes/`, `ex-miembros/`,

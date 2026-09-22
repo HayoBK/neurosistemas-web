@@ -37,7 +37,11 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:ital,wght@0,400;0,500;0,600;1,400&display=swap">
 
 <!-- Estilos -->
-<link rel="stylesheet" href="{{ "css/neurosistemas.css" | relURL }}">
+{{- /* Huella del CSS en la URL: cada cambio de la hoja invalida la caché del
+     navegador (GitHub Pages sirve el archivo con max-age y algunos navegadores
+     lo retienen más). Cambia solo cuando cambia el archivo. */ -}}
+{{- $huella := substr (md5 (os.ReadFile "static/css/neurosistemas.css")) 0 10 }}
+<link rel="stylesheet" href="{{ "css/neurosistemas.css" | relURL }}?v={{ $huella }}">
 
 {{- with .OutputFormats.Get "rss" }}
 <link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }}">
