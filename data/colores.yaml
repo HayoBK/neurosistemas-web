@@ -59,6 +59,15 @@ secciones:
   recursos: "cian"
   contacto: "magenta"
 
+# Sector en que trabaja hoy cada ex miembro (data/exmiembros.yaml).
+# Colorea los nodos de la constelación y las tarjetas de /ex-miembros/.
+sectores:
+  academia: "azul"
+  clinica: "verde"
+  industria: "ambar"
+  gobierno: "morado"
+  otro: "cian"
+
 # Colores de los números de las cifras del Home, en orden.
 # Solo tonos que pasan AA como texto.
 cifras: ["azul", "magenta", "verde", "morado"]

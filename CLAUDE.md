@@ -76,15 +76,32 @@ algo desde el CMS.
 - `partials/`: `head.html`, `header.html` (navbar con dropdowns desde `menus.yaml`),
   `footer.html`, `scripts.html`, `encabezado.html`, `persona.html`, `publicacion.html`,
   `color.html` (resuelve el acento desde `colores.yaml`), `eeg.html` (divisor de sección),
-  `iniciales.html` (primer nombre + último apellido, saltando partículas).
+  `iniciales.html` (primer nombre + último apellido, saltando partículas),
+  `mapa-mundo.html` (siluetas del mapa de ex miembros; lo genera `scripts/generar_mapa.py`).
 - `layouts/index.html` → Home: hero + quiénes somos + 3 líneas + publicaciones recientes +
   líderes + noticias + financiamiento.
 - Secciones: `investigacion/`, `publicaciones/`, `miembros/`, `visitantes/`, `ex-miembros/`,
   `noticias/`, `galeria/`, `contacto/` — cada una con su `list.html`.
-- **Datos:** `data/lineas.yaml`, `miembros.yaml`, `visitantes.yaml`, `exmiembros.yaml`,
+- **Datos:** `data/lineas.yaml`, `visitantes.yaml`, `exmiembros.yaml` (trayectorias de
+  los ex miembros: rol, `hoy`, institución, ciudad, sector, hito, enlaces),
+  `ciudades.yaml` (coordenadas y rótulos del mapa de ex miembros),
   `financiamiento.yaml`, `galeria.yaml`, `colores.yaml` (paleta y asignación),
   `publicaciones_historicas.yaml` (curado, 1988–2023), `orcid.yaml` (configuración) y
   `publicaciones_orcid.json` (generado).
+
+## Ex miembros: tres vistas sobre un YAML
+`/ex-miembros/` (`layouts/ex-miembros/list.html`) dibuja **mapa de difusión**,
+**constelación por institución** y **tarjetas** a partir de `data/exmiembros.yaml`.
+Todo se calcula en el build con funciones `math.*` de Hugo; el JS solo anima los
+arcos una vez, filtra tarjetas y muestra tooltips. Reglas:
+- `institucion_corta` es la llave que agrupa la constelación: mismo texto = mismo radio.
+- `ciudad` debe existir en `data/ciudades.yaml` para salir en el mapa (`dx`/`dy`/`ancla`
+  mueven el rótulo si se pisa con un vecino).
+- `sector` colorea nodos y tarjetas vía la tabla `sectores` de `data/colores.yaml`.
+- `confianza: sin-datos` saca a la persona del mapa y las tarjetas y la manda a la
+  franja "También pasaron por el laboratorio".
+- El recorte del mapa (lon −135…60, lat −57…72) y sus constantes viven en dos lugares:
+  `scripts/generar_mapa.py` y las variables `$LON0/$SX/$LAT1/$SY` del `list.html`.
 
 ## Publicaciones: cómo funciona la fusión
 La página `/publicaciones/` concatena **dos fuentes** y agrupa por año:

@@ -804,6 +804,156 @@ hr{ border:0; border-top:1px solid var(--ns-linea); margin:2.5rem 0; }
   .ns-visor__pag{ break-inside:avoid; }
 }
 
+/* ============================================================
+   EX MIEMBROS — difusión: mapa, constelación y tarjetas
+   El color aquí es sector (data/colores.yaml → sectores) y llega por
+   --ns-acento a cada tarjeta y por fill directo a los nodos del SVG.
+   Sin sombras ni degradados: hairlines, tinta y puntos.
+   ============================================================ */
+.ns-alumni-intro .ns-cifras--alumni{ margin-top:0; }
+.ns-cifras--alumni .ns-cifra__n{ color:var(--ns-tinta); }
+.ns-alumni-h2{ margin-bottom:.6rem; }
+
+/* --- Mapa --- */
+.ns-mapa{ position:relative; margin:clamp(1.8rem,1.2rem + 2vw,2.8rem) 0 0; }
+.ns-mapa svg{ display:block; width:100%; height:auto; overflow:visible; }
+.ns-mapa__tierra path{ fill:var(--ns-fondo2); stroke:var(--ns-linea); stroke-width:.8; vector-effect:non-scaling-stroke; }
+.ns-mapa__arco{
+  stroke:var(--ns-acento); stroke-width:1.1; stroke-opacity:.55;
+  vector-effect:non-scaling-stroke;
+  stroke-dasharray:1200; stroke-dashoffset:1200;
+}
+.ns-mapa.is-visible .ns-mapa__arco{ animation:ns-trazar 1.8s cubic-bezier(.4,0,.2,1) forwards; }
+.ns-mapa.is-visible .ns-mapa__arco:nth-child(2){ animation-delay:.08s; }
+.ns-mapa.is-visible .ns-mapa__arco:nth-child(3){ animation-delay:.16s; }
+.ns-mapa.is-visible .ns-mapa__arco:nth-child(4){ animation-delay:.24s; }
+.ns-mapa.is-visible .ns-mapa__arco:nth-child(5){ animation-delay:.32s; }
+.ns-mapa.is-visible .ns-mapa__arco:nth-child(6){ animation-delay:.40s; }
+.ns-mapa.is-visible .ns-mapa__arco:nth-child(7){ animation-delay:.48s; }
+.ns-mapa.is-visible .ns-mapa__arco:nth-child(8){ animation-delay:.56s; }
+.ns-mapa.is-visible .ns-mapa__arco:nth-child(n+9){ animation-delay:.64s; }
+@keyframes ns-trazar{ to{ stroke-dashoffset:0; } }
+.ns-mapa__ciudad{ cursor:pointer; outline:none; }
+.ns-mapa__halo{ fill:var(--ns-acento); fill-opacity:0; transition:fill-opacity .16s ease; }
+.ns-mapa__ciudad:hover .ns-mapa__halo,
+.ns-mapa__ciudad:focus-visible .ns-mapa__halo,
+.ns-mapa__ciudad.is-activo .ns-mapa__halo{ fill-opacity:.14; }
+.ns-mapa__punto{ fill:var(--ns-acento); stroke:var(--ns-fondo); stroke-width:1.5; vector-effect:non-scaling-stroke; }
+.ns-mapa__ciudad--origen .ns-mapa__punto{ fill:var(--ns-tinta); }
+.ns-mapa__ciudad--origen .ns-mapa__halo{ fill:var(--ns-tinta); }
+.ns-mapa__rotulo{
+  font-family:var(--ns-mono); font-size:12px; letter-spacing:.04em;
+  fill:var(--ns-texto); paint-order:stroke; stroke:var(--ns-fondo); stroke-width:3px; stroke-linejoin:round;
+  pointer-events:none;
+}
+.ns-mapa__n{ fill:var(--ns-tenue); }
+.ns-mapa__ciudad--origen .ns-mapa__rotulo{ font-weight:500; }
+.ns-mapa__pie{
+  display:flex; flex-wrap:wrap; gap:.4rem .9rem; margin-top:1.2rem;
+  font-family:var(--ns-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--ns-suave);
+}
+.ns-mapa__item{ cursor:pointer; padding-bottom:.1rem; border-bottom:1px solid transparent; transition:border-color .16s ease, color .16s ease; }
+.ns-mapa__item b{ font-weight:500; color:var(--ns-acento); }
+.ns-mapa__item:hover,.ns-mapa__item.is-activo{ color:var(--ns-tinta); border-bottom-color:var(--ns-acento); }
+.ns-mapa__item--mudo{ cursor:default; color:var(--ns-tenue); }
+.ns-mapa__item--mudo b{ color:var(--ns-tenue); }
+.ns-mapa__item--mudo:hover{ color:var(--ns-tenue); border-bottom-color:transparent; }
+
+/* Tooltip compartido */
+.ns-tooltip{
+  position:absolute; z-index:3; pointer-events:none;
+  max-width:min(320px, 80vw);
+  padding:.55rem .75rem; border:1px solid var(--ns-tinta); border-radius:var(--ns-radio-s);
+  background:var(--ns-fondo); color:var(--ns-texto);
+  font-size:.82rem; line-height:1.4;
+}
+.ns-tooltip b{
+  display:block; font-family:var(--ns-mono); font-weight:500; font-size:11px;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--ns-suave); margin-bottom:.3rem;
+}
+.ns-tooltip span{ display:block; }
+
+/* --- Constelación --- */
+.ns-conste{ position:relative; margin:clamp(1.8rem,1.2rem + 2vw,2.8rem) auto 0; max-width:900px; }
+.ns-conste svg{ display:block; width:100%; height:auto; overflow:visible; }
+.ns-conste__lineas line{ stroke:var(--ns-linea); stroke-width:1; vector-effect:non-scaling-stroke; }
+.ns-conste__lineas .ns-conste__rama{ stroke-opacity:.7; }
+.ns-conste__hub{ fill:var(--ns-fondo); stroke:var(--ns-tinta); stroke-width:1.2; vector-effect:non-scaling-stroke; }
+.ns-conste__hub.ns-conste__mudo{ stroke:var(--ns-tenue); }
+.ns-conste__rotulo{
+  font-family:var(--ns-mono); font-size:11.5px; letter-spacing:.05em;
+  fill:var(--ns-texto); pointer-events:none;
+}
+.ns-conste__rotulo.ns-conste__mudo{ fill:var(--ns-tenue); }
+.ns-conste__enlace{ outline:none; }
+.ns-conste__nodo{ stroke:var(--ns-fondo); stroke-width:1.5; vector-effect:non-scaling-stroke; transition:r .16s ease; }
+.ns-conste__enlace:hover .ns-conste__nodo,
+.ns-conste__enlace:focus-visible .ns-conste__nodo{ r:8.5; stroke:var(--ns-tinta); }
+.ns-conste__nodo--mudo{ fill:var(--ns-linea); }
+.ns-conste__centro{ fill:var(--ns-tinta); }
+.ns-conste__centro-txt{ font-family:var(--ns-titulo); font-weight:600; font-size:13px; letter-spacing:.02em; fill:var(--ns-tinta); }
+.ns-conste__leyenda,.ns-leyenda{
+  display:flex; flex-wrap:wrap; gap:.5rem 1.2rem; justify-content:center; margin-top:1.2rem;
+  font-family:var(--ns-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--ns-suave);
+}
+.ns-leyenda__item{ display:inline-flex; align-items:center; gap:.45rem; }
+.ns-leyenda__item i{ width:9px; height:9px; border-radius:50%; flex:none; display:inline-block; }
+.ns-leyenda__mudo{ background:var(--ns-linea); }
+
+/* --- Filtros --- */
+.ns-alumni-barra{ gap:.7rem 1rem; }
+.ns-filtros{ display:flex; flex-wrap:wrap; gap:.4rem; }
+.ns-filtro{
+  font-family:var(--ns-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+  padding:.3rem .6rem; border-radius:var(--ns-radio-s);
+  border:1px solid var(--ns-linea); background:var(--ns-fondo); color:var(--ns-suave);
+  cursor:pointer; display:inline-flex; align-items:center; gap:.45rem;
+  transition:border-color .16s ease, color .16s ease;
+}
+.ns-filtro[data-sector]:not([data-sector=""])::before{ content:""; width:7px; height:7px; border-radius:50%; background:var(--ns-acento); }
+.ns-filtro:hover{ border-color:var(--ns-tinta); color:var(--ns-tinta); }
+.ns-filtro.is-activo{ border-color:var(--ns-tinta); color:var(--ns-tinta); }
+.ns-filtro--limpiar{ border-color:var(--ns-acento); color:var(--ns-tinta); }
+.ns-filtro[hidden]{ display:none; }
+
+/* --- Tarjetas --- */
+.ns-alumni--tarjetas{ grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:1rem; }
+.ns-alumno--tarjeta{
+  display:flex; flex-direction:column; gap:.55rem;
+  padding:1.1rem 1.2rem 1.1rem;
+  border-top:3px solid var(--ns-acento);
+}
+.ns-alumno[hidden]{ display:none; }
+.ns-alumno__cab{ display:flex; gap:.9rem; align-items:center; }
+.ns-alumno__rol{
+  font-family:var(--ns-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--ns-tenue); margin:0;
+}
+.ns-alumno__hoy{ margin:.2rem 0 0; font-size:.95rem; line-height:1.5; color:var(--ns-texto); }
+.ns-alumno__et{
+  display:inline-block; margin-right:.55rem;
+  font-family:var(--ns-mono); font-weight:500; font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--ns-acento);
+}
+.ns-alumno__hito{
+  margin:0; font-size:.86rem; line-height:1.5; color:var(--ns-suave);
+  border-left:2px solid var(--ns-linea); padding-left:.75rem;
+}
+.ns-alumno__links{ display:flex; flex-wrap:wrap; gap:.4rem; margin-top:auto; padding-top:.35rem; }
+.ns-alumno--tarjeta:target{ border-color:var(--ns-tinta); }
+.ns-alumni--compactos{ grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); }
+.ns-alumno--mudo .ns-alumno__ini{ border-color:var(--ns-linea); background:var(--ns-fondo2); color:var(--ns-suave); }
+
+@media (max-width: 700px){
+  /* En pantalla chica los rótulos del mapa se pisan: queda solo el origen y
+     la lista de ciudades bajo el mapa hace de leyenda. */
+  .ns-mapa__ciudad:not(.ns-mapa__ciudad--origen) .ns-mapa__rotulo{ display:none; }
+  .ns-mapa__rotulo{ font-size:20px; }
+  .ns-conste__rotulo{ font-size:17px; }
+  .ns-conste__centro-txt{ font-size:18px; }
+  .ns-alumni--tarjetas,.ns-alumni--compactos{ grid-template-columns:1fr; }
+}
+
 @media (prefers-reduced-motion: reduce){
   *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
 }

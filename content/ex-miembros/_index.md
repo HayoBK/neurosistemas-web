@@ -1,7 +1,7 @@
 ---
 title: "Ex miembros"
 rotulo: "El equipo"
-bajada: "Quienes pasaron por el laboratorio y hoy continúan su trabajo en universidades y centros de investigación de Chile y el mundo."
+bajada: "Más de sesenta personas se formaron o investigaron aquí. Hoy dirigen laboratorios, hospitales y programas de investigación en Chile, Estados Unidos y Europa. Esta página sigue sus trayectorias: dónde están, en qué se agrupan y qué hacen."
 aliases:
   - /es/ex-miembros/
   - /en/alumni/

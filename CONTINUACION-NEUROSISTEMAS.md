@@ -2,7 +2,7 @@
 
 Estado del repo y qué falta. Actualizar este archivo al cerrar cada sesión.
 
-**Última actualización:** 3 de septiembre de 2026
+**Última actualización:** 22 de septiembre de 2026
 
 ---
 
@@ -35,6 +35,11 @@ El **25 de agosto de 2026** se sacó el corte de año de la sincronización ORCI
 **"Publicaciones: por qué faltaba gente"** más abajo. Entró además el retrato de
 Hayo Breinbauer y se fijó el orden de los investigadores principales.
 
+El **22 de septiembre de 2026** se rehízo la página de **ex miembros**: se
+investigó qué ha sido de las 65 personas (47 con trayectoria identificada) y la
+página pasó de una lista a tres vistas —mapa de difusión, constelación por
+institución y tarjetas "Hoy:"—. Ver **"Ex miembros: la difusión"** más abajo.
+
 El **3 de septiembre de 2026**, para el stand en **NeuroFEST Chile 2026** (4 y 5 de
 septiembre, USACH), se creó la sección **Recursos** con el cuento infantil *El
 increíble viaje de lo que ves* (Macarena Pedraza Roca), legible en línea y
@@ -57,7 +62,7 @@ descargable, y una noticia sobre la participación del laboratorio. Ver
 | Publicaciones en la ficha de cada persona (10 de 31 tienen) | ✅ |
 | Equipo: 31 miembros en 5 grupos, **cada uno con página propia** | ✅ |
 | Fichas del equipo: 26 con foto, 14 con ORCID, 13 con biografía | ⚠️ faltan bios y retratos |
-| Ex miembros: 52 personas con buscador | ✅ |
+| Ex miembros: 65 personas, 47 con trayectoria actual; mapa + constelación + tarjetas | ✅ |
 | Visitantes: 8 personas, todas con foto | ✅ |
 | Noticias (estreno del sitio + NeuroFEST 2026) + RSS | ✅ |
 | Recursos: sección nueva con visor página a página + PDF liviano (1 recurso) | ✅ |
@@ -141,6 +146,73 @@ porque Simón San Martín pasó a ex miembro y no tiene página.
 Hugo genera **46 redirecciones**, las mismas de antes: no se perdió ninguna URL,
 solo mejoró el destino de 20 de ellas. Al renombrar una sección o borrar una
 ficha, mover su `aliases` con ella.
+
+---
+
+## Ex miembros: la difusión
+
+Rehecha el **22 de septiembre de 2026** a pedido del laboratorio ("una forma
+linda de mostrar en qué están los que pasaron por aquí").
+
+### Los datos
+
+`data/exmiembros.yaml` creció de 3 campos a ~15 por persona: `rol_lab`, `hoy`,
+`institucion`, `institucion_corta`, `ciudad`, `pais`, `sector`, `hito`, `web`,
+`scholar`, `linkedin`, `formacion`, `confianza`. Se conservaron todos los
+correos y ORCID que ya estaban. La investigación (fuentes públicas: ANID,
+páginas institucionales, ResearchGate, Crossref, prensa) quedó documentada en
+`INFORME-EXMIEMBROS.md`, con las fuentes por persona.
+
+- **47 personas** tienen `hoy` y entran a mapa, constelación y tarjetas.
+- **18 personas** quedaron `confianza: sin-datos` y van a la franja final
+  "También pasaron por el laboratorio" con lo que se sabía. Ahí están, por
+  ejemplo, Rolando Castillo (identidad no confirmada), Karina Venegas, Camilo
+  Jara, Christian López, Carlos Navarro y Ricardo Mendoza (que tenía ficha en
+  el WordPress pero no estaba en el YAML: se agregó).
+- **Correcciones de nombre** que salieron de la revisión: Rodrigo Vergara
+  **Ortúzar** (no Ortega), Gonzalo Varas **Díaz**, Ana Campos ya es **Dra.**
+  (PhD UCL 2023), Alejandra Vásquez Rosati y Joel Álvarez Ruf son doctores.
+- `confianza: media` se usa en 17 fichas cuyo cargo se tomó de una sola fuente
+  o de un titular de LinkedIn. La plantilla no las distingue; el campo es para
+  saber a quién preguntar primero al actualizar.
+
+### Las tres vistas (`layouts/ex-miembros/list.html`)
+
+1. **Mapa de difusión.** Siluetas en `partials/mapa-mundo.html` (34 KB, las
+   genera `scripts/generar_mapa.py` desde `countries.geo.json` de
+   johan/world.geo.json). Recorte "atlántico" porque nadie está en Asia ni
+   Oceanía; si eso cambia, ampliar el recorte en el script **y** en las
+   constantes del `list.html`. Los arcos salen de Santiago y se trazan una vez
+   al entrar en pantalla (`IntersectionObserver` + `stroke-dashoffset`;
+   respeta `prefers-reduced-motion`). Clic en una ciudad filtra las tarjetas.
+   En móvil se ocultan los rótulos de las ciudades (se pisaban) y queda la
+   lista bajo el mapa, que también filtra.
+2. **Constelación.** Dendrograma radial: el lab al centro, un radio por
+   `institucion_corta` (ordenadas de mayor a menor), cada persona un punto
+   coloreado por `sector` (tabla `sectores` de `colores.yaml`). Los rótulos van
+   radiales y se voltean en la mitad izquierda para leerse de corrido. Cada
+   punto enlaza a su tarjeta.
+3. **Tarjetas.** Iniciales (ahora se saltan los títulos Dr./Dra./M.Sc./(c)),
+   rol en el lab, "Hoy:", institución · ciudad, un hito y chips ORCID /
+   Scholar / LinkedIn / Web / Correo. Buscador + filtros por sector + filtro
+   por ciudad desde el mapa.
+
+Sin librerías externas; todo el cálculo (proyección, ángulos) lo hace Hugo con
+`math.Sin/Cos/Sqrt`. El build no cambió de tiempo.
+
+### Cómo mantenerla
+
+- Alguien cambia de trabajo → editar su entrada (`hoy`, `institucion`,
+  `institucion_corta`, `ciudad`, `pais`, `sector`). Si la ciudad es nueva,
+  agregarla a `data/ciudades.yaml` con lat/lon.
+- Alguien sale del equipo → agregar una entrada nueva al final del YAML y
+  mover sus `aliases` a `content/ex-miembros/_index.md` (como ya se hace).
+- Si Pedro o el lab entregan **rol y años** de cada persona, `rol_lab` admite
+  texto libre ("Doctorado 2012–2017") y las tarjetas lo muestran tal cual. Con
+  años para todos se podría agregar la vista "río de cohortes" que quedó fuera
+  por falta de datos.
+- Idea pendiente: mandar un correo a los ex miembros con enlace a su tarjeta
+  para que corrijan sus datos.
 
 ---
 
@@ -376,6 +448,10 @@ Lo que sigue pendiente:
       Cisternas (postgrado); Samuel Madariaga pasó de doctorado a postdoctoral y
       Cristian Fernández de magíster a doctorado; Simón San Martín salió a
       `data/exmiembros.yaml`.
+- [ ] **Ex miembros: pedir al laboratorio rol y años de cada persona** para
+      afinar `rol_lab` y, con eso, sumar la vista de cohortes. Confirmar además la
+      identidad de "Rolando Castillo" y si Carlos Navarro fue realmente
+      investigador asistente (podría ser confusión con Rocío Loyola-Navarro).
 - [ ] **Ritmo del Home.** Quedó casi todo blanco, con el divisor EEG separando
       secciones en vez de alternar fondos grises. Es más fiel al "mucho aire" del
       concepto; si se prefiere más contraste, se alterna agregando

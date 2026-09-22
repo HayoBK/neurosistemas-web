@@ -129,9 +129,22 @@ content:
     path: data/exmiembros.yaml
     list: true
     fields:
-      - { name: nombre,     label: "Nombre", type: string }
-      - { name: afiliacion, label: "Afiliación actual", type: text }
-      - { name: email,      label: "Correo", type: string }
+      - { name: nombre,            label: "Nombre", type: string }
+      - { name: rol_lab,           label: "Rol en el laboratorio (Doctorado, Magíster, Postdoctorado, Pregrado, Investigador/a…)", type: string }
+      - { name: hoy,               label: "Qué hace hoy (cargo, en una frase)", type: text }
+      - { name: institucion,       label: "Institución actual (nombre completo)", type: string }
+      - { name: institucion_corta, label: "Institución, nombre corto (agrupa la constelación; usar el mismo texto para la misma institución)", type: string }
+      - { name: ciudad,            label: "Ciudad (debe existir en Ciudades del mapa)", type: string }
+      - { name: pais,              label: "País", type: string }
+      - { name: sector,            label: "Sector", type: select, options: { values: [academia, clinica, industria, gobierno, otro] } }
+      - { name: hito,              label: "Un hito destacable (opcional)", type: text }
+      - { name: orcid,             label: "ORCID iD (solo el número)", type: string }
+      - { name: scholar,           label: "Google Scholar (URL)", type: string }
+      - { name: linkedin,          label: "LinkedIn (URL)", type: string }
+      - { name: web,               label: "Página institucional o web (URL)", type: string }
+      - { name: email,             label: "Correo", type: string }
+      - { name: formacion,         label: "Formación (texto libre, solo si no hay 'hoy')", type: text }
+      - { name: confianza,         label: "Estado de la ficha", type: select, options: { values: [alta, media, sin-datos] } }
 
   - name: publicaciones_historicas
     label: "Publicaciones — archivo histórico"

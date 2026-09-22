@@ -1,0 +1,24 @@
+# ============================================================
+# Coordenadas de las ciudades donde hoy están los ex miembros.
+# La llave debe coincidir EXACTAMENTE con el campo 'ciudad' de
+# data/exmiembros.yaml. Una ciudad que no esté aquí simplemente no
+# aparece en el mapa (la persona sigue en las tarjetas).
+#
+#   lat / lon   grados decimales.
+#   origen      true solo en el laboratorio (Santiago).
+#   dx / dy     desplazamiento del rótulo respecto del punto, en unidades
+#               del mapa (opcional; sirve para separar rótulos vecinos).
+#   ancla       start | end | middle — alineación del rótulo (opcional).
+# ============================================================
+Santiago:     { lat: -33.45, lon: -70.67, origen: true, dx: 22, dy: -6 }
+Rancagua:     { lat: -34.17, lon: -70.74, dx: -12, dy: 14, ancla: end }
+Valdivia:     { lat: -39.81, lon: -73.25 }
+Nueva York:   { lat: 40.71,  lon: -74.01, dx: 12, dy: 4 }
+Boston:       { lat: 42.36,  lon: -71.06, dx: 10, dy: -4 }
+Baltimore:    { lat: 39.29,  lon: -76.61, dx: -12, dy: -2, ancla: end }
+Bethesda:     { lat: 38.98,  lon: -77.10, dx: -12, dy: 14, ancla: end }
+San Diego:    { lat: 32.72,  lon: -117.16 }
+Londres:      { lat: 51.51,  lon: -0.13, dx: -12, dy: 4, ancla: end }
+Hamburgo:     { lat: 53.55,  lon: 9.99, dx: 4, dy: -10 }
+Berlín:       { lat: 52.52,  lon: 13.40, dx: 12, dy: 6 }
+Berna:        { lat: 46.95,  lon: 7.45, dx: 12, dy: 6 }

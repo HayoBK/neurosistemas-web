@@ -1,24 +1,271 @@
 {{ define "main" }}
 {{ partial "encabezado.html" . }}
+{{- /*
+  Ex miembros: tres vistas sobre los mismos datos (data/exmiembros.yaml).
 
-<section class="ns-seccion">
+    1. Mapa de difusión  — dónde están hoy (ciudades de data/ciudades.yaml).
+    2. Constelación      — en qué instituciones se agrupan (institucion_corta).
+    3. Tarjetas          — uno a uno: rol en el lab, qué hacen hoy, un hito, enlaces.
+
+  Quien tiene confianza "sin-datos" no entra al mapa ni a las tarjetas: va a la
+  franja final "También pasaron por el laboratorio", con lo poco que se sabe.
+  Todo se calcula en el build; el JavaScript solo anima, filtra y muestra
+  tooltips. Sin dependencias externas.
+*/ -}}
+{{- $col := partial "color.html" (dict "tipo" "secciones" "clave" "ex-miembros") }}
+{{- $ex := hugo.Data.exmiembros }}
+{{- $con := slice }}
+{{- $sin := slice }}
+{{- range $ex }}
+  {{- if eq (.confianza | default "") "sin-datos" }}{{ $sin = $sin | append . }}{{ else }}{{ $con = $con | append . }}{{ end }}
+{{- end }}
+
+{{- /* ---- Agregados: ciudades, países, instituciones ---- */}}
+{{- $ciudades := dict }}
+{{- $paises := slice }}
+{{- $insts := dict }}
+{{- $ordenInst := slice }}
+{{- range $con }}
+  {{- $p := . }}
+  {{- with .ciudad }}
+    {{- $l := index $ciudades . | default slice }}
+    {{- $ciudades = merge $ciudades (dict . ($l | append $p)) }}
+  {{- end }}
+  {{- with .pais }}{{ if not (in $paises .) }}{{ $paises = $paises | append . }}{{ end }}{{ end }}
+  {{- $k := .institucion_corta | default "Otros destinos" }}
+  {{- if not (in $ordenInst $k) }}{{ $ordenInst = $ordenInst | append $k }}{{ end }}
+  {{- $l := index $insts $k | default slice }}
+  {{- $insts = merge $insts (dict $k ($l | append $p)) }}
+{{- end }}
+{{- $nCiudades := 0 }}{{ range $k, $v := $ciudades }}{{ $nCiudades = add $nCiudades 1 }}{{ end }}
+
+<section class="ns-seccion ns-alumni-intro" style="--ns-acento:{{ $col }}">
   <div class="ns-wrap">
-    {{- with .Content }}<div class="ns-prosa" style="margin-bottom:2.5rem;">{{ . }}</div>{{ end }}
+    {{- with .Content }}<div class="ns-prosa">{{ . }}</div>{{ end }}
+    <div class="ns-cifras ns-cifras--alumni">
+      <div class="ns-cifra"><div class="ns-cifra__n">{{ len $ex }}</div><div class="ns-cifra__t">Personas</div></div>
+      <div class="ns-cifra"><div class="ns-cifra__n">{{ len $con }}</div><div class="ns-cifra__t">Trayectorias seguidas</div></div>
+      <div class="ns-cifra"><div class="ns-cifra__n">{{ len $ordenInst }}</div><div class="ns-cifra__t">Instituciones</div></div>
+      <div class="ns-cifra"><div class="ns-cifra__n">{{ $nCiudades }}</div><div class="ns-cifra__t">Ciudades</div></div>
+      <div class="ns-cifra"><div class="ns-cifra__n">{{ len $paises }}</div><div class="ns-cifra__t">Países</div></div>
+    </div>
+  </div>
+</section>
 
-    <div class="ns-pub-barra">
-      <input type="search" id="ns-buscar-alumni" placeholder="Buscar por nombre o institución…" aria-label="Buscar ex miembros">
-      <span class="ns-pub-barra__meta" id="ns-contador-alumni">{{ len hugo.Data.exmiembros }} personas</span>
+{{ partial "eeg.html" . }}
+
+{{- /* ============================================================
+       1. MAPA DE DIFUSIÓN
+       Proyección idéntica a la del partial mapa-mundo.html.
+     ============================================================ */}}
+{{- $C := hugo.Data.ciudades | default dict }}
+{{- $LON0 := -135.0 }}{{ $SX := 5.1282 }}{{ $LAT1 := 72.0 }}{{ $SY := 5.8974 }}
+{{- $ox := 0.0 }}{{ $oy := 0.0 }}{{ $origen := "" }}
+{{- range $k, $v := $C }}{{ if $v.origen }}{{ $origen = $k }}{{ $ox = mul (sub (float $v.lon) $LON0) $SX }}{{ $oy = mul (sub $LAT1 (float $v.lat)) $SY }}{{ end }}{{ end }}
+<section class="ns-seccion" style="--ns-acento:{{ $col }}">
+  <div class="ns-wrap">
+    <p class="ns-rotulo">Difusión</p>
+    <h2 class="ns-alumni-h2">Dónde están hoy</h2>
+    <p class="ns-bajada">Desde el laboratorio, en Independencia, hacia las universidades, hospitales y centros donde hoy trabajan quienes pasaron por aquí. Cada trazo es una trayectoria; el tamaño del punto, cuántas personas hay en esa ciudad.</p>
+
+    <figure class="ns-mapa" id="ns-mapa">
+      <svg viewBox="0 0 1000 761" role="img" aria-labelledby="ns-mapa-tit" focusable="false">
+        <title id="ns-mapa-tit">Mapa con las ciudades donde trabajan hoy los ex miembros del laboratorio</title>
+        {{ partial "mapa-mundo.html" . }}
+        <g class="ns-mapa__arcos" fill="none">
+        {{- range $k, $lista := $ciudades }}
+          {{- with index $C $k }}
+            {{- if and (not .origen) $origen }}
+              {{- $x := mul (sub (float .lon) $LON0) $SX }}{{ $y := mul (sub $LAT1 (float .lat)) $SY }}
+              {{- $mx := div (add $ox $x) 2.0 }}{{ $my := div (add $oy $y) 2.0 }}
+              {{- $cx := add $mx (mul (sub $y $oy) 0.22) }}{{ $cy := sub $my (mul (sub $x $ox) 0.22) }}
+              <path class="ns-mapa__arco" d="M{{ printf "%.1f" $ox }},{{ printf "%.1f" $oy }} Q{{ printf "%.1f" $cx }},{{ printf "%.1f" $cy }} {{ printf "%.1f" $x }},{{ printf "%.1f" $y }}"/>
+            {{- end }}
+          {{- end }}
+        {{- end }}
+        </g>
+        <g class="ns-mapa__puntos">
+        {{- range $k, $lista := $ciudades }}
+          {{- with index $C $k }}
+            {{- $x := mul (sub (float .lon) $LON0) $SX }}{{ $y := mul (sub $LAT1 (float .lat)) $SY }}
+            {{- $n := len $lista }}
+            {{- $r := add 4.0 (mul 1.6 (math.Sqrt $n)) }}
+            {{- $nombres := slice }}{{ range $lista }}{{ $nombres = $nombres | append .nombre }}{{ end }}
+            {{- $dx := add $r 9.0 }}{{ with .dx }}{{ $dx = float . }}{{ end }}
+            {{- $dy := 4.0 }}{{ with .dy }}{{ $dy = float . }}{{ end }}
+            {{- $ancla := .ancla | default "start" }}
+            <g class="ns-mapa__ciudad{{ if .origen }} ns-mapa__ciudad--origen{{ end }}" data-ciudad="{{ $k }}" data-n="{{ $n }}" data-nombres="{{ delimit $nombres " · " }}" tabindex="0" role="button" aria-label="{{ $k }}: {{ $n }} {{ if eq $n 1 }}persona{{ else }}personas{{ end }}. Filtrar tarjetas.">
+              <circle class="ns-mapa__halo" cx="{{ printf "%.1f" $x }}" cy="{{ printf "%.1f" $y }}" r="{{ printf "%.1f" (add $r 7.0) }}"/>
+              <circle class="ns-mapa__punto" cx="{{ printf "%.1f" $x }}" cy="{{ printf "%.1f" $y }}" r="{{ printf "%.1f" $r }}"/>
+              <text class="ns-mapa__rotulo" x="{{ printf "%.1f" (add $x $dx) }}" y="{{ printf "%.1f" (add $y $dy) }}"{{ if ne $ancla "start" }} text-anchor="{{ $ancla }}"{{ end }}>{{ $k }} <tspan class="ns-mapa__n">{{ $n }}</tspan></text>
+            </g>
+          {{- end }}
+        {{- end }}
+        </g>
+      </svg>
+      <div class="ns-tooltip" id="ns-tooltip" role="status" aria-live="polite" hidden></div>
+      <figcaption class="ns-mapa__pie">
+        {{- range $k, $lista := $ciudades }}{{ if index $C $k }}<span class="ns-mapa__item" data-ciudad="{{ $k }}">{{ $k }} <b>{{ len $lista }}</b></span>{{ end }}{{ end }}
+        {{- $sinMapa := slice }}{{ range $con }}{{ if not .ciudad }}{{ $sinMapa = $sinMapa | append . }}{{ end }}{{ end }}
+        {{- with $sinMapa }}<span class="ns-mapa__item ns-mapa__item--mudo">Sin ciudad fija <b>{{ len . }}</b></span>{{ end }}
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+{{ partial "eeg.html" . }}
+
+{{- /* ============================================================
+       2. CONSTELACIÓN — el lab al centro, las instituciones alrededor,
+          cada persona como un punto coloreado por sector.
+          Ángulo por institución proporcional a (personas + 1.4).
+     ============================================================ */}}
+{{- $CX := 500.0 }}{{ $CY := 500.0 }}{{ $R1 := 188.0 }}{{ $R2 := 300.0 }}{{ $R3 := 322.0 }}
+{{- /* instituciones de mayor a menor; a igual tamaño, en el orden del YAML */}}
+{{- $ordenado := slice }}
+{{- range $n := seq 200 0 }}{{ range $ordenInst }}{{ if eq (len (index $insts .)) $n }}{{ $ordenado = $ordenado | append . }}{{ end }}{{ end }}{{ end }}
+{{- $ordenInst = $ordenado }}
+{{- $peso := 0.0 }}
+{{- range $ordenInst }}{{ $peso = add $peso (add (float (len (index $insts .))) 1.4) }}{{ end }}
+{{- $pesoSin := add (float (len $sin)) 1.4 }}{{ $peso = add $peso $pesoSin }}
+{{- $ang := mul math.Pi -0.5 }}
+<section class="ns-seccion" style="--ns-acento:{{ $col }}">
+  <div class="ns-wrap">
+    <p class="ns-rotulo">Constelación</p>
+    <h2 class="ns-alumni-h2">Una red que sigue creciendo</h2>
+    <p class="ns-bajada">Cada punto es una persona; cada radio, la institución donde trabaja hoy. El color dice en qué sector: academia, clínica, gobierno u otro. Pasa el cursor sobre un punto para ver quién es.</p>
+
+    <figure class="ns-conste" id="ns-conste">
+      <svg viewBox="0 0 1000 1000" role="img" aria-labelledby="ns-conste-tit" focusable="false">
+        <title id="ns-conste-tit">Constelación de ex miembros agrupados por institución actual</title>
+        <g class="ns-conste__lineas" fill="none">
+        {{- $a := $ang }}
+        {{- range $ordenInst }}
+          {{- $lista := index $insts . }}
+          {{- $span := mul (div (add (float (len $lista)) 1.4) $peso) (mul 2.0 math.Pi) }}
+          {{- $am := add $a (div $span 2.0) }}
+          {{- $hx := add $CX (mul $R1 (math.Cos $am)) }}{{ $hy := add $CY (mul $R1 (math.Sin $am)) }}
+          <line x1="{{ printf "%.1f" $CX }}" y1="{{ printf "%.1f" $CY }}" x2="{{ printf "%.1f" $hx }}" y2="{{ printf "%.1f" $hy }}"/>
+          {{- $n := len $lista }}
+          {{- $paso := div $span (add (float $n) 1.0) }}
+          {{- range $i, $p := $lista }}
+            {{- $ap := add $a (mul $paso (add (float $i) 1.0)) }}
+            {{- $px := add $CX (mul $R2 (math.Cos $ap)) }}{{ $py := add $CY (mul $R2 (math.Sin $ap)) }}
+            <line class="ns-conste__rama" x1="{{ printf "%.1f" $hx }}" y1="{{ printf "%.1f" $hy }}" x2="{{ printf "%.1f" $px }}" y2="{{ printf "%.1f" $py }}"/>
+          {{- end }}
+          {{- $a = add $a $span }}
+        {{- end }}
+        {{- /* franja "sin datos" */}}
+        {{- $span := mul (div $pesoSin $peso) (mul 2.0 math.Pi) }}
+        {{- $am := add $a (div $span 2.0) }}
+        {{- $hx := add $CX (mul $R1 (math.Cos $am)) }}{{ $hy := add $CY (mul $R1 (math.Sin $am)) }}
+        <line class="ns-conste__mudo" x1="{{ printf "%.1f" $CX }}" y1="{{ printf "%.1f" $CY }}" x2="{{ printf "%.1f" $hx }}" y2="{{ printf "%.1f" $hy }}"/>
+        {{- $paso := div $span (add (float (len $sin)) 1.0) }}
+        {{- range $i, $p := $sin }}
+          {{- $ap := add $a (mul $paso (add (float $i) 1.0)) }}
+          <line class="ns-conste__rama ns-conste__mudo" x1="{{ printf "%.1f" $hx }}" y1="{{ printf "%.1f" $hy }}" x2="{{ printf "%.1f" (add $CX (mul $R2 (math.Cos $ap))) }}" y2="{{ printf "%.1f" (add $CY (mul $R2 (math.Sin $ap))) }}"/>
+        {{- end }}
+        </g>
+
+        <g class="ns-conste__nodos">
+        {{- $a = $ang }}
+        {{- range $ordenInst }}
+          {{- $k := . }}
+          {{- $lista := index $insts . }}
+          {{- $span := mul (div (add (float (len $lista)) 1.4) $peso) (mul 2.0 math.Pi) }}
+          {{- $am := add $a (div $span 2.0) }}
+          {{- $hx := add $CX (mul $R1 (math.Cos $am)) }}{{ $hy := add $CY (mul $R1 (math.Sin $am)) }}
+          <circle class="ns-conste__hub" cx="{{ printf "%.1f" $hx }}" cy="{{ printf "%.1f" $hy }}" r="3"/>
+          {{- $grados := div (mul $am 180.0) math.Pi }}
+          {{- $volteado := and (gt $grados 90.0) (lt $grados 270.0) }}
+          <text class="ns-conste__rotulo" transform="rotate({{ printf "%.1f" $grados }} {{ printf "%.1f" $CX }} {{ printf "%.1f" $CY }}) translate({{ printf "%.1f" (add $CX $R3) }} {{ printf "%.1f" (add $CY 3.5) }}){{ if $volteado }} rotate(180 0 -3.5){{ end }}"{{ if $volteado }} text-anchor="end"{{ end }}>{{ $k }}</text>
+          {{- $n := len $lista }}
+          {{- $paso := div $span (add (float $n) 1.0) }}
+          {{- range $i, $p := $lista }}
+            {{- $ap := add $a (mul $paso (add (float $i) 1.0)) }}
+            {{- $px := add $CX (mul $R2 (math.Cos $ap)) }}{{ $py := add $CY (mul $R2 (math.Sin $ap)) }}
+            {{- $cs := partial "color.html" (dict "tipo" "sectores" "clave" ($p.sector | default "otro")) }}
+            <a href="#{{ printf "alumni-%s" ($p.nombre | anchorize) }}" class="ns-conste__enlace" data-nombres="{{ $p.nombre }}{{ with $p.hoy }} — {{ . }}{{ end }}" aria-label="{{ $p.nombre }}">
+              <circle class="ns-conste__nodo" cx="{{ printf "%.1f" $px }}" cy="{{ printf "%.1f" $py }}" r="5.5" fill="{{ $cs }}"/>
+            </a>
+          {{- end }}
+          {{- $a = add $a $span }}
+        {{- end }}
+        {{- $span := mul (div $pesoSin $peso) (mul 2.0 math.Pi) }}
+        {{- $am := add $a (div $span 2.0) }}
+        {{- $hx := add $CX (mul $R1 (math.Cos $am)) }}{{ $hy := add $CY (mul $R1 (math.Sin $am)) }}
+        <circle class="ns-conste__hub ns-conste__mudo" cx="{{ printf "%.1f" $hx }}" cy="{{ printf "%.1f" $hy }}" r="3"/>
+        {{- $grados := div (mul $am 180.0) math.Pi }}
+        {{- $volteado := and (gt $grados 90.0) (lt $grados 270.0) }}
+        <text class="ns-conste__rotulo ns-conste__mudo" transform="rotate({{ printf "%.1f" $grados }} {{ printf "%.1f" $CX }} {{ printf "%.1f" $CY }}) translate({{ printf "%.1f" (add $CX $R3) }} {{ printf "%.1f" (add $CY 3.5) }}){{ if $volteado }} rotate(180 0 -3.5){{ end }}"{{ if $volteado }} text-anchor="end"{{ end }}>Sin datos recientes</text>
+        {{- $paso := div $span (add (float (len $sin)) 1.0) }}
+        {{- range $i, $p := $sin }}
+          {{- $ap := add $a (mul $paso (add (float $i) 1.0)) }}
+          <a href="#ns-sin-datos" class="ns-conste__enlace" data-nombres="{{ $p.nombre }}" aria-label="{{ $p.nombre }}">
+            <circle class="ns-conste__nodo ns-conste__nodo--mudo" cx="{{ printf "%.1f" (add $CX (mul $R2 (math.Cos $ap))) }}" cy="{{ printf "%.1f" (add $CY (mul $R2 (math.Sin $ap))) }}" r="4.5"/>
+          </a>
+        {{- end }}
+        {{- /* centro */}}
+        <circle class="ns-conste__centro" cx="{{ printf "%.1f" $CX }}" cy="{{ printf "%.1f" $CY }}" r="7"/>
+        <text class="ns-conste__centro-txt" x="{{ printf "%.1f" $CX }}" y="{{ printf "%.1f" (add $CY 26.0) }}" text-anchor="middle">Neurosistemas</text>
+        </g>
+      </svg>
+      <div class="ns-tooltip" id="ns-tooltip-conste" role="status" aria-live="polite" hidden></div>
+      <figcaption class="ns-conste__leyenda">
+        {{- $sect := dict "academia" "Academia" "clinica" "Clínica y hospitales" "gobierno" "Agencias públicas" "industria" "Industria" "otro" "Independientes" }}
+        {{- $usados := slice }}{{ range $con }}{{ $s := .sector | default "otro" }}{{ if not (in $usados $s) }}{{ $usados = $usados | append $s }}{{ end }}{{ end }}
+        {{- range $usados }}<span class="ns-leyenda__item"><i style="background:{{ partial "color.html" (dict "tipo" "sectores" "clave" .) }}"></i>{{ index $sect . | default . }}</span>{{ end }}
+        {{- with $sin }}<span class="ns-leyenda__item"><i class="ns-leyenda__mudo"></i>Sin datos recientes</span>{{ end }}
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+{{ partial "eeg.html" . }}
+
+{{- /* ============================================================
+       3. TARJETAS — uno a uno
+     ============================================================ */}}
+<section class="ns-seccion" style="--ns-acento:{{ $col }}" id="ns-uno-a-uno">
+  <div class="ns-wrap">
+    <p class="ns-rotulo">Uno a uno</p>
+    <h2 class="ns-alumni-h2">Qué hacen hoy</h2>
+
+    <div class="ns-pub-barra ns-alumni-barra">
+      <input type="search" id="ns-buscar-alumni" placeholder="Buscar por nombre, institución o ciudad…" aria-label="Buscar ex miembros">
+      <div class="ns-filtros" role="group" aria-label="Filtrar por sector">
+        <button type="button" class="ns-filtro is-activo" data-sector="">Todos</button>
+        {{- range $usados }}<button type="button" class="ns-filtro" data-sector="{{ . }}" style="--ns-acento:{{ partial "color.html" (dict "tipo" "sectores" "clave" .) }}">{{ index $sect . | default . }}</button>{{ end }}
+      </div>
+      <span class="ns-pub-barra__meta" id="ns-contador-alumni">{{ len $con }} personas</span>
+      <button type="button" class="ns-filtro ns-filtro--limpiar" id="ns-limpiar-alumni" hidden>Quitar filtro ×</button>
     </div>
 
-    {{- $col := partial "color.html" (dict "tipo" "secciones" "clave" "ex-miembros") }}
-    <div class="ns-alumni" style="--ns-acento:{{ $col }}">
-      {{- range hugo.Data.exmiembros }}
-      <article class="ns-alumno">
-        <div class="ns-alumno__ini" aria-hidden="true">{{ partial "iniciales.html" .nombre }}</div>
-        <div>
-          <h3 class="ns-alumno__nombre">{{ .nombre }}</h3>
-          {{- with .afiliacion }}<p class="ns-alumno__afil">{{ . | safeHTML }}</p>{{ end }}
-          {{- with .email }}<p class="ns-alumno__afil ns-alumno__mail"><a href="mailto:{{ . }}">{{ . }}</a></p>{{ end }}
+    <div class="ns-alumni ns-alumni--tarjetas">
+      {{- range $con }}
+      {{- $cs := partial "color.html" (dict "tipo" "sectores" "clave" (.sector | default "otro")) }}
+      <article class="ns-alumno ns-alumno--tarjeta" id="{{ printf "alumni-%s" (.nombre | anchorize) }}" style="--ns-acento:{{ $cs }}"
+        data-sector="{{ .sector | default "otro" }}" data-ciudad="{{ .ciudad }}" data-pais="{{ .pais }}" data-inst="{{ .institucion_corta }}">
+        <div class="ns-alumno__cab">
+          <div class="ns-alumno__ini" aria-hidden="true">{{ partial "iniciales.html" (replaceRE `^(?:(?:Dra?\.|M\.Sc\.|Ps\.|\(c\))\s*)+` "" .nombre) }}</div>
+          <div>
+            <h3 class="ns-alumno__nombre">{{ .nombre }}</h3>
+            {{- with .rol_lab }}<p class="ns-alumno__rol">{{ . }} en el laboratorio</p>{{ end }}
+          </div>
+        </div>
+        {{- with .hoy }}
+        <p class="ns-alumno__hoy"><span class="ns-alumno__et">Hoy</span>{{ . }}</p>
+        {{- end }}
+        {{- $lugar := slice }}{{ with .institucion }}{{ $lugar = $lugar | append . }}{{ end }}{{ with .ciudad }}{{ $lugar = $lugar | append . }}{{ end }}{{ with .pais }}{{ if ne . "Chile" }}{{ $lugar = $lugar | append . }}{{ end }}{{ end }}
+        {{- with $lugar }}<p class="ns-alumno__afil">{{ delimit . " · " }}</p>{{ end }}
+        {{- with .hito }}<p class="ns-alumno__hito">{{ . }}</p>{{ end }}
+        {{- with .formacion }}<p class="ns-alumno__afil">{{ . | safeHTML }}</p>{{ end }}
+        <div class="ns-alumno__links">
+          {{- with .orcid }}<a class="ns-chip ns-chip--orcid" href="https://orcid.org/{{ . }}" target="_blank" rel="noopener">ORCID</a>{{ end }}
+          {{- with .scholar }}<a class="ns-chip" href="{{ . }}" target="_blank" rel="noopener">Scholar</a>{{ end }}
+          {{- with .linkedin }}<a class="ns-chip" href="{{ . }}" target="_blank" rel="noopener">LinkedIn</a>{{ end }}
+          {{- with .web }}<a class="ns-chip" href="{{ . }}" target="_blank" rel="noopener">Web</a>{{ end }}
+          {{- with .email }}<a class="ns-chip" href="mailto:{{ . }}">Correo</a>{{ end }}
         </div>
       </article>
       {{- end }}
@@ -27,25 +274,112 @@
   </div>
 </section>
 
+{{- with $sin }}
+{{ partial "eeg.html" $ }}
+<section class="ns-seccion" style="--ns-acento:{{ $col }}" id="ns-sin-datos">
+  <div class="ns-wrap">
+    <p class="ns-rotulo">También pasaron por el laboratorio</p>
+    <p class="ns-bajada">De estas personas no tenemos noticias recientes. Si eres una de ellas, o sabes qué ha sido de alguien, <a href="{{ "contacto/" | relURL }}">escríbenos</a> y actualizamos su ficha.</p>
+    <div class="ns-alumni ns-alumni--compactos">
+      {{- range . }}
+      <article class="ns-alumno ns-alumno--mudo">
+        <div class="ns-alumno__ini" aria-hidden="true">{{ partial "iniciales.html" (replaceRE `^(?:(?:Dra?\.|M\.Sc\.|Ps\.|\(c\))\s*)+` "" .nombre) }}</div>
+        <div>
+          <h3 class="ns-alumno__nombre">{{ .nombre }}</h3>
+          {{- with .rol_lab }}<p class="ns-alumno__rol">{{ . }} en el laboratorio</p>{{ end }}
+          {{- with .formacion }}<p class="ns-alumno__afil">{{ . | safeHTML }}</p>{{ end }}
+          {{- with .hito }}<p class="ns-alumno__afil">{{ . }}</p>{{ end }}
+          {{- with .email }}<p class="ns-alumno__afil ns-alumno__mail"><a href="mailto:{{ . }}">{{ . }}</a></p>{{ end }}
+        </div>
+      </article>
+      {{- end }}
+    </div>
+    <p class="ns-nota-pie">Trayectorias revisadas en septiembre de 2026 a partir de fuentes públicas (páginas institucionales, ANID, ORCID, publicaciones). Si algún dato está desactualizado, avísanos.</p>
+  </div>
+</section>
+{{- end }}
+
 <script>
 (function(){
+  /* ---- Tooltips (mapa y constelación) ---- */
+  function tooltip(fig, tipId){
+    var tip = document.getElementById(tipId); if(!fig || !tip) return;
+    var actual = null;
+    function mostrar(el, ev){
+      var txt = el.getAttribute('data-nombres'); if(!txt) return;
+      var n = el.getAttribute('data-n');
+      tip.innerHTML = '';
+      if(n){ var t = document.createElement('b'); t.textContent = el.getAttribute('data-ciudad') + ' · ' + n + (n === '1' ? ' persona' : ' personas'); tip.appendChild(t); }
+      txt.split(' · ').forEach(function(s){ var d = document.createElement('span'); d.textContent = s; tip.appendChild(d); });
+      tip.hidden = false; actual = el;
+      mover(ev);
+    }
+    function mover(ev){
+      if(tip.hidden) return;
+      var r = fig.getBoundingClientRect();
+      var x = (ev && ev.clientX != null ? ev.clientX : r.left + r.width/2) - r.left;
+      var y = (ev && ev.clientY != null ? ev.clientY : r.top + r.height/2) - r.top;
+      var w = tip.offsetWidth, ancho = r.width;
+      tip.style.left = Math.max(8, Math.min(x + 14, ancho - w - 8)) + 'px';
+      tip.style.top  = (y + 18) + 'px';
+    }
+    function ocultar(){ tip.hidden = true; actual = null; }
+    fig.addEventListener('mouseover', function(ev){ var el = ev.target.closest('[data-nombres]'); if(el && el !== actual) mostrar(el, ev); });
+    fig.addEventListener('mousemove', mover);
+    fig.addEventListener('mouseout', function(ev){ var el = ev.target.closest('[data-nombres]'); if(el && !el.contains(ev.relatedTarget)) ocultar(); });
+    fig.addEventListener('focusin', function(ev){ var el = ev.target.closest('[data-nombres]'); if(el){ var b = el.getBoundingClientRect(); mostrar(el, {clientX:b.left + b.width/2, clientY:b.top + b.height/2}); } });
+    fig.addEventListener('focusout', ocultar);
+  }
+  tooltip(document.getElementById('ns-mapa'), 'ns-tooltip');
+  tooltip(document.getElementById('ns-conste'), 'ns-tooltip-conste');
+
+  /* ---- Dibujo de los arcos al entrar en pantalla (una sola vez) ---- */
+  var mapa = document.getElementById('ns-mapa');
+  if(mapa && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ mapa.classList.add('is-visible'); io.disconnect(); } }); }, {threshold:.25});
+    io.observe(mapa);
+  } else if(mapa){ mapa.classList.add('is-visible'); }
+
+  /* ---- Buscador y filtros de las tarjetas ---- */
   var caja = document.getElementById('ns-buscar-alumni');
-  if(!caja) return;
-  var items = Array.prototype.slice.call(document.querySelectorAll('.ns-alumno'));
+  var items = Array.prototype.slice.call(document.querySelectorAll('.ns-alumno--tarjeta'));
   var contador = document.getElementById('ns-contador-alumni');
   var vacio = document.getElementById('ns-vacio-alumni');
-  function norm(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  var limpiar = document.getElementById('ns-limpiar-alumni');
+  var botones = Array.prototype.slice.call(document.querySelectorAll('.ns-filtro[data-sector]'));
+  var sector = '', ciudad = '';
+  function norm(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
   var idx = items.map(function(el){ return norm(el.textContent); });
-  caja.addEventListener('input', function(){
-    var q = norm(caja.value).trim(), n = 0;
+  function aplicar(){
+    var q = norm(caja ? caja.value : '').trim(), n = 0;
     items.forEach(function(el,i){
-      var ok = !q || idx[i].indexOf(q) !== -1;
-      el.style.display = ok ? '' : 'none';
-      if(ok) n++;
+      var ok = (!q || idx[i].indexOf(q) !== -1)
+            && (!sector || el.getAttribute('data-sector') === sector)
+            && (!ciudad || el.getAttribute('data-ciudad') === ciudad);
+      el.hidden = !ok; if(ok) n++;
     });
-    if(contador) contador.textContent = n + ' personas';
+    if(contador) contador.textContent = n + (n === 1 ? ' persona' : ' personas') + (ciudad ? ' en ' + ciudad : '');
     if(vacio) vacio.hidden = n !== 0;
+    if(limpiar) limpiar.hidden = !ciudad;
+  }
+  if(caja) caja.addEventListener('input', aplicar);
+  botones.forEach(function(b){ b.addEventListener('click', function(){
+    sector = b.getAttribute('data-sector') || '';
+    botones.forEach(function(x){ x.classList.toggle('is-activo', x === b); });
+    aplicar();
+  }); });
+  function filtrarCiudad(c){
+    ciudad = c || '';
+    document.querySelectorAll('.ns-mapa__ciudad, .ns-mapa__item').forEach(function(el){ el.classList.toggle('is-activo', !!ciudad && el.getAttribute('data-ciudad') === ciudad); });
+    aplicar();
+    var dest = document.getElementById('ns-uno-a-uno');
+    if(ciudad && dest) dest.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  document.querySelectorAll('.ns-mapa__ciudad, .ns-mapa__item').forEach(function(el){
+    el.addEventListener('click', function(){ var c = el.getAttribute('data-ciudad'); filtrarCiudad(c === ciudad ? '' : c); });
+    el.addEventListener('keydown', function(ev){ if(ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); el.click(); } });
   });
+  if(limpiar) limpiar.addEventListener('click', function(){ filtrarCiudad(''); });
 })();
 </script>
 {{ end }}

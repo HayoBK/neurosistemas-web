@@ -1,221 +1,712 @@
 # ============================================================
-# Ex miembros del laboratorio (alumni)
+# Ex miembros del laboratorio (alumni) — editable desde Pages CMS
+#
+# Cada persona es una entrada. TODOS los campos salvo 'nombre' son
+# opcionales: la plantilla tolera vacíos.
+#
+#   nombre             Como se muestra.
+#   orcid / email      Opcionales.
+#   rol_lab            Qué fue en el lab: Doctorado, Magíster, Postdoctorado,
+#                      Pregrado, Investigador/a, Técnico...
+#   hoy                Cargo actual, en una frase.
+#   institucion        Nombre completo de la institución actual.
+#   institucion_corta  Nombre corto: es la llave con que la constelación
+#                      agrupa a la gente (usa exactamente el mismo texto
+#                      para la misma institución).
+#   ciudad / pais      La ciudad debe existir en data/ciudades.yaml para
+#                      aparecer en el mapa.
+#   sector             academia | clinica | industria | gobierno | otro
+#   hito               Un logro en una frase (opcional).
+#   web / scholar / linkedin   Enlaces (opcionales).
+#   formacion          Texto libre con estudios (solo si no hay 'hoy').
+#   confianza          alta | media | sin-datos. Con 'sin-datos' la persona
+#                      va a la franja "También pasaron por el laboratorio".
+#
+# Última revisión de trayectorias: septiembre de 2026.
 # ============================================================
 - nombre: Dr. Simón San Martín R.
   orcid: "0009-0001-2424-091X"
-  afiliacion: Fonoaudiólogo. Magíster en Neurociencia y Doctor en Ciencias Biomédicas, Universidad
-    de Chile. Neurociencia del sistema auditivo, neurodegeneración y neurorrehabilitación.
   email: simonsnm@ug.uchile.cl
+  rol_lab: Doctorado
+  hoy: Investigador en neurociencia auditiva, Laboratorio de Paul Délano
+  institucion: Departamento de Neurociencia, Facultad de Medicina, Universidad de Chile
+  institucion_corta: U. de Chile
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: Coautor en Alzheimer’s & Dementia y Scientific Reports (2024–2026) sobre audición, tinnitus y
+    deterioro cognitivo.
+  web: https://www.researchgate.net/profile/Simon-San-Martin-3
+  confianza: media
 - nombre: Dr. Rómulo Fuentes
   orcid: "0000-0002-6282-7287"
-  afiliacion: Profesor, Departamento de Neurociencia, Facultad de Medicina, Universidad de Chile.
   email: romulo@u.uchile.cl
+  rol_lab: Doctorado
+  hoy: Director de Investigación de la Universidad de Chile (VID) y Profesor Asociado del Departamento
+    de Neurociencia
+  institucion: Universidad de Chile
+  institucion_corta: U. de Chile
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: Asumió en 2025 la Dirección de Investigación de toda la Universidad; antes dirigió la investigación
+    de la Facultad de Medicina.
+  web: https://uchile.cl/noticias/226179/romulo-fuentes-asume-como-nuevo-director-de-investigacion-uchile
+  scholar: https://scholar.google.com/citations?user=uZu1O1cAAAAJ
+  linkedin: https://www.linkedin.com/in/romulo-fuentes-flores-831291202/
+  confianza: alta
 - nombre: Dr. Paul Délano
   orcid: "0000-0003-2588-4757"
-  afiliacion: Departamento de Otorrinolaringología, Hospital Clínico Universidad de Chile. Departamento
-    de Neurociencia, Facultad de Medicina, Universidad de Chile.
   email: phdelano@gmail.com
+  rol_lab: Doctorado
+  hoy: Director Académico del Hospital Clínico de la Universidad de Chile; otorrinolaringólogo y profesor
+    del Departamento de Neurociencia
+  institucion: Hospital Clínico y Facultad de Medicina, Universidad de Chile
+  institucion_corta: U. de Chile
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: Premio de Investigación Médica de la Academia Chilena de Medicina 2023.
+  web: https://redclinica.cl/institucional/noticias-c/newsid/2660.aspx
+  confianza: alta
 - nombre: Dr. José Luis Valdés
   orcid: "0000-0002-9178-2743"
-  afiliacion: Programa de Fisiología y Biofísica, Instituto de Ciencias Biomédicas, Facultad de Medicina,
-    Universidad de Chile.
   email: jvaldegu@gmail.com
+  rol_lab: Doctorado
+  hoy: Profesor Asistente, Departamento de Neurociencia
+  institucion: Facultad de Medicina, Universidad de Chile
+  institucion_corta: U. de Chile
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: Coordina la red latinoamericana Neurosur; estudia la navegación espacial como marcador temprano
+    de deterioro cognitivo.
+  web: https://deptoneuro.med.uchile.cl/academico/jose-luis-valdes-guerrero/
+  scholar: https://scholar.google.com/citations?user=85Ubr4wAAAAJ
+  confianza: alta
 - nombre: Dr. Fabián Muñoz
-  afiliacion: Rutgers University, Nueva Jersey, EE.UU.
   email: vanfallen@gmail.com
+  rol_lab: ''
+  hoy: Research Associate, Departamento de Neurociencia (Laboratorio de Vincent Ferrera)
+  institucion: Columbia University, Zuckerman Institute
+  institucion_corta: Columbia
+  ciudad: Nueva York
+  pais: Estados Unidos
+  sector: academia
+  hito: Coautor en Science Advances (2026) sobre ultrasonido focalizado en primates.
+  web: https://www.researchgate.net/profile/Fabian-Munoz-4
+  scholar: https://scholar.google.com/citations?user=oxkrrXMAAAAJ
+  confianza: media
 - nombre: Dr. Hachi Manzur
-  afiliacion: Docente clínico, Departamento de Neurociencia, Universidad de Chile.
   email: hemanzur@gmail.com
+  rol_lab: Magíster
+  hoy: Neurólogo del Hospital Clínico y académico del Departamento de Neurociencia
+  institucion: Universidad de Chile
+  institucion_corta: U. de Chile
+  ciudad: Santiago
+  pais: Chile
+  sector: clinica
+  hito: Fellows Award for Research Excellence (NIH, 2016); desarrolla tecnología portátil de bajo costo
+    para rehabilitación.
+  web: https://investigadores.anid.cl/es/public_search/researcher?id=40247
+  confianza: alta
 - nombre: Dr. Marcelo Aguilar
-  afiliacion: Facultad de Ciencias Biológicas, Pontificia Universidad Católica de Chile.
   email: miaguil1@uc.cl
+  rol_lab: Doctorado
+  hoy: Associate Project Scientist, Laboratorio de Andrea Chiba
+  institucion: University of California San Diego
+  institucion_corta: UC San Diego
+  ciudad: San Diego
+  pais: Estados Unidos
+  sector: academia
+  hito: 'Publica como Marcelo Aguilar-Rivera: electrofisiología conductual y bioinstrumentación inalámbrica
+    en roedores.'
+  web: https://www.researchgate.net/profile/Marcelo-Aguilar-Rivera
+  linkedin: https://www.linkedin.com/in/marcelo-aguilar-rivera/
+  confianza: media
 - nombre: Dr. Francisco Flores
-  afiliacion: Neuroscience and Statistical Research Laboratory, Department of Anesthesia, Critical Care
-    and Pain Medicine, MGH. Harvard Medical School. Department of Brain and Cognitive Sciences, MIT.
   email: fjflores@mit.edu
+  rol_lab: Doctorado
+  hoy: Instructor in Anaesthesia (Harvard Medical School / MGH) y Research Scientist (Picower Institute,
+    MIT)
+  institucion: Massachusetts General Hospital · Harvard Medical School · MIT
+  institucion_corta: MGH / MIT
+  ciudad: Boston
+  pais: Estados Unidos
+  sector: academia
+  hito: Investiga los mecanismos de la inconsciencia anestésica en el laboratorio de Emery N. Brown.
+  web: https://sites.mit.edu/fjflores/about/
+  scholar: https://scholar.google.com/citations?user=XJmSRzYAAAAJ
+  confianza: alta
 - nombre: Dr. José Pablo Ossandón
-  afiliacion: Institut für Kognitionswissenschaft (AG Neurobiopsychologie), Universität Osnabrück, Alemania.
   email: jpossandon@gmail.com
+  rol_lab: Magíster
+  hoy: Investigador postdoctoral, Psicología Biológica y Neuropsicología (grupo de Brigitte Röder)
+  institucion: Universität Hamburg
+  institucion_corta: U. Hamburg
+  ciudad: Hamburgo
+  pais: Alemania
+  sector: academia
+  hito: Primer autor en Cortex (2025) sobre plasticidad visual tras revertir ceguera congénita.
+  web: https://www.psy.uni-hamburg.de/en/arbeitsbereiche/biologische-psychologie-und-neuropsychologie/personen/ossandon-jose.html
+  scholar: https://scholar.google.com/citations?user=OGyAEm0AAAAJ
+  confianza: alta
 - nombre: Dr. Jonathan Wimmer del Solar
-  afiliacion: Doctor en Ciencias Biomédicas, Universidad de Chile.
   email: jonchile2@gmail.com
+  rol_lab: Doctorado
+  hoy: Neurólogo, Hospital El Carmen de Maipú; coordinador académico del Diplomado en Neurociencias de
+    la USACH
+  institucion: Hospital El Carmen · Universidad de Santiago de Chile
+  institucion_corta: USACH
+  ciudad: Santiago
+  pais: Chile
+  sector: clinica
+  hito: Se doctoró en el laboratorio en 2016; hoy forma neurocientíficos en la USACH.
+  web: https://www.researchgate.net/profile/Jonathan-Wimmer-Del-Solar
+  confianza: alta
 - nombre: Dra. Andrea Helo Herrera
-  afiliacion: Profesora Asociada, Departamento de Fonoaudiología, Universidad de Chile. Laboratoire Psychologie
-    de la Perception, Université Paris Descartes, Francia.
   email: andreahelo@gmail.com
+  rol_lab: Magíster
+  hoy: Profesora Asociada, Departamentos de Fonoaudiología y de Neurociencia; Editora en Jefe de la Revista
+    Chilena de Fonoaudiología
+  institucion: Facultad de Medicina, Universidad de Chile
+  institucion_corta: U. de Chile
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: Doctora en Neurociencia Cognitiva (Paris Descartes); estudia el desarrollo del lenguaje con eye-tracking
+    y EEG.
+  web: https://deptofonoaudiologia.med.uchile.cl/profesores/andrea-helo-herrera/
+  confianza: alta
 - nombre: M.Sc. Dr. Claudio Fullerton
-  afiliacion: Facultad de Medicina, Universidad de Chile.
   email: claudiofullerton@gmail.com
+  rol_lab: Magíster
+  hoy: Profesor Asistente de Psiquiatría y psiquiatra clínico
+  institucion: Universidad de los Andes · Clínica Universidad de los Andes
+  institucion_corta: U. de los Andes
+  ciudad: Santiago
+  pais: Chile
+  sector: clinica
+  web: https://www.uandes.cl/personas/claudio-daniel-fullerton-ugalde/
+  confianza: alta
 - nombre: M.Sc. (c) Cristián Arellano
-  afiliacion: Facultad de Medicina, Pontificia Universidad Católica de Chile.
   email: crisbua@yahoo.com
-- nombre: M.Sc. Ps. Alejandra Vásquez
-  afiliacion: Escuela de Psicología, Facultad de Ciencias Sociales, Pontificia Universidad Católica de
-    Chile.
+  rol_lab: Magíster
+  confianza: sin-datos
+  formacion: Facultad de Medicina, Pontificia Universidad Católica de Chile.
+- nombre: Dra. Alejandra Vásquez Rosati
   email: alejandravasquezrosati@gmail.com
+  rol_lab: Magíster
+  hoy: Investigadora postdoctoral (Universidad Austral de Chile) y profesora de Psicología (Universidad
+    Adolfo Ibáñez)
+  institucion: Universidad Austral de Chile · Universidad Adolfo Ibáñez
+  institucion_corta: U. Austral
+  ciudad: Valdivia
+  pais: Chile
+  sector: academia
+  hito: Doctora en Psicología; investiga neurofenomenología y prácticas contemplativas en movimiento.
+  web: https://www.uai.cl/profesores/psicologia/alejandra-vasquez-rosati
+  scholar: https://scholar.google.com/citations?user=0y56KTUAAAAJ
+  confianza: alta
 - nombre: M.Sc. Karina Venegas
-  afiliacion: Escuela de Kinesiología, Universidad de Los Lagos.
   email: polinkai@yahoo.com.ar
-- nombre: M.Sc. Fernando Ramírez
-  afiliacion: Humboldt Universität, Berlín, Alemania.
+  rol_lab: Magíster
+  confianza: sin-datos
+  formacion: Escuela de Kinesiología, Universidad de Los Lagos.
+- nombre: Dr. Fernando Ramírez
   email: toporam@yahoo.com
-- nombre: M.Sc. Joel Álvarez
-  afiliacion: Escuela de Psicología, Facultad de Ciencias Sociales, Pontificia Universidad Católica de
-    Chile. Universidad Metropolitana de Ciencias de la Educación.
+  rol_lab: Magíster
+  hoy: Investigador postdoctoral, Section on Functional Imaging Methods
+  institucion: National Institute of Mental Health (NIH)
+  institucion_corta: NIMH / NIH
+  ciudad: Bethesda
+  pais: Estados Unidos
+  sector: gobierno
+  hito: Doctor en Psicología (Humboldt-Universität zu Berlin); primer autor en Journal of Neuroscience
+    (2024).
+  web: https://fim.nimh.nih.gov/members/ramirez/
+  confianza: media
+- nombre: Dr. Joel Álvarez Ruf
   email: jalvarezruf@yahoo.com
+  rol_lab: Magíster
+  hoy: Profesor Asociado y Coordinador de Postítulo y Postgrado, Departamento de Kinesiología
+  institucion: Universidad Metropolitana de Ciencias de la Educación (UMCE)
+  institucion_corta: UMCE
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: Doctor en Psicología; electromiografía de superficie y control motor.
+  web: https://loop.frontiersin.org/people/829436/overview
+  scholar: https://scholar.google.com/citations?user=vmTRbVsAAAAJ
+  linkedin: https://www.linkedin.com/in/joel-alvarez-ruf-797ba542/
+  confianza: alta
 - nombre: Dr. Pablo Burgos
-  afiliacion: Profesor Asociado, Departamento de Kinesiología, Universidad de Chile.
   email: pablo.i.burgos@gmail.com
+  rol_lab: Doctorado
+  hoy: Profesor Asociado, Departamentos de Kinesiología y de Neurociencia
+  institucion: Facultad de Medicina, Universidad de Chile
+  institucion_corta: U. de Chile
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: Fondecyt de Iniciación 2018 en rehabilitación temprana post-ACV; sigue publicando con el laboratorio
+    (2025).
+  web: https://investigadores.anid.cl/es/public_search/researcher?id=18629
+  confianza: alta
 - nombre: M.Sc. Susana Brugues S.
-  afiliacion: ''
   email: susibrugues@gmail.com
+  rol_lab: Magíster
+  hoy: Technical Staff, Swartz Center for Computational Neuroscience
+  institucion: University of California San Diego
+  institucion_corta: UC San Diego
+  ciudad: San Diego
+  pais: Estados Unidos
+  sector: academia
+  hito: En el centro donde se desarrolla EEGLAB.
+  web: https://sccn.ucsd.edu/people/
+  confianza: media
 - nombre: Dr. Enzo Brunetti F.
-  afiliacion: Neurólogo, Hospital Clínico de la Universidad de Chile, 2017.
   email: enzo.brunetti@gmail.com
+  rol_lab: Doctorado
+  hoy: Neurólogo especialista en epilepsia y EEG, Instituto de Neurocirugía Dr. Asenjo; Profesor Asistente
+  institucion: Instituto de Neurocirugía Dr. Alfonso Asenjo · Universidad de Chile
+  institucion_corta: Inst. Neurocirugía Asenjo
+  ciudad: Santiago
+  pais: Chile
+  sector: clinica
+  web: https://investigadores.anid.cl/es/public_search/researcher?id=7297
+  linkedin: https://www.linkedin.com/in/enzo-brunetti-7696272a/
+  confianza: alta
 - nombre: Dr. Carlos Ibáñez P.
-  afiliacion: Profesor, Departamento de Psiquiatría, Facultad de Medicina, Universidad de Chile.
   email: sanbolaren@gmail.com
+  rol_lab: Doctorado
+  hoy: Director de la Clínica Psiquiátrica Universitaria; profesor del Departamento de Psiquiatría y jefe
+    de la Unidad de Adicciones
+  institucion: Facultad de Medicina, Universidad de Chile
+  institucion_corta: U. de Chile
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: Asumió la dirección de la Clínica Psiquiátrica Universitaria en agosto de 2025; asesor en políticas
+    públicas de drogas.
+  web: https://portafolio-academico.uchile.cl/perfil/50485
+  scholar: https://scholar.google.com/citations?user=KqG5bLIAAAAJ
+  linkedin: https://www.linkedin.com/in/carlos-ib%C3%A1%C3%B1ez-45090532/
+  confianza: alta
 - nombre: Dra. Carolina Astudillo Valenzuela
-  afiliacion: Profesora, Escuela de Kinesiología, Pontificia Universidad Católica de Chile.
   email: caro.isabel@gmail.com
+  rol_lab: Doctorado
+  hoy: Profesora Asistente y Coordinadora de Asuntos Estudiantiles, Kinesiología UC
+  institucion: Pontificia Universidad Católica de Chile
+  institucion_corta: PUC
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: Neurorrehabilitación y neurociencia del envejecimiento; divulgadora científica.
+  web: https://kinesiologia.uc.cl/persona/klga-carolina-astudillo-valenzuela-m-sc-ph-d/
+  linkedin: https://www.linkedin.com/in/carolina-astudillo-valenzuela/
+  confianza: alta
 - nombre: Dr. Gonzalo Rivera Lillo
   orcid: "0000-0002-8157-4086"
-  afiliacion: Profesor Asociado, Departamento de Kinesiología, Universidad de Chile.
   email: gonzaloriveralillo@gmail.com
-- nombre: Dr. Gonzalo Varas
-  afiliacion: ''
+  rol_lab: Doctorado
+  hoy: Profesor Asociado, Departamentos de Kinesiología y de Neurociencia
+  institucion: Facultad de Medicina, Universidad de Chile
+  institucion_corta: U. de Chile
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: Postdoctorado en Cambridge; dirige proyectos ANID/FONDEF sobre trastornos de conciencia y TEC.
+  web: https://deptoneuro.med.uchile.cl/academico/gonzalo-bernardo-rivera-lillo/
+  scholar: https://scholar.google.com/citations?user=ge1-FmEAAAAJ
+  linkedin: https://www.linkedin.com/in/gonzalo-rivera-89a2401a3/
+  confianza: alta
+- nombre: Dr. Gonzalo Varas Díaz
   email: gonzalovaras1983@gmail.com
+  rol_lab: Magíster
+  hoy: Profesor Asistente, Carrera de Kinesiología
+  institucion: Pontificia Universidad Católica de Chile
+  institucion_corta: PUC
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: Ph.D. en Ciencias de la Rehabilitación; balance reactivo y rehabilitación de ACV guiada por smartphone.
+  web: https://kinesiologia.uc.cl/persona/gonzalo-varas-diaz-ph-d/
+  linkedin: https://www.linkedin.com/in/gonzalo-varas-b359657b/
+  confianza: alta
 - nombre: Tatiana Alarcón G.
-  afiliacion: ''
   email: tatiana.alarcong@gmail.com
+  rol_lab: ''
+  confianza: sin-datos
 - nombre: Dra. Consuelo San Martín
-  afiliacion: Doctora en Psicología, Universidad de Chile. Psicóloga, Universidad Diego Portales.
   email: mariaconsuelo.sm@gmail.com
-- nombre: Dra. (c) Ana Campos Espinoza
-  afiliacion: M.Sc. en Neurociencia, U. de Chile (2015). MSc in Language Development, University College
-    London (2017). PhD(c) in Speech, Hearing & Phonetic Sciences, UCL. Fonoaudióloga, Universidad de Chile
-    (2010).
+  rol_lab: Magíster
+  hoy: Profesora Asistente, Escuela de Psicología
+  institucion: Universidad de los Andes
+  institucion_corta: U. de los Andes
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: Investiga aprendizaje asociativo, miedo y regulación emocional con potenciales evocados.
+  web: https://investigadores.uandes.cl/en/persons/mar%C3%ADa-consuelo-san-mart%C3%ADn-miranda
+  confianza: alta
+- nombre: Dra. Ana Campos Espinoza
   email: ana_campos@hotmail.com
+  rol_lab: Magíster
+  hoy: Lecturer en Audiología y Research Fellow, UCL Ear Institute
+  institucion: University College London
+  institucion_corta: UCL
+  ciudad: Londres
+  pais: Reino Unido
+  sector: academia
+  hito: Doctora por UCL (2023) con una tesis sobre dinámica cortical y percepción del habla en la primera
+    infancia.
+  web: https://profiles.ucl.ac.uk/65423-ana-campos-espinoza
+  confianza: alta
 - nombre: Dr. Sergio Vicencio J.
-  afiliacion: Postdoctoral Fellow, Lauer Lab, Johns Hopkins University. Doctor en Ciencias Biomédicas,
-    Universidad de Chile.
   email: vicenciojimenez@gmail.com
-- nombre: Claudia Acevedo Echeverría
-  afiliacion: Estudiante de Magíster en Ciencias Biomédicas, mención Neurociencias. Médico Cirujano, USACH
-    (2004). Especialista en Psiquiatría de Adultos, Instituto Psiquiátrico José Horwitz Barak, CONACEM
-    (2011).
+  rol_lab: Doctorado
+  hoy: Research Associate, Lauer Lab, Center for Hearing and Balance
+  institucion: Johns Hopkins University School of Medicine
+  institucion_corta: Johns Hopkins
+  ciudad: Baltimore
+  pais: Estados Unidos
+  sector: academia
+  hito: 'Primer autor en Genes, Brain and Behavior (2026): sistema eferente auditivo y envejecimiento.'
+  web: https://pure.johnshopkins.edu/en/persons/sergio-vicencio-jimenez
+  scholar: https://scholar.google.com/citations?user=hxv2pFIAAAAJ
+  confianza: alta
+- nombre: Dra. Claudia Acevedo Echeverría
   email: claudia.acevedoe@gmail.com
-- nombre: Jonathan Cortés Silva
-  afiliacion: Psicólogo. Estudiante de doctorado, Department of Affective Neuroscience and Psychophysiology,
-    Georg-August-Universität Göttingen.
+  rol_lab: Magíster
+  hoy: Psiquiatra, jefatura de Psicooncología; docente de posgrado en la UDP
+  institucion: Instituto Nacional del Cáncer · Universidad Diego Portales
+  institucion_corta: Inst. Nacional del Cáncer
+  ciudad: Santiago
+  pais: Chile
+  sector: clinica
+  web: https://posgrados.udp.cl/academico/claudia-acevedo-echeverria/
+  linkedin: https://www.linkedin.com/in/claudia-acevedo-echeverria-3b088954/
+  confianza: media
+- nombre: Dr. Jonathan Cortés Silva
   email: psicologia.jonathancortes@gmail.com
-- nombre: Dr. Daniel Rojas L.
-  afiliacion: Profesor, Universidad Diego Portales.
+  rol_lab: Pregrado
+  hoy: Doctor en Neurociencia por la Universidad de Göttingen; consultor y divulgador en salud cerebral
+  institucion: Independiente
+  institucion_corta: Independientes
+  sector: otro
+  hito: Fundador de la iniciativa DDCI (Depression-Dementia-Century Initiative).
+  web: https://jonathan-cortes.com/
+  linkedin: https://www.linkedin.com/in/jonathan-cort%C3%A9s-silva/
+  confianza: media
+- nombre: Dr. Daniel Rojas Líbano
   email: dirl75@gmail.com
+  rol_lab: Postdoctorado
+  hoy: Académico de la Facultad de Psicología y Director del Diplomado en Neurociencia Humana y Neuropsicología
+  institucion: Universidad Diego Portales, CENHN
+  institucion_corta: UDP
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: Ph.D. en Neurobiología (University of Chicago); estudia el contexto de los procesos cognitivos
+    con EEG y pupilometría.
+  web: https://psicologia.udp.cl/?persona=daniel-rojas-libano
+  confianza: alta
 - nombre: Dr. Rodrigo Montefusco-Siegmund
-  afiliacion: Profesor, Universidad Austral de Chile.
   email: yoguito@gmail.com
-- nombre: M.Sc. Giuliana Bucci
-  afiliacion: Kinesióloga UDD. Magíster en Neurociencia (2015). Estudiante de doctorado en Psychological
-    and Brain Sciences, Johns Hopkins University.
+  rol_lab: Doctorado
+  hoy: Académico, Instituto de Ciencias del Movimiento y la Ocupación Humana
+  institucion: Universidad Austral de Chile
+  institucion_corta: U. Austral
+  ciudad: Valdivia
+  pais: Chile
+  sector: academia
+  hito: Realidad virtual y EEG para el aprendizaje espacial en adultos mayores; comité organizador de
+    la Reunión SChN 2025.
+  web: https://www.researchgate.net/profile/Rodrigo-Montefusco
+  confianza: alta
+- nombre: M.Sc. Giuliana Bucci-Mansilla
   email: giubucci@gmail.com
+  rol_lab: Magíster
+  hoy: Estudiante de doctorado, Psychological and Brain Sciences (laboratorio de Jason Fischer)
+  institucion: Johns Hopkins University
+  institucion_corta: Johns Hopkins
+  ciudad: Baltimore
+  pais: Estados Unidos
+  sector: academia
+  hito: Percepción visual y física intuitiva; primera autora en Journal of Vision (2024).
+  web: https://doi.org/10.1167/jov.24.10.977
+  confianza: media
 - nombre: Joaquín Bou Terán
-  afiliacion: ''
-  email: ''
+  rol_lab: ''
+  confianza: sin-datos
 - nombre: Dr. Julio Torres E.
   orcid: "0000-0003-2645-9170"
-  afiliacion: Profesor, Departamento de Kinesiología, Universidad de Chile.
   email: juliotorrese@gmail.com
+  rol_lab: Doctorado
+  hoy: Profesor Asistente, Departamento de Kinesiología
+  institucion: Facultad de Medicina, Universidad de Chile
+  institucion_corta: U. de Chile
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: Atención visual y sistema motor; coordinador de investigación en Clínica Dávila.
+  web: https://investigadores.anid.cl/es/public_search/researcher?id=29478
+  linkedin: https://www.linkedin.com/in/julio-torres-phd-1321b2108/
+  confianza: media
 - nombre: Kristofher Muñoz
-  afiliacion: ''
   email: kristofher@outlook.com
-- nombre: Dr. Miguel Concha M.
-  afiliacion: Licenciado en Matemáticas, PUC. Psicólogo, PUC. Doctor en Ciencias Biomédicas (2019). Postdoctoral
-    Fellow, Bernstein Center for Computational Neuroscience, Humboldt-Universität zu Berlin.
+  rol_lab: Investigador
+  hito: Coautor en Neurocomputing (2015) sobre eye-tracking y pupilometría.
+  confianza: sin-datos
+- nombre: Dr. Miguel Concha Miranda
   email: miguelconcham@gmail.com
-- nombre: Nicolás Balmaceda Pascal
-  afiliacion: ''
+  rol_lab: Doctorado
+  hoy: Investigador postdoctoral, Bernstein Center for Computational Neuroscience (laboratorio de Michael
+    Brecht)
+  institucion: Humboldt-Universität zu Berlin
+  institucion_corta: HU Berlin
+  ciudad: Berlín
+  pais: Alemania
+  sector: academia
+  hito: Coautor de “Behavioral and neural correlates of hide-and-seek in rats” (Science, 2019).
+  web: https://loop.frontiersin.org/people/679102
+  scholar: https://scholar.google.com/citations?user=TfNvugIAAAAJ
+  linkedin: https://de.linkedin.com/in/miguel-concha-miranda-7676a684
+  confianza: alta
+- nombre: Dr. Nicolás Balmaceda Pascal
   email: nbalmaceda@ug.uchile.cl
+  rol_lab: Pregrado
+  hoy: Médico y científico de datos; Jefe de la Unidad de Estudios, Proyectos e Innovación
+  institucion: Hospital Dr. Luis Tisné Brousse
+  institucion_corta: Hospital Luis Tisné
+  ciudad: Santiago
+  pais: Chile
+  sector: clinica
+  hito: Magíster en Neurobiología (Columbia) y en Ciencia de Datos (PUC); aplica IA a la gestión hospitalaria.
+  web: https://www.researchgate.net/profile/Nicolas-Balmaceda-2
+  linkedin: https://www.linkedin.com/in/nicolas-balmaceda-pascal-243567369/
+  confianza: alta
 - nombre: Daniel Zenteno
-  afiliacion: Médico cirujano, Universidad de Chile.
   email: daniel.zenteno@ug.uchile.cl
+  rol_lab: Pregrado
+  confianza: sin-datos
+  formacion: Médico cirujano, Universidad de Chile.
 - nombre: Dr. (c) Joaquín Herrero Silva
-  afiliacion: Estudiante de Doctorado en Neurociencia, Pontificia Universidad Católica de Chile.
   email: jherrerosilva@gmail.com
-- nombre: Dr. Rodrigo Vergara O.
-  afiliacion: Profesor, Departamento de Kinesiología, UMCE.
+  rol_lab: Magíster
+  hoy: Académico y Encargado de la Mención Neurokinesiología, Escuela de Kinesiología
+  institucion: Universidad Finis Terrae
+  institucion_corta: U. Finis Terrae
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: Doctorado en Neurociencias (PUC); aprendizaje sensoriomotor y neurorrehabilitación.
+  web: https://finis.cl/experto/joaquin-herrero-silva/
+  linkedin: https://cl.linkedin.com/in/joaqu%C3%ADn-herrero-silva-32896a69
+  confianza: media
+- nombre: Dr. Rodrigo Vergara Ortúzar
   email: rodrigoc.vergara@gmail.com
+  rol_lab: Postdoctorado
+  hoy: Profesor Titular, Departamento de Kinesiología (UMCE); investigador de la Universidad San Sebastián
+    y del CENIA
+  institucion: UMCE · Universidad San Sebastián · CENIA
+  institucion_corta: UMCE
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: Investigador asociado del Centro Nacional de Inteligencia Artificial; Staff Scientist del BNI.
+  web: https://investigadores.anid.cl/es/public_search/researcher?id=20682
+  linkedin: https://cl.linkedin.com/in/rodrigo-vergara-ort%C3%BAzar-153b8253
+  confianza: alta
 - nombre: Dr. Juan José Marimán
-  afiliacion: Profesor, Departamento de Kinesiología, UMCE.
   email: jjmariman@gmail.com
-- nombre: Dra. Rocío Mayol T.
-  afiliacion: ''
+  rol_lab: Doctorado
+  hoy: Profesor Titular, Departamento de Kinesiología
+  institucion: Universidad Metropolitana de Ciencias de la Educación (UMCE)
+  institucion_corta: UMCE
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: Neuromodulación cerebelar y aprendizaje motor; autor senior en European Journal of Neuroscience
+    (2025).
+  web: https://www.researchgate.net/profile/Juan-Mariman
+  linkedin: https://www.linkedin.com/in/juanjosemariman/
+  confianza: alta
+- nombre: Dra. Rocío Mayol Troncoso
   email: rociomayolt@gmail.com
+  rol_lab: Doctorado
+  hoy: Académica de la Facultad de Psicología (UAH), Directora del Postítulo en Neuropsicología Clínica;
+    Profesora Asistente de Psiquiatría (U. de Chile)
+  institucion: Universidad Alberto Hurtado · Universidad de Chile
+  institucion_corta: U. Alberto Hurtado
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: Premio 100 Mujeres Líderes 2022; integra el consorcio internacional AMP SCZ sobre detección temprana
+    de psicosis.
+  web: https://psicologia.uahurtado.cl/academico/rocio-mayol/
+  confianza: alta
 - nombre: Dr. Roberto Verdugo
-  afiliacion: Médico Cirujano, Universidad de Chile (2005). Especialista en Psiquiatría de Adultos, Universidad
-    de Chile (2010). Magíster en Ciencias Médicas, mención Neurociencias, Universidad de Chile (2013).
   email: robertoverdugo@gmail.com
+  rol_lab: Magíster
+  hoy: Psiquiatra de adultos, práctica clínica privada
+  institucion_corta: Práctica clínica
+  ciudad: Santiago
+  pais: Chile
+  sector: clinica
+  linkedin: https://www.linkedin.com/in/roberto-verdugo-alarc%C3%B3n-04ba3131/
+  confianza: media
 - nombre: Dr. Enrique Lorca-Ponce
-  afiliacion: Bioquímico. Doctor en Ciencias Biomédicas.
   email: enriqueantonio.lorca@gmail.com
+  rol_lab: Doctorado
+  hoy: Profesor Asistente, Escuela de Enfermería; docente en la PUC y la UMCE
+  institucion: Universidad Finis Terrae
+  institucion_corta: U. Finis Terrae
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: Alimentos funcionales y enfermedad renal; coautor con el laboratorio en European Journal of Neuroscience
+    (2023).
+  web: https://www.researchgate.net/profile/Enrique-Lorca-Ponce
+  scholar: https://scholar.google.com/citations?user=tNxqQcAAAAAJ
+  linkedin: https://www.linkedin.com/in/enrique-lorca-ponce/
+  confianza: alta
 - nombre: Dra. Consuelo Aldunate
-  afiliacion: Médico Cirujano, Universidad de Chile (2010). Especialista en Psiquiatría Infantil y del
-    Adolescente. Postítulo en Lactancia Materna y Salud Mental.
   email: consu.aldunate@gmail.com
+  rol_lab: Doctorado
+  hoy: Psiquiatra infantil y del adolescente; académica de la Facultad de Medicina
+  institucion: Universidad de Chile
+  institucion_corta: U. de Chile
+  ciudad: Santiago
+  pais: Chile
+  sector: clinica
+  linkedin: https://cl.linkedin.com/in/consuelo-aldunate-castillo-90a08839
+  confianza: media
 - nombre: Iván Rubio
-  afiliacion: ''
-  email: ''
+  rol_lab: ''
+  confianza: sin-datos
 - nombre: Dr. Rolando Castillo
-  afiliacion: ''
-  email: ''
+  rol_lab: ''
+  confianza: sin-datos
 - nombre: Alfredo Hernández
-  afiliacion: ''
-  email: ''
-- nombre: Juan Pablo Del Río
-  afiliacion: ''
-  email: ''
+  rol_lab: Investigador
+  hito: Coautor con el laboratorio en European Journal of Neuroscience (2023).
+  confianza: sin-datos
+- nombre: Dr. Juan Pablo del Río
+  rol_lab: Doctorado
+  hoy: Profesor Asistente, Departamento de Psiquiatría y Salud Mental Infantil y del Adolescente
+  institucion: Facultad de Medicina, Universidad de Chile
+  institucion_corta: U. de Chile
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: Young Physician Leader del InterAcademy Partnership (2022); colabora con el Autism Research Centre
+    de Cambridge.
+  web: https://www.autismresearchcentre.com/people/dr-juan-pablo-del-rio-md-ph-d/
+  confianza: media
 - nombre: Gustavo Lam
-  afiliacion: ''
-  email: ''
-- nombre: Dra. Alexandra García
-  afiliacion: Bachiller en Ciencias Naturales y Exactas (U. de Chile). Bioquímica (U. de Chile). Magíster
-    y Doctora en Neurociencias (PUC). Actualmente postdoctorante en el Laboratorio de Aprendizaje, Memoria
-    y Neuromodulación (LAMN).
+  rol_lab: Pregrado
+  hito: Coautor con el laboratorio en European Journal of Neuroscience (2023).
+  confianza: sin-datos
+- nombre: Dra. Alexandra García-Pérez
   email: alexandrag@uchile.cl
+  rol_lab: Postdoctorado
+  hoy: Especialista de Proyectos e investigadora en seguridad de modelos de IA
+  institucion: Centro Nacional de Inteligencia Artificial (CENIA)
+  institucion_corta: CENIA
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: Única chilena seleccionada como red teamer externa de OpenAI para GPT-4o (2024).
+  web: https://cenia.cl/2024/08/29/alexandra-garcia-es-la-unica-mujer-chilena-seleccionada-como-red-teamer-de-open-ai/
+  linkedin: https://www.linkedin.com/in/alexandra-garc%C3%ADa-3a1079128/
+  confianza: alta
 - nombre: Christian López
-  afiliacion: Técnico de laboratorio, Laboratorio de Neurosistemas.
-  email: ''
+  rol_lab: Técnico de laboratorio
+  confianza: sin-datos
 - nombre: Carlos Navarro
-  afiliacion: Investigador asistente, Laboratorio de Neurosistemas.
-  email: ''
+  rol_lab: Investigador asistente
+  confianza: sin-datos
 - nombre: Rocío Loyola
   orcid: "0000-0001-7637-4277"
-  afiliacion: Investigadora asistente, Laboratorio de Neurosistemas.
-  email: ''
+  rol_lab: Investigadora
+  hoy: Académica del Departamento de Educación Diferencial (UMCE) e investigadora asociada del CIAE
+  institucion: UMCE · CIAE, Universidad de Chile
+  institucion_corta: UMCE
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: 'Publica como Rocío Loyola-Navarro: EEG y percepción del habla en niños con trastorno del desarrollo
+    del lenguaje.'
+  web: https://www.ciae.uchile.cl/perfil/rocio-loyola/publicaciones-academicas
+  confianza: media
 - nombre: Carolina Lindsay
-  afiliacion: Estudiante de Doctorado en el Laboratorio de Neurosistemas.
-  email: ''
-- nombre: Ismael Jaras
-  afiliacion: Estudiante de Doctorado en el Laboratorio de Neurosistemas.
-  email: ''
+  rol_lab: Doctorado
+  hoy: Integrante del Comité Ético Científico
+  institucion: Hospital Regional de Rancagua
+  institucion_corta: Hosp. Regional Rancagua
+  ciudad: Rancagua
+  pais: Chile
+  sector: clinica
+  web: https://www.researchgate.net/profile/Carolina-Lindsay
+  linkedin: https://www.linkedin.com/in/c-lindsaybrain/
+  confianza: media
+- nombre: Dr. Ismael Jaras
+  rol_lab: Doctorado
+  hoy: Investigador postdoctoral, Departamento de Fisiología (grupo NeuroTMA)
+  institucion: Universität Bern
+  institucion_corta: U. Bern
+  ciudad: Berna
+  pais: Suiza
+  sector: academia
+  hito: Coautor en Nature Communications (2025) y Nature Machine Intelligence (2024); primer autor en
+    PLOS Computational Biology (2025).
+  web: https://physiologie.unibe.ch/~jaras/
+  scholar: https://scholar.google.com/citations?user=n59UJEgAAAAJ
+  confianza: alta
 - nombre: Myriam Gutiérrez
-  afiliacion: Estudiante de Doctorado en el Laboratorio de Neurosistemas.
-  email: ''
+  rol_lab: Doctorado
+  hoy: Académica de la Escuela de Kinesiología (UDP) e investigadora de la Unidad de Cerebro Saludable
+    del Hospital Clínico U. de Chile
+  institucion: Universidad Diego Portales · Hospital Clínico Universidad de Chile
+  institucion_corta: UDP
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: Primera autora en Alzheimer’s & Dementia (LatAm-FINGERS, 2025) y JMIR Aging (2025).
+  web: https://saludyodontologia.udp.cl/?persona=myriam-gutierrez-villegas
+  scholar: https://scholar.google.com/citations?user=7CHG5QQAAAAJ
+  confianza: media
 - nombre: Camilo Jara
-  afiliacion: Estudiante de Magíster en el Laboratorio de Neurosistemas.
-  email: ''
+  rol_lab: Magíster
+  hito: Primer autor en Expert Systems with Applications (2024) sobre predicción de trayectorias oculares.
+  confianza: sin-datos
 - nombre: Camilo Espinosa
-  afiliacion: Estudiante de Magíster en el Laboratorio de Neurosistemas.
-  email: ''
+  rol_lab: Magíster
+  hoy: Ingeniero de desarrollo y análisis, Advanced Mining Technology Center
+  institucion: Facultad de Ciencias Físicas y Matemáticas, Universidad de Chile
+  institucion_corta: U. de Chile (AMTC)
+  ciudad: Santiago
+  pais: Chile
+  sector: academia
+  hito: Deep learning para señales sismo-volcánicas; primer autor en IEEE TGRS (2026).
+  web: https://github.com/camilo-espinosa
+  scholar: https://scholar.google.com/citations?user=-u7TPVEAAAAJ
+  linkedin: https://www.linkedin.com/in/camilo-espinosa-ing/
+  confianza: media
 - nombre: María Soledad Hernández
-  afiliacion: Estudiante de Magíster en el Laboratorio de Neurosistemas.
-  email: ''
+  rol_lab: Magíster
+  confianza: sin-datos
 - nombre: Rodrigo González
-  afiliacion: Estudiante de Magíster en el Laboratorio de Neurosistemas.
-  email: ''
+  rol_lab: Magíster
+  confianza: sin-datos
 - nombre: Alejandra Silva
-  afiliacion: ''
-  email: ''
+  rol_lab: ''
+  confianza: sin-datos
 - nombre: Isidora Nilo
-  afiliacion: ''
-  email: ''
+  rol_lab: ''
+  confianza: sin-datos
+- nombre: Ricardo Mendoza
+  rol_lab: ''
+  confianza: sin-datos
