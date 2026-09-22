@@ -38,7 +38,7 @@ areas:
   "02": "ambar"
   "03": "magenta"
 
-# Grupos del equipo, por el campo 'titulo' de data/miembros.yaml.
+# Grupos del equipo, por el campo 'grupo' de content/miembros/*.md.
 # Si un título no calza, la plantilla usa un tono de reserva según
 # la posición del grupo: no se rompe nada.
 grupos:
@@ -46,7 +46,6 @@ grupos:
   "Gestión y apoyo técnico": "verde"
   "Investigadores postdoctorales y asistentes": "cian"
   "Estudiantes de postgrado": "morado"
-  "Estudiantes de pregrado y ayudantes": "lima"
 
 # Secciones del sitio
 secciones:

@@ -13,7 +13,7 @@
       principales". Por eso se reordenan por el weight más bajo de cada grupo,
       que es el mismo número que ordena a las personas dentro de él
       (100 investigadores principales, 200 gestión, 300 postdoctorales,
-      400 postgrado, 600 pregrado y ayudantes).
+      400 postgrado).
     */ -}}
     {{- $grupos := slice }}
     {{- range .Pages.GroupByParam "grupo" }}
@@ -35,8 +35,8 @@
     {{- end }}
 
     <p class="ns-acciones">
-      <a class="ns-btn ns-btn--fantasma" href="{{ "visitantes/" | relURL }}">Miembros visitantes</a>
       <a class="ns-btn ns-btn--fantasma" href="{{ "ex-miembros/" | relURL }}">Ex miembros</a>
+      <a class="ns-btn ns-btn--fantasma" href="{{ "visitantes/" | relURL }}">Miembros visitantes</a>
     </p>
   </div>
 </section>

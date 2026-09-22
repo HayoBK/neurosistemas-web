@@ -23,12 +23,12 @@ main:
     pageRef: "/miembros"
     parent: "Equipo"
     weight: 41
-  - name: "Miembros visitantes"
-    pageRef: "/visitantes"
-    parent: "Equipo"
-    weight: 42
   - name: "Ex miembros"
     pageRef: "/ex-miembros"
+    parent: "Equipo"
+    weight: 42
+  - name: "Miembros visitantes"
+    pageRef: "/visitantes"
     parent: "Equipo"
     weight: 43
 

@@ -90,11 +90,10 @@ content:
             - "Gestión y apoyo técnico"
             - "Investigadores postdoctorales y asistentes"
             - "Estudiantes de postgrado"
-            - "Estudiantes de pregrado y ayudantes"
       # El orden de la página del equipo sale de aquí, nunca del alfabeto:
       # 100 investigadores principales · 200 gestión · 300 postdoctorales ·
-      # 400 postgrado · 600 pregrado y ayudantes. El 500 quedó libre a
-      # propósito, por si aparece un grupo intermedio.
+      # 400 postgrado. El 500 y el 600 quedaron libres a propósito, por si
+      # aparece un grupo nuevo.
       - { name: weight,    label: "Orden dentro del sitio (ver la ayuda)", type: number }
       - { name: foto,      label: "Foto (archivo en images/equipo/)", type: string }
       - { name: email,     label: "Correo", type: string }
