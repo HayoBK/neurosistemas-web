@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-09-29",
+  "actualizado": "2026-09-30",
   "fuentes": [
     {
       "nombre": "Pedro E. Maldonado",
@@ -19,7 +19,7 @@
     {
       "nombre": "José Ignacio Egaña",
       "orcid": "0000-0003-1242-0232",
-      "trabajos": 21
+      "trabajos": 23
     },
     {
       "nombre": "Iván Plaza",
@@ -101,6 +101,19 @@
     },
     {
       "anio": 2026,
+      "titulo": "Inferring preoperative cognitive function from intraoperative electroencephalography in elderly patients using machine learning",
+      "autores": "Pedemonte, J. C., Sun, H., Freedman, I. G., Turco, I., Wiredu, K., Penna, A., <b>Egaña, J. I.</b>, Gutierrez, R., Ibacache, M., Cortínez, L. I., Westover, M. B., Akeju, O. &amp; Boncompte, G.",
+      "revista": "IEEE Transactions on Biomedical Engineering, 1-10",
+      "doi": "10.1109/tbme.2026.3671187",
+      "url": "",
+      "tipo": "journal-article",
+      "miembros": [
+        "José Ignacio Egaña"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2026,
       "titulo": "Personalized Music-Embedded Sound Therapy Based on Gating Modulation and Neural Decoupling Reduces Tinnitus Severity",
       "autores": "Henriquez, P. I., Delano, P. H., Herrada, J., Guevara, C. &amp; <b>Breinbauer, H. A.</b>",
       "revista": "Brain Sciences, 16, 644",
@@ -109,6 +122,19 @@
       "tipo": "journal-article",
       "miembros": [
         "Hayo Breinbauer"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2025,
+      "titulo": "Association Between Postoperative Acute Kidney Injury and Long-Term Mortality in Patients Undergoing Major Abdominal Surgery: A Cohort-Based Study",
+      "autores": "Césped, B., Gutiérrez, R., <b>Egaña, J. I.</b>, de la Maza, P., Toro, L. &amp; Penna, A.",
+      "revista": "A&amp;A Practice, 19, e02038",
+      "doi": "10.1213/xaa.0000000000002038",
+      "url": "",
+      "tipo": "journal-article",
+      "miembros": [
+        "José Ignacio Egaña"
       ],
       "fuente": "orcid"
     },
