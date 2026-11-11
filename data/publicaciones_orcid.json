@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-10",
+  "actualizado": "2026-11-11",
   "fuentes": [
     {
       "nombre": "Pedro E. Maldonado",
@@ -29,7 +29,7 @@
     {
       "nombre": "Rocío Loyola",
       "orcid": "0000-0001-7637-4277",
-      "trabajos": 5
+      "trabajos": 6
     },
     {
       "nombre": "Samuel Madariaga Román",
@@ -122,6 +122,19 @@
       "tipo": "journal-article",
       "miembros": [
         "Hayo Breinbauer"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2026,
+      "titulo": "When Students Control Information Onset: Disentangling Effects of Motor Self-Initiation and Temporal Predictability on Working Memory",
+      "autores": "<b>Loyola-Navarro, R.</b>, Gomez, D. M., Lions, S., Antil, S. &amp; Dartnell, P.",
+      "revista": "Education Sciences, 16, 1933",
+      "doi": "10.3390/educsci16111933",
+      "url": "",
+      "tipo": "journal-article",
+      "miembros": [
+        "Rocío Loyola"
       ],
       "fuente": "orcid"
     },
