@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-15",
+  "actualizado": "2026-11-16",
   "fuentes": [
     {
       "nombre": "Pedro E. Maldonado",
@@ -44,7 +44,7 @@
     {
       "nombre": "Joaquín Valdés Bize",
       "orcid": "0000-0003-3222-8440",
-      "trabajos": 10
+      "trabajos": 11
     },
     {
       "nombre": "Cristian Fernández",
@@ -122,6 +122,19 @@
       "tipo": "journal-article",
       "miembros": [
         "Hayo Breinbauer"
+      ],
+      "fuente": "orcid"
+    },
+    {
+      "anio": 2026,
+      "titulo": "Preserved cognitive control with altered ventromedial prefrontal activity in lichen simplex chronicus: an fMRI study during the Multi-Source Interference Task.",
+      "autores": "Valenzuela, L., <b>Valdés, J.</b>, Domic-Siede, M., Curi, M., Solis-Avaca, M., Crossley, N. A., Zamorano, F., Sandoval, M., Ossandón, T. &amp; Medel, V.",
+      "revista": "",
+      "doi": "10.64898/2026.11.12.766224",
+      "url": "",
+      "tipo": "preprint",
+      "miembros": [
+        "Joaquín Valdés Bize"
       ],
       "fuente": "orcid"
     },
